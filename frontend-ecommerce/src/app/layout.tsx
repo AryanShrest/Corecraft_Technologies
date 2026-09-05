@@ -1,13 +1,28 @@
 import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
+import { Raleway, Rubik } from 'next/font/google'
 import './globals.css'
 import Providers from './providers'
 
-const inter = Inter({ subsets: ['latin'] })
+const rubik = Rubik({
+  subsets: ['latin'],
+  variable: '--font-body',
+  display: 'swap',
+})
+
+const raleway = Raleway({
+  subsets: ['latin'],
+  variable: '--font-heading',
+  display: 'swap',
+})
 
 export const metadata: Metadata = {
-  title: 'CoreCraft Ecommerce',
-  description: 'CoreCraft Technologies Ecommerce Platform',
+  metadataBase: new URL('https://corecraftnepal.com'),
+  title: {
+    default: 'CoreCraft Technologies',
+    template: '%s | CoreCraft Technologies',
+  },
+  description:
+    'CoreCraft Technologies builds websites, software, mobile applications, and digital solutions for modern businesses.',
 }
 
 export default function RootLayout({
@@ -17,7 +32,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body className={`${rubik.variable} ${raleway.variable}`}>
         <Providers>{children}</Providers>
       </body>
     </html>

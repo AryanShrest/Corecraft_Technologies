@@ -89,7 +89,7 @@ Replace placeholders before development begins.
 | Milestone | Status | Owner | Target | Completed | Evidence/notes |
 |---|---|---|---|---|---|
 | M0 — Decisions and asset clearance | `NOT STARTED` | `TBD` | `TBD` | — | — |
-| M1 — Foundation | `NOT STARTED` | Bishowdip | `TBD` | — | — |
+| M1 — Foundation | `IN PROGRESS` | Bishowdip | `TBD` | — | FND-002–005 complete; typed content awaiting client decisions. |
 | M2 — Shared shell | `NOT STARTED` | `TBD` | `TBD` | — | — |
 | M3 — Homepage static fidelity | `NOT STARTED` | `TBD` | `TBD` | — | — |
 | M4 — Motion system | `NOT STARTED` | `TBD` | `TBD` | — | — |
@@ -105,14 +105,14 @@ Update these counts whenever a task moves to `DONE`.
 | Category | Done | Total | Progress |
 |---|---:|---:|---:|
 | Decisions/assets | 0 | 12 | 0% |
-| Foundation | 1 | 12 | 8% |
+| Foundation | 4 | 12 | 33% |
 | Shared shell | 0 | 8 | 0% |
 | Homepage | 0 | 12 | 0% |
 | Motion/responsive | 0 | 10 | 0% |
 | Internal pages | 0 | 8 | 0% |
 | Forms/integrations | 0 | 8 | 0% |
 | Quality/release | 0 | 14 | 0% |
-| **Overall** | **1** | **84** | **1%** |
+| **Overall** | **4** | **84** | **5%** |
 
 ---
 
@@ -143,14 +143,14 @@ These tasks block accurate implementation. Do not replace them with assumptions.
 |---|---|---|---|---|---|---|---|
 | FND-001 | §3 | Confirm team names, branches, ownership, and reviewers | Bishowdip | `BLOCKED` | Team member identities | `bishowdip` | Waiting for the other three names/handles. |
 | FND-002 | §5 | Audit existing frontend components before changing architecture | Bishowdip | `DONE` | — | `bishowdip` | See `FRONTEND_BASELINE_AUDIT.md`; baseline typecheck/build pass, Biome and audit fail. |
-| FND-003 | §5.5 | Confirm route and folder migration plan | `TBD` | `NOT STARTED` | FND-002 | — | Avoid one huge rename PR. |
-| FND-004 | §6.1 | Create approved CSS color tokens | `TBD` | `NOT STARTED` | Reference captures | — | Include sampled values. |
-| FND-005 | §6.2 | Confirm and configure no more than two font families | `TBD` | `NOT STARTED` | Asset/license review | — | Record weights and loading method. |
+| FND-003 | §5.5 | Confirm route and folder migration plan | Bishowdip | `DONE` | FND-002 | `bishowdip` | See `ROUTE_MIGRATION_PLAN.md`. |
+| FND-004 | §6.1 | Create approved CSS color tokens | Bishowdip | `DONE` | Reference captures | `bishowdip` | Shared color/layout/motion variables added to `globals.css`; Tailwind aliases added. |
+| FND-005 | §6.2 | Confirm and configure no more than two font families | Bishowdip | `DONE` | Reference typography verification | `bishowdip` | Live computed styles verified: Rubik body/navigation and Raleway headings. |
 | FND-006 | §6.3/6.4 | Implement containers, grids, spacing, and breakpoints | `TBD` | `NOT STARTED` | FND-004 | — | Test at all required widths. |
 | FND-007 | §6.5 | Build shared Button and icon-button primitives | `TBD` | `NOT STARTED` | FND-004/005 | — | Include focus/disabled/loading states. |
 | FND-008 | §6.5 | Build SectionHeading and media-frame primitives | `TBD` | `NOT STARTED` | FND-004/005/006 | — | — |
-| FND-009 | §13 | Create typed site settings and navigation data | `TBD` | `NOT STARTED` | DEC-005/009/012 | — | Temporary `TBD` values must not ship. |
-| FND-010 | §13 | Create typed hero, service, benefit, FAQ, and statistic data | `TBD` | `NOT STARTED` | DEC-004/006 | — | No duplicated content in components. |
+| FND-009 | §13 | Create typed site settings and navigation data | Bishowdip | `BLOCKED` | DEC-005/009/012 | `bishowdip` | Schema and verified values added; opening hours and final legal details await decisions. |
+| FND-010 | §13 | Create typed hero, service, benefit, FAQ, and statistic data | Bishowdip | `BLOCKED` | DEC-004/006 | `bishowdip` | Typed data added; unknown statistics/FAQ answers/destinations are intentionally null. |
 | FND-011 | §5.2 | Review and approve required dependencies | `TBD` | `NOT STARTED` | FND-002 | — | One carousel and one icon strategy only. |
 | FND-012 | §18 | Configure component/E2E/accessibility/visual test foundation | `TBD` | `NOT STARTED` | FND-002 | — | Document new commands. |
 
@@ -272,8 +272,8 @@ Contact and newsletter homepage sections are tracked under integrations so their
 | 2 | DEC-001 — Confirm reproduction permission | `TBD` | `NOT STARTED` | `TBD` | Blocks asset reuse. |
 | 3 | FND-002 — Audit current components | Bishowdip | `DONE` | 2026-09-05 | See `FRONTEND_BASELINE_AUDIT.md`. |
 | 4 | DEC-004/005/006/009 — Resolve core content decisions | `TBD` | `NOT STARTED` | `TBD` | Required for shared data. |
-| 5 | FND-004/005/006 — Design tokens and layout | `TBD` | `NOT STARTED` | `TBD` | Foundation for all UI work. |
-| 6 | FND-009/010 — Typed content | `TBD` | `NOT STARTED` | `TBD` | Blocks page implementation. |
+| 5 | FND-004/005/006 — Design tokens and layout | Bishowdip | `IN PROGRESS` | `TBD` | Tokens/fonts complete; responsive layout task FND-006 remains. |
+| 6 | FND-009/010 — Typed content | Bishowdip | `BLOCKED` | `TBD` | Schemas exist; client decisions block final values. |
 
 ### Sprint risks/blockers
 
@@ -295,6 +295,7 @@ Add a row immediately when a task changes to `BLOCKED`.
 | Date | Task | Owner | Blocker | Waiting on | Next action | Last updated |
 |---|---|---|---|---|---|---|
 | 2026-09-05 | FND-001 | Bishowdip | Other three team identities/handles are unknown | Project owner | Provide names/handles and branch naming preference | 2026-09-05 |
+| 2026-09-05 | FND-009/010 | Bishowdip | Final business settings, statistics, FAQ answers, and service destinations are unapproved | Project/content owner | Complete DEC-004/005/006/009/012 | 2026-09-05 |
 
 ---
 
@@ -307,6 +308,8 @@ Record decisions that affect multiple contributors. Never rely only on chat hist
 | 2026-09-05 | ADR-001 | Work begins from branch `bishowdip`; `main` is not edited directly. | Bishowdip | All tasks | Git branch state |
 | 2026-09-05 | ADR-002 | `WEBSITE_CLONE_REQUIREMENTS.md` is the requirement source of truth. | Bishowdip | All tasks | Requirements document |
 | 2026-09-05 | ADR-003 | Existing homepage components are prototypes to refactor or replace; do not independently duplicate them. | Bishowdip | FND and HOME tasks | `FRONTEND_BASELINE_AUDIT.md` |
+| 2026-09-05 | ADR-004 | Canonical marketing routes will be introduced incrementally; no repository-wide route/component rename. | Bishowdip | FND-003 and all PAGE tasks | `ROUTE_MIGRATION_PLAN.md` |
+| 2026-09-05 | ADR-005 | Use verified Rubik for body/navigation and Raleway for headings. | Bishowdip | FND-005 and all UI | Live computed-style audit and `src/app/layout.tsx` |
 
 ---
 
@@ -323,6 +326,7 @@ Record decisions that affect multiple contributors. Never rely only on chat hist
 | Date | Task/page | Viewport/browser | Check performed | Result | Evidence link | Verified by |
 |---|---|---|---|---|---|---|
 | 2026-09-05 | FND-002 | Local baseline | Component/route audit, typecheck, build, Biome, npm audit | Partial pass | `FRONTEND_BASELINE_AUDIT.md` | Bishowdip |
+| 2026-09-05 | FND-003–005 | Local baseline | Targeted Biome check, TypeScript with incremental output disabled, production build | Pass | `ROUTE_MIGRATION_PLAN.md`, `globals.css`, `layout.tsx`, `tailwind.config.ts` | Bishowdip |
 
 ---
 
@@ -333,6 +337,9 @@ Move a task summary here only after its tracker row is `DONE`. Keep the original
 | Completed date | Task | Owner | PR/commit | Verification summary |
 |---|---|---|---|---|
 | 2026-09-05 | FND-002 | Bishowdip | Pending commit | Existing frontend audited; typecheck/build pass; 118 Biome errors and two high-severity dependency entries recorded. |
+| 2026-09-05 | FND-003 | Bishowdip | Pending commit | Incremental canonical route and folder migration plan completed. |
+| 2026-09-05 | FND-004 | Bishowdip | Pending commit | Shared color, layout, motion, focus, selection, and reduced-motion foundations added. |
+| 2026-09-05 | FND-005 | Bishowdip | Pending commit | Verified Rubik/Raleway typography configured with `next/font`. |
 
 ---
 
