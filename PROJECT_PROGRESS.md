@@ -92,7 +92,7 @@ Replace placeholders before development begins.
 | M1 — Foundation | `IN PROGRESS` | Bishowdip | `TBD` | — | FND-002–008 complete; typed content awaits client decisions. |
 | M2 — Shared shell | `IN PROGRESS` | Bishowdip | `TBD` | — | Header behavior complete; approved logo and remaining footer/search work pending. |
 | M3 — Homepage static fidelity | `NOT STARTED` | `TBD` | `TBD` | — | — |
-| M4 — Motion system | `NOT STARTED` | `TBD` | `TBD` | — | — |
+| M4 — Motion system | `IN PROGRESS` | Bishowdip | `TBD` | — | Core tokens, reveal/stagger, counter, and accordion primitives complete. |
 | M5 — Internal pages | `NOT STARTED` | `TBD` | `TBD` | — | — |
 | M6 — Forms and integrations | `NOT STARTED` | `TBD` | `TBD` | — | — |
 | M7 — Accessibility, SEO, performance | `NOT STARTED` | `TBD` | `TBD` | — | — |
@@ -108,11 +108,11 @@ Update these counts whenever a task moves to `DONE`.
 | Foundation | 7 | 12 | 58% |
 | Shared shell | 2 | 8 | 25% |
 | Homepage | 0 | 12 | 0% |
-| Motion/responsive | 0 | 10 | 0% |
+| Motion/responsive | 4 | 10 | 40% |
 | Internal pages | 0 | 8 | 0% |
 | Forms/integrations | 0 | 8 | 0% |
 | Quality/release | 0 | 14 | 0% |
-| **Overall** | **9** | **84** | **11%** |
+| **Overall** | **13** | **84** | **15%** |
 
 ---
 
@@ -196,10 +196,10 @@ Contact and newsletter homepage sections are tracked under integrations so their
 
 | Task | Requirement | Deliverable | Owner | Status | Depends on | Branch/PR | Evidence/notes |
 |---|---|---|---|---|---|---|---|
-| MOT-T01 | MOT-001 | Central motion durations/easing tokens | `TBD` | `NOT STARTED` | Reference recording | — | No per-component random timing. |
-| MOT-T02 | MOT-002/003 | Reusable reveal and stagger primitives | `TBD` | `NOT STARTED` | MOT-T01 | — | Server content remains usable. |
-| MOT-T03 | MOT-002, HOME-006 | One-time animated counter primitive | `TBD` | `NOT STARTED` | MOT-T01 | — | Immediate final value under reduced motion. |
-| MOT-T04 | MOT-001, HOME-006 | Reusable accordion transition | `TBD` | `NOT STARTED` | MOT-T01 | — | No clipped dynamic content. |
+| MOT-T01 | MOT-001 | Central motion durations/easing tokens | Bishowdip | `DONE` | Reference audit | `bishowdip` | Central instant/hover/reveal durations and standard/emphasis easing tokens implemented. |
+| MOT-T02 | MOT-002/003 | Reusable reveal and stagger primitives | Bishowdip | `DONE` | MOT-T01 | `bishowdip` | SSR-safe visible content, fade/axis/scale variants, configurable threshold/once/delay, fallback, and reduced motion. |
+| MOT-T03 | MOT-002, HOME-006 | One-time animated counter primitive | Bishowdip | `DONE` | MOT-T01 | `bishowdip` | Viewport trigger, one-time requestAnimationFrame count, cubic easing, formatting, suffix/prefix, fallback, and cleanup. |
+| MOT-T04 | MOT-001, HOME-006 | Reusable accordion transition | Bishowdip | `DONE` | MOT-T01 | `bishowdip` | Single/multiple modes, stable IDs, ARIA expanded/controls/hidden state, animated height, and decorative icon handling. |
 | MOT-T05 | MOT-004 | Shared card/button hover motion | `TBD` | `NOT STARTED` | MOT-T01, FND-007 | — | Touch-safe. |
 | MOT-T06 | MOT-005 | Approved parallax/tilt behavior | `TBD` | `NOT STARTED` | DEC-003, MOT-T01 | — | Disable on touch/reduced motion. |
 | MOT-T07 | MOT-006 | Optional desktop custom cursor | `TBD` | `NOT STARTED` | MOT-T01 | — | May be deferred for usability/performance. |
@@ -313,6 +313,7 @@ Record decisions that affect multiple contributors. Never rely only on chat hist
 | 2026-09-05 | ADR-005 | Use verified Rubik for body/navigation and Raleway for headings. | Bishowdip | FND-005 and all UI | Live computed-style audit and `src/app/layout.tsx` |
 | 2026-09-05 | ADR-006 | Shared marketing UI must consume Container, Section, Button/IconButton, SectionHeading, and MediaFrame primitives instead of redefining equivalents. | Bishowdip | All SHELL, HOME, and PAGE tasks | `src/components/layout`, `src/components/ui` |
 | 2026-09-05 | ADR-007 | Use one sticky header whose desktop utility bar collapses after 32 px instead of cloning duplicate header DOM. | Bishowdip | SHELL-001–004 | `src/components/layout/SiteHeader.tsx` |
+| 2026-09-05 | ADR-008 | Use native CSS transitions plus IntersectionObserver with a visible-content fallback for shared reveal motion; do not add a motion dependency for these primitives. | Bishowdip | MOT-T01–T04 and section consumers | `src/components/motion`, `globals.css` |
 
 ---
 
@@ -332,6 +333,7 @@ Record decisions that affect multiple contributors. Never rely only on chat hist
 | 2026-09-05 | FND-003–005 | Local baseline | Targeted Biome check, TypeScript with incremental output disabled, production build | Pass | `ROUTE_MIGRATION_PLAN.md`, `globals.css`, `layout.tsx`, `tailwind.config.ts` | Bishowdip |
 | 2026-09-05 | FND-006–008 | Local baseline | Targeted Biome lint, TypeScript with incremental output disabled, production build | Pass | `src/components/layout`, `src/components/ui` | Bishowdip |
 | 2026-09-05 | SHELL-001–004 | Chromium local, 1440×900 and 390×844 | Active route, sticky collapse, menu transition, Escape, focus, body lock, closed tab exclusion, overflow | Pass except approved logo pending | `src/components/layout/SiteHeader.tsx` | Bishowdip |
+| 2026-09-05 | MOT-T01–T04 | Local hydrated browser test | Reveal fallback, stagger fallback, counter final value, accordion single-open state, ARIA expanded/hidden state | Pass | `src/components/motion`, `globals.css`; temporary test route removed | Bishowdip |
 
 ---
 
@@ -350,6 +352,10 @@ Move a task summary here only after its tracker row is `DONE`. Keep the original
 | 2026-09-05 | FND-008 | Bishowdip | Pending commit | Shared SectionHeading and MediaFrame variants completed. |
 | 2026-09-05 | SHELL-001 | Bishowdip | Pending commit | Verified desktop information bar and utility navigation implemented. |
 | 2026-09-05 | SHELL-003 | Bishowdip | Pending commit | Single sticky header and compact scrolled state implemented and browser-tested. |
+| 2026-09-05 | MOT-T01 | Bishowdip | Pending commit | Central motion durations and easing tokens completed. |
+| 2026-09-05 | MOT-T02 | Bishowdip | Pending commit | SSR-safe Reveal and StaggerGroup primitives completed with fallback behavior. |
+| 2026-09-05 | MOT-T03 | Bishowdip | Pending commit | One-time formatted AnimatedCounter completed. |
+| 2026-09-05 | MOT-T04 | Bishowdip | Pending commit | Accessible single/multiple Accordion primitive completed. |
 
 ---
 

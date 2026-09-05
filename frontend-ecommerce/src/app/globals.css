@@ -110,6 +110,74 @@ select {
   padding-block: var(--section-space-lg);
 }
 
+.motion-reveal,
+.motion-stagger > * {
+  transition-duration: var(--motion-reveal);
+  transition-property: opacity, transform;
+  transition-timing-function: var(--ease-standard);
+}
+
+.motion-reveal {
+  transition-delay: var(--reveal-delay, 0ms);
+}
+
+.motion-reveal[data-motion-ready][data-visible="false"],
+.motion-stagger[data-motion-ready][data-visible="false"] > * {
+  opacity: 0;
+}
+
+.motion-reveal[data-reveal-variant="fade-up"][data-motion-ready][data-visible="false"],
+.motion-stagger[data-reveal-variant="fade-up"][data-motion-ready][data-visible="false"] > * {
+  transform: translateY(2rem);
+}
+
+.motion-reveal[data-reveal-variant="fade-left"][data-motion-ready][data-visible="false"],
+.motion-stagger[data-reveal-variant="fade-left"][data-motion-ready][data-visible="false"] > * {
+  transform: translateX(2rem);
+}
+
+.motion-reveal[data-reveal-variant="fade-right"][data-motion-ready][data-visible="false"],
+.motion-stagger[data-reveal-variant="fade-right"][data-motion-ready][data-visible="false"] > * {
+  transform: translateX(-2rem);
+}
+
+.motion-reveal[data-reveal-variant="scale"][data-motion-ready][data-visible="false"],
+.motion-stagger[data-reveal-variant="scale"][data-motion-ready][data-visible="false"] > * {
+  transform: scale(0.96);
+}
+
+.motion-stagger > *:nth-child(1) {
+  transition-delay: 0ms;
+}
+
+.motion-stagger > *:nth-child(2) {
+  transition-delay: var(--stagger-interval, 90ms);
+}
+
+.motion-stagger > *:nth-child(3) {
+  transition-delay: calc(var(--stagger-interval, 90ms) * 2);
+}
+
+.motion-stagger > *:nth-child(4) {
+  transition-delay: calc(var(--stagger-interval, 90ms) * 3);
+}
+
+.motion-stagger > *:nth-child(5) {
+  transition-delay: calc(var(--stagger-interval, 90ms) * 4);
+}
+
+.motion-stagger > *:nth-child(6) {
+  transition-delay: calc(var(--stagger-interval, 90ms) * 5);
+}
+
+.motion-stagger > *:nth-child(7) {
+  transition-delay: calc(var(--stagger-interval, 90ms) * 6);
+}
+
+.motion-stagger > *:nth-child(8) {
+  transition-delay: calc(var(--stagger-interval, 90ms) * 7);
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
@@ -122,5 +190,6 @@ select {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
+    transition-delay: 0ms !important;
   }
 }
