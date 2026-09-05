@@ -1,3 +1,4 @@
+import { ScrollToTop } from '@/components/layout'
 import type { Metadata } from 'next'
 import { Raleway, Rubik } from 'next/font/google'
 import './globals.css'
@@ -40,6 +41,7 @@ export default function RootLayout({
           Skip to content
         </a>
         <Providers>{children}</Providers>
+        <ScrollToTop />
       </body>
     </html>
   )

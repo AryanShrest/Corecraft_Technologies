@@ -66,7 +66,7 @@ Replace placeholders before development begins.
 
 | Team member | Primary area | Active branch | Current task | Availability |
 |---|---|---|---|---|
-| Bishowdip | Integration, foundation, final review | `bishowdip` | SHELL-007 — scroll-to-top control | Active |
+| Bishowdip | Integration, foundation, final review | `bishowdip` | Shared shell and homepage | Active |
 | Developer 2 — `TBD` | Homepage static sections | `TBD` | Unassigned | `TBD` |
 | Developer 3 — `TBD` | Motion and responsive QA | `TBD` | Unassigned | `TBD` |
 | Developer 4 — `TBD` | Internal pages and integrations | `TBD` | Unassigned | `TBD` |
@@ -106,13 +106,13 @@ Update these counts whenever a task moves to `DONE`.
 |---|---:|---:|---:|
 | Decisions/assets | 0 | 12 | 0% |
 | Foundation | 9 | 12 | 75% |
-| Shared shell | 2 | 8 | 25% |
+| Shared shell | 3 | 8 | 38% |
 | Homepage | 1 | 12 | 8% |
 | Motion/responsive | 4 | 10 | 40% |
 | Internal pages | 0 | 8 | 0% |
 | Forms/integrations | 0 | 8 | 0% |
 | Quality/release | 0 | 14 | 0% |
-| **Overall** | **16** | **84** | **19%** |
+| **Overall** | **17** | **84** | **20%** |
 
 ---
 
@@ -166,7 +166,7 @@ These tasks block accurate implementation. Do not replace them with assumptions.
 | SHELL-004 | GLO-004 | Accessible mobile off-canvas navigation | Bishowdip | `BLOCKED` | DEC-002 | `bishowdip` | Focus trap, Escape, scroll lock/restoration, focus restoration, backdrop, routes, and closed tab exclusion verified; logo asset pending. |
 | SHELL-005 | GLO-005 | Functional search or approved removal | `TBD` | `NOT STARTED` | Search scope decision | — | Decorative search is forbidden. |
 | SHELL-006 | GLO-006 | Shared footer and copyright bar | `TBD` | `NOT STARTED` | FND-009, DEC-010/012 | — | No suspicious recent posts. |
-| SHELL-007 | GLO-007 | Accessible scroll-to-top control | Bishowdip | `IN PROGRESS` | MOT-001 | `bishowdip` | Implementing threshold visibility, keyboard activation, and reduced-motion behavior. |
+| SHELL-007 | GLO-007 | Accessible scroll-to-top control | Bishowdip | `DONE` | MOT-001 | `bishowdip` | Global 480 px threshold control with tab-order isolation, smooth scrolling, and reduced-motion fallback; component tests pass. |
 | SHELL-008 | PAGE-001 | Reusable internal-page header/banner/breadcrumb | `TBD` | `NOT STARTED` | SHELL-002, FND-008 | — | Exactly one page `h1`. |
 
 ---
@@ -337,6 +337,7 @@ Record decisions that affect multiple contributors. Never rely only on chat hist
 | 2026-09-05 | MOT-T01–T04 | Local hydrated browser test | Reveal fallback, stagger fallback, counter final value, accordion single-open state, ARIA expanded/hidden state | Pass | `src/components/motion`, `globals.css`; temporary test route removed | Bishowdip |
 | 2026-09-05 | FND-011/012 | Vitest/jsdom | Button, accordion, motion fallback, header, and typed content invariants | Pass — 5 files, 13 tests | `npm test` | Bishowdip |
 | 2026-09-05 | HOME-T01/T02 | Local browser and Vitest/jsdom | Responsive hero structure, slide controls, autoplay pause, pagination, swipe, inactive state, typecheck, and build | Pass except approved photography pending | `src/components/home/Hero.tsx`, `npm test` | Bishowdip |
+| 2026-09-05 | SHELL-007 | Vitest/jsdom and production build | Visibility threshold, hidden tab state, activation, smooth-scroll behavior, typecheck, and build | Pass — 7 files, 19 tests | `src/components/layout/ScrollToTop.tsx`, `npm test` | Bishowdip |
 
 ---
 
@@ -362,6 +363,7 @@ Move a task summary here only after its tracker row is `DONE`. Keep the original
 | 2026-09-05 | FND-011 | Bishowdip | Pending commit | Dependency choices, deferrals, compatibility, and security constraints documented. |
 | 2026-09-05 | FND-012 | Bishowdip | Pending commit | Vitest and Testing Library foundation added with 13 passing tests. |
 | 2026-09-05 | HOME-T02 | Bishowdip | Pending commit | Accessible two-slide carousel completed with autoplay pause/reset, arrow and pagination controls, swipe, and fixed-height transitions. |
+| 2026-09-05 | SHELL-007 | Bishowdip | Pending commit | Global accessible scroll-to-top control completed with threshold visibility and reduced-motion-aware behavior. |
 
 ---
 
