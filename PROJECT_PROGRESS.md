@@ -90,7 +90,7 @@ Replace placeholders before development begins.
 |---|---|---|---|---|---|
 | M0 — Decisions and asset clearance | `NOT STARTED` | `TBD` | `TBD` | — | — |
 | M1 — Foundation | `IN PROGRESS` | Bishowdip | `TBD` | — | FND-002–008 complete; typed content awaits client decisions. |
-| M2 — Shared shell | `NOT STARTED` | `TBD` | `TBD` | — | — |
+| M2 — Shared shell | `IN PROGRESS` | Bishowdip | `TBD` | — | Header behavior complete; approved logo and remaining footer/search work pending. |
 | M3 — Homepage static fidelity | `NOT STARTED` | `TBD` | `TBD` | — | — |
 | M4 — Motion system | `NOT STARTED` | `TBD` | `TBD` | — | — |
 | M5 — Internal pages | `NOT STARTED` | `TBD` | `TBD` | — | — |
@@ -106,13 +106,13 @@ Update these counts whenever a task moves to `DONE`.
 |---|---:|---:|---:|
 | Decisions/assets | 0 | 12 | 0% |
 | Foundation | 7 | 12 | 58% |
-| Shared shell | 0 | 8 | 0% |
+| Shared shell | 2 | 8 | 25% |
 | Homepage | 0 | 12 | 0% |
 | Motion/responsive | 0 | 10 | 0% |
 | Internal pages | 0 | 8 | 0% |
 | Forms/integrations | 0 | 8 | 0% |
 | Quality/release | 0 | 14 | 0% |
-| **Overall** | **7** | **84** | **8%** |
+| **Overall** | **9** | **84** | **11%** |
 
 ---
 
@@ -160,10 +160,10 @@ These tasks block accurate implementation. Do not replace them with assumptions.
 
 | Task | Requirement | Deliverable | Owner | Status | Depends on | Branch/PR | Evidence/notes |
 |---|---|---|---|---|---|---|---|
-| SHELL-001 | GLO-001 | Top information bar | `TBD` | `NOT STARTED` | FND-004/005/006/009 | — | Desktop behavior verified. |
-| SHELL-002 | GLO-002 | Main desktop header and active routes | `TBD` | `NOT STARTED` | SHELL-001, DEC-005 | — | No placeholder routes. |
-| SHELL-003 | GLO-003 | Sticky header without duplicate DOM bugs/layout shift | `TBD` | `NOT STARTED` | SHELL-002 | — | Scroll both directions. |
-| SHELL-004 | GLO-004 | Accessible mobile off-canvas navigation | `TBD` | `NOT STARTED` | SHELL-002 | — | Focus trap, Escape, scroll lock. |
+| SHELL-001 | GLO-001 | Top information bar | Bishowdip | `DONE` | FND-004/005/006/009 | `bishowdip` | Verified email/address and utility navigation rendered at desktop. |
+| SHELL-002 | GLO-002 | Main desktop header and active routes | Bishowdip | `BLOCKED` | DEC-002 | `bishowdip` | Structure, CTA, and active-route behavior complete; approved logo asset pending. |
+| SHELL-003 | GLO-003 | Sticky header without duplicate DOM bugs/layout shift | Bishowdip | `DONE` | SHELL-002 structure | `bishowdip` | One sticky header collapses top bar and compacts from 132 px to 76 px at scroll threshold. |
+| SHELL-004 | GLO-004 | Accessible mobile off-canvas navigation | Bishowdip | `BLOCKED` | DEC-002 | `bishowdip` | Focus trap, Escape, scroll lock/restoration, focus restoration, backdrop, routes, and closed tab exclusion verified; logo asset pending. |
 | SHELL-005 | GLO-005 | Functional search or approved removal | `TBD` | `NOT STARTED` | Search scope decision | — | Decorative search is forbidden. |
 | SHELL-006 | GLO-006 | Shared footer and copyright bar | `TBD` | `NOT STARTED` | FND-009, DEC-010/012 | — | No suspicious recent posts. |
 | SHELL-007 | GLO-007 | Accessible scroll-to-top control | `TBD` | `NOT STARTED` | MOT-001 | — | Reduced-motion behavior. |
@@ -296,6 +296,7 @@ Add a row immediately when a task changes to `BLOCKED`.
 |---|---|---|---|---|---|---|
 | 2026-09-05 | FND-001 | Bishowdip | Other three team identities/handles are unknown | Project owner | Provide names/handles and branch naming preference | 2026-09-05 |
 | 2026-09-05 | FND-009/010 | Bishowdip | Final business settings, statistics, FAQ answers, and service destinations are unapproved | Project/content owner | Complete DEC-004/005/006/009/012 | 2026-09-05 |
+| 2026-09-05 | SHELL-002/004 | Bishowdip | Approved production logo asset is unavailable | Project/design owner | Complete DEC-002 and replace temporary text mark | 2026-09-05 |
 
 ---
 
@@ -311,6 +312,7 @@ Record decisions that affect multiple contributors. Never rely only on chat hist
 | 2026-09-05 | ADR-004 | Canonical marketing routes will be introduced incrementally; no repository-wide route/component rename. | Bishowdip | FND-003 and all PAGE tasks | `ROUTE_MIGRATION_PLAN.md` |
 | 2026-09-05 | ADR-005 | Use verified Rubik for body/navigation and Raleway for headings. | Bishowdip | FND-005 and all UI | Live computed-style audit and `src/app/layout.tsx` |
 | 2026-09-05 | ADR-006 | Shared marketing UI must consume Container, Section, Button/IconButton, SectionHeading, and MediaFrame primitives instead of redefining equivalents. | Bishowdip | All SHELL, HOME, and PAGE tasks | `src/components/layout`, `src/components/ui` |
+| 2026-09-05 | ADR-007 | Use one sticky header whose desktop utility bar collapses after 32 px instead of cloning duplicate header DOM. | Bishowdip | SHELL-001–004 | `src/components/layout/SiteHeader.tsx` |
 
 ---
 
@@ -329,6 +331,7 @@ Record decisions that affect multiple contributors. Never rely only on chat hist
 | 2026-09-05 | FND-002 | Local baseline | Component/route audit, typecheck, build, Biome, npm audit | Partial pass | `FRONTEND_BASELINE_AUDIT.md` | Bishowdip |
 | 2026-09-05 | FND-003–005 | Local baseline | Targeted Biome check, TypeScript with incremental output disabled, production build | Pass | `ROUTE_MIGRATION_PLAN.md`, `globals.css`, `layout.tsx`, `tailwind.config.ts` | Bishowdip |
 | 2026-09-05 | FND-006–008 | Local baseline | Targeted Biome lint, TypeScript with incremental output disabled, production build | Pass | `src/components/layout`, `src/components/ui` | Bishowdip |
+| 2026-09-05 | SHELL-001–004 | Chromium local, 1440×900 and 390×844 | Active route, sticky collapse, menu transition, Escape, focus, body lock, closed tab exclusion, overflow | Pass except approved logo pending | `src/components/layout/SiteHeader.tsx` | Bishowdip |
 
 ---
 
@@ -345,6 +348,8 @@ Move a task summary here only after its tracker row is `DONE`. Keep the original
 | 2026-09-05 | FND-006 | Bishowdip | Pending commit | Fluid responsive container and section-spacing primitives completed. |
 | 2026-09-05 | FND-007 | Bishowdip | Pending commit | Shared accessible Button and IconButton states completed. |
 | 2026-09-05 | FND-008 | Bishowdip | Pending commit | Shared SectionHeading and MediaFrame variants completed. |
+| 2026-09-05 | SHELL-001 | Bishowdip | Pending commit | Verified desktop information bar and utility navigation implemented. |
+| 2026-09-05 | SHELL-003 | Bishowdip | Pending commit | Single sticky header and compact scrolled state implemented and browser-tested. |
 
 ---
 
