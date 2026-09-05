@@ -1,135 +1,212 @@
-import Link from 'next/link'
-import Image from 'next/image'
+'use client'
 
-const HERO_IMG =
-  'https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=Professional%20diverse%20business%20team%20of%20three%20people%20collaborating%20in%20modern%20office%2C%20one%20caucasian%20bearded%20man%20with%20folder%2C%20one%20african%20american%20woman%20with%20notebook%2C%20friendly%20corporate%20photography%2C%20blue%20lighting%20atmosphere%2C%20high%20quality%20photo&image_size=landscape_4_3'
+import { useCallback, useEffect, useRef, useState } from 'react'
+
+import { Container } from '@/components/layout'
+import { Button } from '@/components/ui'
+import { heroSlides } from '@/content/site'
+import { cn } from '@/utils/format'
+
+const AUTOPLAY_DELAY = 6000
+const SWIPE_THRESHOLD = 48
+
+function ArrowIcon({ direction = 'right' }: { direction?: 'left' | 'right' }) {
+  return (
+    <svg
+      aria-hidden="true"
+      className={cn('size-4', direction === 'left' && 'rotate-180')}
+      fill="none"
+      viewBox="0 0 24 24"
+    >
+      <path
+        d="M5 12h14m-5-5 5 5-5 5"
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth="2"
+      />
+    </svg>
+  )
+}
 
 export default function Hero() {
+  const [activeIndex, setActiveIndex] = useState(0)
+  const [isPaused, setIsPaused] = useState(false)
+  const touchStartX = useRef<number | null>(null)
+
+  const selectSlide = useCallback((index: number) => {
+    setActiveIndex((index + heroSlides.length) % heroSlides.length)
+  }, [])
+
+  // biome-ignore lint/correctness/useExhaustiveDependencies: changing slides intentionally restarts autoplay
+  useEffect(() => {
+    if (isPaused || heroSlides.length < 2) return
+    const timer = window.setTimeout(() => {
+      setActiveIndex((current) => (current + 1) % heroSlides.length)
+    }, AUTOPLAY_DELAY)
+    return () => window.clearTimeout(timer)
+  }, [activeIndex, isPaused])
+
+  function finishSwipe(clientX: number) {
+    if (touchStartX.current === null) return
+    const distance = clientX - touchStartX.current
+    touchStartX.current = null
+    if (Math.abs(distance) < SWIPE_THRESHOLD) return
+    selectSlide(activeIndex + (distance < 0 ? 1 : -1))
+  }
+
   return (
-    <section className="relative overflow-hidden bg-gradient-to-br from-[#0a1940] via-[#13275f] to-[#1e3a8a] text-white">
-      {/* Decorative shapes */}
-      <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute -top-24 -left-24 w-96 h-96 rounded-full bg-primary-500/10 blur-3xl" />
-        <div className="absolute top-10 right-0 w-80 h-80 rounded-full bg-blue-400/10 blur-3xl" />
-        <svg className="absolute bottom-0 left-0 w-64 h-64 text-primary-400/10" viewBox="0 0 200 200">
-          <path fill="currentColor" d="M40.2,-61.7C50.8,-53.5,57.1,-38.6,60.1,-23.7C63.1,-8.8,62.9,6,58.2,18.4C53.6,30.9,44.5,40.9,33.7,48.6C22.9,56.3,10.4,61.6,-2.8,65.3C-16,69,-32.1,71.1,-45.6,64.9C-59.1,58.8,-70.1,44.3,-75.3,28.6C-80.6,12.8,-80.1,-4.2,-74.3,-18.3C-68.5,-32.4,-57.3,-43.6,-44.8,-51.3C-32.2,-59,-18.3,-63.2,-2.9,-59.3C12.4,-55.5,29.6,-69.9,40.2,-61.7Z" transform="translate(100 100)" />
-        </svg>
+    <section
+      aria-label="CoreCraft introduction"
+      aria-roledescription="carousel"
+      className="relative isolate overflow-hidden bg-[#111f4d] text-white"
+      onBlur={(event) => {
+        if (!event.currentTarget.contains(event.relatedTarget)) setIsPaused(false)
+      }}
+      onFocus={() => setIsPaused(true)}
+      onMouseEnter={() => setIsPaused(true)}
+      onMouseLeave={() => setIsPaused(false)}
+      onTouchEnd={(event) => finishSwipe(event.changedTouches[0]?.clientX ?? 0)}
+      onTouchStart={(event) => {
+        touchStartX.current = event.touches[0]?.clientX ?? null
+      }}
+    >
+      <div aria-hidden="true" className="absolute inset-0">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_78%_28%,rgba(61,114,252,0.35),transparent_31%),linear-gradient(112deg,#101d47_0%,#182d69_52%,#244caf_100%)]" />
+        <div className="hero-grid absolute inset-y-0 right-0 w-[58%] opacity-30" />
+        <div className="absolute -right-24 top-10 size-[30rem] rounded-full border border-white/10" />
+        <div className="absolute -right-2 top-32 size-72 rounded-full border border-white/10" />
+        <div className="absolute bottom-20 right-[14%] size-28 rotate-12 rounded-3xl border border-blue-300/20 bg-blue-300/5" />
       </div>
 
-      <div className="relative max-w-7xl mx-auto px-6 pt-16 pb-28 lg:pt-24 lg:pb-40">
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
-          {/* Left content */}
-          <div>
-            <div className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/5 px-4 py-1.5 text-xs font-medium mb-6">
-              <span className="w-2 h-2 rounded-full bg-green-400" />
-              WELCOME TO CORECRAFT TECHNOLOGIES
-            </div>
-
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold leading-[1.1] tracking-tight">
-              Your{' '}
-              <span className="relative inline-block">
-                <span className="bg-gradient-to-r from-blue-300 to-white bg-clip-text text-transparent">
-                  Digital
-                </span>
-                <svg className="absolute -bottom-2 left-0 w-full" height="8" viewBox="0 0 200 8" preserveAspectRatio="none">
-                  <path d="M2 6 Q 50 0 100 4 T 198 3" stroke="#60a5fa" strokeWidth="3" fill="none" strokeLinecap="round" />
-                </svg>
-              </span>{' '}
-              <br /> Growth Partner
-            </h1>
-
-            <p className="mt-6 text-base md:text-lg text-blue-100/90 max-w-xl leading-relaxed">
-              We design, develop, and deploy cutting-edge digital solutions that empower businesses
-              to innovate, automate, and compete globally.
-            </p>
-
-            <div className="mt-8 flex flex-wrap items-center gap-4">
-              <Link
-                href="/contact"
-                className="inline-flex items-center gap-2 bg-white text-primary-900 font-semibold px-6 py-3.5 rounded-md hover:bg-blue-50 shadow-xl shadow-black/20 transition-all"
+      <Container className="relative min-h-[39rem] py-16 sm:min-h-[42rem] sm:py-20 lg:min-h-[45rem] lg:py-24">
+        <div className="relative min-h-[29rem] sm:min-h-[31rem] lg:min-h-[34rem]">
+          {heroSlides.map((slide, index) => {
+            const isActive = index === activeIndex
+            const Heading = isActive ? 'h1' : 'div'
+            return (
+              <article
+                aria-hidden={!isActive}
+                aria-label={`${index + 1} of ${heroSlides.length}`}
+                aria-roledescription="slide"
+                className={cn(
+                  'absolute inset-0 grid items-center transition-[opacity,transform] duration-[var(--motion-reveal)] ease-[var(--ease-emphasis)] lg:grid-cols-[minmax(0,0.62fr)_minmax(20rem,0.38fr)] lg:gap-12',
+                  isActive
+                    ? 'z-10 translate-x-0 opacity-100'
+                    : 'pointer-events-none z-0 translate-x-8 opacity-0',
+                )}
+                key={slide.id}
               >
-                Contact Now
-                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
-              </Link>
-              <button className="inline-flex items-center gap-3 text-sm font-medium text-white/90 hover:text-white transition-colors">
-                <span className="w-12 h-12 rounded-full border-2 border-white/30 flex items-center justify-center bg-white/5 backdrop-blur">
-                  <svg className="w-4 h-4 ml-0.5" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z" /></svg>
-                </span>
-                Watch Introduction
-              </button>
-            </div>
+                <div className="max-w-3xl py-8">
+                  <p className="mb-6 flex items-center gap-3 text-xs font-semibold tracking-[0.22em] text-blue-200 sm:text-sm">
+                    <span aria-hidden="true" className="h-0.5 w-10 bg-brand" />
+                    {slide.eyebrow}
+                  </p>
+                  <Heading
+                    aria-label={slide.title}
+                    className="max-w-3xl text-[clamp(2.75rem,7vw,5.4rem)] font-extrabold leading-[0.98] tracking-[-0.045em] text-white"
+                  >
+                    {slide.title.split(' ').map((word, wordIndex) => {
+                      const highlighted = wordIndex === 1 || (index === 1 && wordIndex === 3)
+                      return (
+                        <span
+                          className={cn(highlighted && 'hero-highlight text-blue-300')}
+                          key={`${slide.id}-${word}`}
+                        >
+                          {word}{' '}
+                        </span>
+                      )
+                    })}
+                  </Heading>
+                  <p className="mt-7 max-w-2xl text-base leading-7 text-blue-50/85 sm:text-lg sm:leading-8">
+                    {slide.body}
+                  </p>
+                  <Button
+                    className="mt-9 shadow-xl shadow-black/20"
+                    endIcon={<ArrowIcon />}
+                    href="/contact"
+                    size="large"
+                  >
+                    Contact Now
+                  </Button>
+                </div>
 
-            <div className="mt-12 hidden md:flex items-center gap-6 text-xs text-blue-100/80">
-              <div className="flex items-center gap-2">
-                <div className="flex -space-x-2">
-                  {[0, 1, 2, 3].map((i) => (
-                    <div
-                      key={i}
-                      className="w-7 h-7 rounded-full bg-primary-400 border-2 border-[#0a1940]"
-                      style={{ background: `hsl(${210 + i * 15}, 80%, 60%)` }}
+                <div aria-hidden="true" className="relative hidden min-h-[28rem] lg:block">
+                  <div className="absolute inset-8 rounded-[3rem] border border-white/15 bg-gradient-to-br from-white/15 to-white/[0.03] shadow-2xl shadow-black/25 backdrop-blur-sm" />
+                  <div className="absolute inset-x-20 bottom-20 top-24 rounded-[2rem] bg-gradient-to-br from-blue-300/25 to-brand/10 ring-1 ring-white/15" />
+                  <svg
+                    className="absolute inset-0 size-full text-blue-100/80"
+                    fill="none"
+                    viewBox="0 0 420 440"
+                  >
+                    <title>Decorative technology illustration</title>
+                    <path d="M110 295 210 120l100 175H110Z" stroke="currentColor" strokeWidth="2" />
+                    <circle
+                      cx="210"
+                      cy="218"
+                      r="68"
+                      stroke="currentColor"
+                      strokeDasharray="6 10"
+                      strokeWidth="2"
                     />
-                  ))}
+                    <path
+                      d="M173 219h74M210 182v74"
+                      stroke="currentColor"
+                      strokeLinecap="round"
+                      strokeWidth="8"
+                    />
+                  </svg>
+                  <div className="absolute right-2 top-16 rounded-2xl border border-white/20 bg-[#17242c]/90 px-5 py-4 shadow-xl backdrop-blur">
+                    <span className="block text-2xl font-bold text-white">Digital first</span>
+                    <span className="text-xs tracking-wide text-blue-200">BUILT TO SCALE</span>
+                  </div>
                 </div>
-                <span>Trusted by 2,500+ clients</span>
-              </div>
-              <div className="h-8 w-px bg-white/10" />
-              <div className="flex items-center gap-1">
-                <div className="flex">
-                  {[0, 1, 2, 3, 4].map((i) => (
-                    <svg key={i} className="w-4 h-4 text-yellow-400" viewBox="0 0 20 20" fill="currentColor"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.286 3.957a1 1 0 00.95.69h4.162c.969 0 1.371 1.24.588 1.81l-3.37 2.448a1 1 0 00-.364 1.118l1.287 3.957c.3.922-.755 1.688-1.54 1.118l-3.37-2.448a1 1 0 00-1.175 0l-3.37 2.448c-.784.57-1.838-.196-1.539-1.118l1.287-3.957a1 1 0 00-.364-1.118L2.05 9.384c-.783-.57-.38-1.81.588-1.81h4.162a1 1 0 00.95-.69l1.286-3.957z" /></svg>
-                  ))}
-                </div>
-                <span>4.9/5 rating</span>
-              </div>
-            </div>
-          </div>
+              </article>
+            )
+          })}
+        </div>
 
-          {/* Right image */}
-          <div className="relative">
-            {/* Stats badge top */}
-            <div className="absolute -top-4 -left-4 z-10 flex items-center gap-3 bg-white rounded-2xl shadow-2xl shadow-black/30 px-5 py-3 text-gray-900">
-              <div className="w-10 h-10 rounded-xl bg-green-100 flex items-center justify-center">
-                <svg className="w-5 h-5 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-              </div>
-              <div>
-                <div className="text-lg font-bold leading-tight">99.6%</div>
-                <div className="text-[11px] text-gray-500">Client Satisfaction</div>
-              </div>
-            </div>
-
-            <div className="relative rounded-[2rem] overflow-hidden shadow-2xl shadow-black/30 border-4 border-white/10">
-              <div className="aspect-[4/5] lg:aspect-[5/6]">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src={HERO_IMG}
-                  alt="CoreCraft team"
-                  className="w-full h-full object-cover"
-                />
-              </div>
-              <div className="absolute inset-0 bg-gradient-to-t from-[#0a1940]/40 via-transparent to-transparent" />
-            </div>
-
-            {/* Bottom line decoration */}
-            <div className="absolute -bottom-8 -left-8 w-3/4 h-1 bg-gradient-to-r from-blue-400 via-blue-500 to-blue-300 rounded-full" />
-            <div className="absolute -bottom-10 -left-4 w-1/2 h-1 bg-gradient-to-r from-blue-500 to-blue-300 rounded-full" />
-
-            {/* Floating icons */}
-            <div className="hidden lg:flex absolute top-16 -left-10 w-14 h-14 rounded-full bg-white/10 backdrop-blur border border-white/20 items-center justify-center">
-              <svg className="w-6 h-6 text-blue-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>
-            </div>
-            <div className="hidden lg:flex absolute top-28 right-0 w-12 h-12 rounded-full bg-white/10 backdrop-blur border border-white/20 items-center justify-center">
-              <div className="w-4 h-4 rounded-full border-2 border-blue-300" />
-            </div>
+        <div className="relative z-20 flex items-center justify-between gap-6 border-t border-white/10 pt-5">
+          <fieldset className="flex gap-2 border-0 p-0" aria-label="Choose a slide">
+            {heroSlides.map((slide, index) => (
+              <button
+                aria-label={`Show slide ${index + 1}: ${slide.title}`}
+                aria-pressed={activeIndex === index}
+                className={cn(
+                  'h-3 rounded-full transition-[width,background-color] duration-[var(--motion-hover)]',
+                  activeIndex === index ? 'w-10 bg-brand' : 'w-3 bg-white/40 hover:bg-white/70',
+                )}
+                key={slide.id}
+                onClick={() => selectSlide(index)}
+                type="button"
+              />
+            ))}
+          </fieldset>
+          <div className="flex gap-2">
+            <button
+              aria-label="Previous slide"
+              className="hero-control"
+              onClick={() => selectSlide(activeIndex - 1)}
+              type="button"
+            >
+              <ArrowIcon direction="left" />
+            </button>
+            <button
+              aria-label="Next slide"
+              className="hero-control"
+              onClick={() => selectSlide(activeIndex + 1)}
+              type="button"
+            >
+              <ArrowIcon />
+            </button>
           </div>
         </div>
-      </div>
+      </Container>
 
-      {/* Wave bottom */}
-      <div className="absolute bottom-0 left-0 right-0 text-white">
-        <svg viewBox="0 0 1440 80" fill="currentColor" preserveAspectRatio="none" className="w-full h-16 lg:h-20">
-          <path d="M0,48 C240,88 480,8 720,32 C960,56 1200,88 1440,48 L1440,80 L0,80 Z" />
-        </svg>
-      </div>
+      <div
+        aria-hidden="true"
+        className="absolute inset-x-0 bottom-0 h-10 bg-white [clip-path:polygon(0_74%,100%_0,100%_100%,0_100%)] sm:h-16"
+      />
     </section>
   )
 }

@@ -110,6 +110,50 @@ select {
   padding-block: var(--section-space-lg);
 }
 
+.hero-grid {
+  background-image: linear-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.08) 1px, transparent 1px);
+  background-size: 4rem 4rem;
+  mask-image: linear-gradient(to left, black, transparent);
+}
+
+.hero-highlight {
+  position: relative;
+  display: inline-block;
+}
+
+.hero-highlight::after {
+  position: absolute;
+  right: 0;
+  bottom: -0.08em;
+  left: 0;
+  height: 0.08em;
+  border-radius: 999px;
+  background: currentColor;
+  content: "";
+  opacity: 0.8;
+  transform: rotate(-1.5deg);
+}
+
+.hero-control {
+  display: inline-flex;
+  width: 2.75rem;
+  height: 2.75rem;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgb(255 255 255 / 20%);
+  border-radius: 999px;
+  color: white;
+  background: rgb(255 255 255 / 6%);
+  transition: color var(--motion-hover) var(--ease-standard), background-color var(--motion-hover)
+    var(--ease-standard), border-color var(--motion-hover) var(--ease-standard);
+}
+
+.hero-control:hover {
+  border-color: rgb(255 255 255 / 50%);
+  background: rgb(255 255 255 / 14%);
+}
+
 .motion-reveal,
 .motion-stagger > * {
   transition-duration: var(--motion-reveal);

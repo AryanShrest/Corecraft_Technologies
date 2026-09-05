@@ -66,7 +66,7 @@ Replace placeholders before development begins.
 
 | Team member | Primary area | Active branch | Current task | Availability |
 |---|---|---|---|---|
-| Bishowdip | Integration, foundation, final review | `bishowdip` | HOME-T01/T02 — homepage hero | Active |
+| Bishowdip | Integration, foundation, final review | `bishowdip` | Homepage static sections | Active |
 | Developer 2 — `TBD` | Homepage static sections | `TBD` | Unassigned | `TBD` |
 | Developer 3 — `TBD` | Motion and responsive QA | `TBD` | Unassigned | `TBD` |
 | Developer 4 — `TBD` | Internal pages and integrations | `TBD` | Unassigned | `TBD` |
@@ -107,12 +107,12 @@ Update these counts whenever a task moves to `DONE`.
 | Decisions/assets | 0 | 12 | 0% |
 | Foundation | 9 | 12 | 75% |
 | Shared shell | 2 | 8 | 25% |
-| Homepage | 0 | 12 | 0% |
+| Homepage | 1 | 12 | 8% |
 | Motion/responsive | 4 | 10 | 40% |
 | Internal pages | 0 | 8 | 0% |
 | Forms/integrations | 0 | 8 | 0% |
 | Quality/release | 0 | 14 | 0% |
-| **Overall** | **15** | **84** | **18%** |
+| **Overall** | **16** | **84** | **19%** |
 
 ---
 
@@ -175,8 +175,8 @@ These tasks block accurate implementation. Do not replace them with assumptions.
 
 | Task | Requirement | Deliverable | Owner | Status | Depends on | Branch/PR | Evidence/notes |
 |---|---|---|---|---|---|---|---|
-| HOME-T01 | HOME-001 | Static hero structure and responsive imagery | Bishowdip | `IN PROGRESS` | FND-006/007/010, DEC-003 | `bishowdip` | Implementing approved copy and responsive structure; final photography remains blocked by DEC-003. |
-| HOME-T02 | HOME-001 | Hero carousel, controls, autoplay, swipe, accessibility | Bishowdip | `IN PROGRESS` | HOME-T01, MOT-T01 | `bishowdip` | Implementing controls, autoplay pause/reset, swipe, and accessible slide state. |
+| HOME-T01 | HOME-001 | Static hero structure and responsive imagery | Bishowdip | `BLOCKED` | FND-006/007/010, DEC-003 | `bishowdip` | Approved copy and responsive structure complete; temporary CSS technology artwork isolates the unresolved licensed photography dependency. |
+| HOME-T02 | HOME-001 | Hero carousel, controls, autoplay, swipe, accessibility | Bishowdip | `DONE` | HOME-T01, MOT-T01 | `bishowdip` | Two-slide carousel: 6 s autoplay, hover/focus pause, manual reset, arrows, pagination, swipe, fixed layout, and inactive-slide accessibility isolation; component tests pass. |
 | HOME-T03 | HOME-002 | How We Work section | `TBD` | `NOT STARTED` | FND-008, DEC-003 | — | `/services` CTA. |
 | HOME-T04 | HOME-003 | Innovation/process CTA section | `TBD` | `NOT STARTED` | Approved copy/assets | — | No invented steps. |
 | HOME-T05 | HOME-004 | Six-card service grid | `TBD` | `NOT STARTED` | FND-010, DEC-003/006 | — | Reused on Services page. |
@@ -336,6 +336,7 @@ Record decisions that affect multiple contributors. Never rely only on chat hist
 | 2026-09-05 | SHELL-001–004 | Chromium local, 1440×900 and 390×844 | Active route, sticky collapse, menu transition, Escape, focus, body lock, closed tab exclusion, overflow | Pass except approved logo pending | `src/components/layout/SiteHeader.tsx` | Bishowdip |
 | 2026-09-05 | MOT-T01–T04 | Local hydrated browser test | Reveal fallback, stagger fallback, counter final value, accordion single-open state, ARIA expanded/hidden state | Pass | `src/components/motion`, `globals.css`; temporary test route removed | Bishowdip |
 | 2026-09-05 | FND-011/012 | Vitest/jsdom | Button, accordion, motion fallback, header, and typed content invariants | Pass — 5 files, 13 tests | `npm test` | Bishowdip |
+| 2026-09-05 | HOME-T01/T02 | Local browser and Vitest/jsdom | Responsive hero structure, slide controls, autoplay pause, pagination, swipe, inactive state, typecheck, and build | Pass except approved photography pending | `src/components/home/Hero.tsx`, `npm test` | Bishowdip |
 
 ---
 
@@ -360,6 +361,7 @@ Move a task summary here only after its tracker row is `DONE`. Keep the original
 | 2026-09-05 | MOT-T04 | Bishowdip | Pending commit | Accessible single/multiple Accordion primitive completed. |
 | 2026-09-05 | FND-011 | Bishowdip | Pending commit | Dependency choices, deferrals, compatibility, and security constraints documented. |
 | 2026-09-05 | FND-012 | Bishowdip | Pending commit | Vitest and Testing Library foundation added with 13 passing tests. |
+| 2026-09-05 | HOME-T02 | Bishowdip | Pending commit | Accessible two-slide carousel completed with autoplay pause/reset, arrow and pagination controls, swipe, and fixed-height transitions. |
 
 ---
 
