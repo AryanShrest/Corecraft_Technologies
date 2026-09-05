@@ -66,7 +66,7 @@ Replace placeholders before development begins.
 
 | Team member | Primary area | Active branch | Current task | Availability |
 |---|---|---|---|---|
-| Bishowdip | Integration, foundation, final review | `bishowdip` | Homepage static sections | Active |
+| Bishowdip | Integration, foundation, final review | `bishowdip` | SHELL-007 — scroll-to-top control | Active |
 | Developer 2 — `TBD` | Homepage static sections | `TBD` | Unassigned | `TBD` |
 | Developer 3 — `TBD` | Motion and responsive QA | `TBD` | Unassigned | `TBD` |
 | Developer 4 — `TBD` | Internal pages and integrations | `TBD` | Unassigned | `TBD` |
@@ -166,7 +166,7 @@ These tasks block accurate implementation. Do not replace them with assumptions.
 | SHELL-004 | GLO-004 | Accessible mobile off-canvas navigation | Bishowdip | `BLOCKED` | DEC-002 | `bishowdip` | Focus trap, Escape, scroll lock/restoration, focus restoration, backdrop, routes, and closed tab exclusion verified; logo asset pending. |
 | SHELL-005 | GLO-005 | Functional search or approved removal | `TBD` | `NOT STARTED` | Search scope decision | — | Decorative search is forbidden. |
 | SHELL-006 | GLO-006 | Shared footer and copyright bar | `TBD` | `NOT STARTED` | FND-009, DEC-010/012 | — | No suspicious recent posts. |
-| SHELL-007 | GLO-007 | Accessible scroll-to-top control | `TBD` | `NOT STARTED` | MOT-001 | — | Reduced-motion behavior. |
+| SHELL-007 | GLO-007 | Accessible scroll-to-top control | Bishowdip | `IN PROGRESS` | MOT-001 | `bishowdip` | Implementing threshold visibility, keyboard activation, and reduced-motion behavior. |
 | SHELL-008 | PAGE-001 | Reusable internal-page header/banner/breadcrumb | `TBD` | `NOT STARTED` | SHELL-002, FND-008 | — | Exactly one page `h1`. |
 
 ---
