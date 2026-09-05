@@ -3,7 +3,7 @@
 **Requirements:** [WEBSITE_CLONE_REQUIREMENTS.md](./WEBSITE_CLONE_REQUIREMENTS.md)  
 **Integration branch:** `bishowdip`  
 **Last updated:** 2026-09-05  
-**Overall status:** Not started
+**Overall status:** In progress
 
 > This file is the canonical task tracker. Before starting work, claim the task here and pull the latest branch. Do not begin a task already marked `IN PROGRESS`, `IN REVIEW`, or `BLOCKED` without contacting its owner.
 
@@ -105,14 +105,14 @@ Update these counts whenever a task moves to `DONE`.
 | Category | Done | Total | Progress |
 |---|---:|---:|---:|
 | Decisions/assets | 0 | 12 | 0% |
-| Foundation | 0 | 12 | 0% |
+| Foundation | 1 | 12 | 8% |
 | Shared shell | 0 | 8 | 0% |
 | Homepage | 0 | 12 | 0% |
 | Motion/responsive | 0 | 10 | 0% |
 | Internal pages | 0 | 8 | 0% |
 | Forms/integrations | 0 | 8 | 0% |
 | Quality/release | 0 | 14 | 0% |
-| **Overall** | **0** | **84** | **0%** |
+| **Overall** | **1** | **84** | **1%** |
 
 ---
 
@@ -141,8 +141,8 @@ These tasks block accurate implementation. Do not replace them with assumptions.
 
 | Task | Requirement | Deliverable | Owner | Status | Depends on | Branch/PR | Evidence/notes |
 |---|---|---|---|---|---|---|---|
-| FND-001 | §3 | Confirm team names, branches, ownership, and reviewers | Bishowdip | `NOT STARTED` | — | — | Update Section 2. |
-| FND-002 | §5 | Audit existing frontend components before changing architecture | `TBD` | `NOT STARTED` | — | — | Record keep/refactor/replace decisions. |
+| FND-001 | §3 | Confirm team names, branches, ownership, and reviewers | Bishowdip | `BLOCKED` | Team member identities | `bishowdip` | Waiting for the other three names/handles. |
+| FND-002 | §5 | Audit existing frontend components before changing architecture | Bishowdip | `DONE` | — | `bishowdip` | See `FRONTEND_BASELINE_AUDIT.md`; baseline typecheck/build pass, Biome and audit fail. |
 | FND-003 | §5.5 | Confirm route and folder migration plan | `TBD` | `NOT STARTED` | FND-002 | — | Avoid one huge rename PR. |
 | FND-004 | §6.1 | Create approved CSS color tokens | `TBD` | `NOT STARTED` | Reference captures | — | Include sampled values. |
 | FND-005 | §6.2 | Confirm and configure no more than two font families | `TBD` | `NOT STARTED` | Asset/license review | — | Record weights and loading method. |
@@ -268,9 +268,9 @@ Contact and newsletter homepage sections are tracked under integrations so their
 
 | Priority | Task | Owner | Status | Planned completion | Notes |
 |---:|---|---|---|---|---|
-| 1 | FND-001 — Confirm roster and ownership | Bishowdip | `NOT STARTED` | `TBD` | Must happen before parallel coding. |
+| 1 | FND-001 — Confirm roster and ownership | Bishowdip | `BLOCKED` | `TBD` | Waiting for the other three team names/handles. |
 | 2 | DEC-001 — Confirm reproduction permission | `TBD` | `NOT STARTED` | `TBD` | Blocks asset reuse. |
-| 3 | FND-002 — Audit current components | `TBD` | `NOT STARTED` | `TBD` | Prevent duplicate/replacement work. |
+| 3 | FND-002 — Audit current components | Bishowdip | `DONE` | 2026-09-05 | See `FRONTEND_BASELINE_AUDIT.md`. |
 | 4 | DEC-004/005/006/009 — Resolve core content decisions | `TBD` | `NOT STARTED` | `TBD` | Required for shared data. |
 | 5 | FND-004/005/006 — Design tokens and layout | `TBD` | `NOT STARTED` | `TBD` | Foundation for all UI work. |
 | 6 | FND-009/010 — Typed content | `TBD` | `NOT STARTED` | `TBD` | Blocks page implementation. |
@@ -283,6 +283,8 @@ Contact and newsletter homepage sections are tracked under integrations so their
 | RISK-002 | Reference statistics are missing values | Cannot faithfully build counters | `TBD` | Open | Complete DEC-004. |
 | RISK-003 | Legacy blog appears contaminated | Unsafe or irrelevant content migration | `TBD` | Open | Complete security and content review under DEC-010. |
 | RISK-004 | Existing repository is named/configured for ecommerce | Contributors may expand scope accidentally | Bishowdip | Open | Enforce marketing-site boundary in requirements. |
+| RISK-005 | Frontend dependency audit reports two high-severity entries | Production security/reliability risk | Bishowdip | Open | Plan a tested Next.js/PostCSS upgrade; do not force-upgrade automatically. |
+| RISK-006 | `npm run check` reports 118 existing errors | Merge quality gate is currently unreliable | Bishowdip | Open | Fix in scoped foundation work and keep typecheck/build green. |
 
 ---
 
@@ -292,7 +294,7 @@ Add a row immediately when a task changes to `BLOCKED`.
 
 | Date | Task | Owner | Blocker | Waiting on | Next action | Last updated |
 |---|---|---|---|---|---|---|
-| — | — | — | — | — | — | — |
+| 2026-09-05 | FND-001 | Bishowdip | Other three team identities/handles are unknown | Project owner | Provide names/handles and branch naming preference | 2026-09-05 |
 
 ---
 
@@ -304,6 +306,7 @@ Record decisions that affect multiple contributors. Never rely only on chat hist
 |---|---|---|---|---|---|
 | 2026-09-05 | ADR-001 | Work begins from branch `bishowdip`; `main` is not edited directly. | Bishowdip | All tasks | Git branch state |
 | 2026-09-05 | ADR-002 | `WEBSITE_CLONE_REQUIREMENTS.md` is the requirement source of truth. | Bishowdip | All tasks | Requirements document |
+| 2026-09-05 | ADR-003 | Existing homepage components are prototypes to refactor or replace; do not independently duplicate them. | Bishowdip | FND and HOME tasks | `FRONTEND_BASELINE_AUDIT.md` |
 
 ---
 
@@ -319,7 +322,7 @@ Record decisions that affect multiple contributors. Never rely only on chat hist
 
 | Date | Task/page | Viewport/browser | Check performed | Result | Evidence link | Verified by |
 |---|---|---|---|---|---|---|
-| — | — | — | — | — | — | — |
+| 2026-09-05 | FND-002 | Local baseline | Component/route audit, typecheck, build, Biome, npm audit | Partial pass | `FRONTEND_BASELINE_AUDIT.md` | Bishowdip |
 
 ---
 
@@ -329,7 +332,7 @@ Move a task summary here only after its tracker row is `DONE`. Keep the original
 
 | Completed date | Task | Owner | PR/commit | Verification summary |
 |---|---|---|---|---|
-| — | — | — | — | — |
+| 2026-09-05 | FND-002 | Bishowdip | Pending commit | Existing frontend audited; typecheck/build pass; 118 Biome errors and two high-severity dependency entries recorded. |
 
 ---
 
