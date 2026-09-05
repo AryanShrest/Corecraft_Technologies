@@ -66,7 +66,7 @@ Replace placeholders before development begins.
 
 | Team member | Primary area | Active branch | Current task | Availability |
 |---|---|---|---|---|
-| Bishowdip | Integration, foundation, final review | `bishowdip` | MOT-T05 — shared hover motion | Active |
+| Bishowdip | Integration, foundation, final review | `bishowdip` | Motion and homepage | Active |
 | Developer 2 — `TBD` | Homepage static sections | `TBD` | Unassigned | `TBD` |
 | Developer 3 — `TBD` | Motion and responsive QA | `TBD` | Unassigned | `TBD` |
 | Developer 4 — `TBD` | Internal pages and integrations | `TBD` | Unassigned | `TBD` |
@@ -92,7 +92,7 @@ Replace placeholders before development begins.
 | M1 — Foundation | `IN PROGRESS` | Bishowdip | `TBD` | — | FND-002–008 and FND-011–012 complete; typed content awaits client decisions. |
 | M2 — Shared shell | `IN PROGRESS` | Bishowdip | `TBD` | — | Header behavior complete; approved logo and remaining footer/search work pending. |
 | M3 — Homepage static fidelity | `NOT STARTED` | `TBD` | `TBD` | — | — |
-| M4 — Motion system | `IN PROGRESS` | Bishowdip | `TBD` | — | Core tokens, reveal/stagger, counter, and accordion primitives complete. |
+| M4 — Motion system | `IN PROGRESS` | Bishowdip | `TBD` | — | Core tokens, reveal/stagger, counter, accordion, and shared hover behavior complete. |
 | M5 — Internal pages | `NOT STARTED` | `TBD` | `TBD` | — | — |
 | M6 — Forms and integrations | `NOT STARTED` | `TBD` | `TBD` | — | — |
 | M7 — Accessibility, SEO, performance | `NOT STARTED` | `TBD` | `TBD` | — | — |
@@ -108,11 +108,11 @@ Update these counts whenever a task moves to `DONE`.
 | Foundation | 9 | 12 | 75% |
 | Shared shell | 3 | 8 | 38% |
 | Homepage | 1 | 12 | 8% |
-| Motion/responsive | 4 | 10 | 40% |
+| Motion/responsive | 5 | 10 | 50% |
 | Internal pages | 0 | 8 | 0% |
 | Forms/integrations | 0 | 8 | 0% |
 | Quality/release | 0 | 14 | 0% |
-| **Overall** | **17** | **84** | **20%** |
+| **Overall** | **18** | **84** | **21%** |
 
 ---
 
@@ -200,7 +200,7 @@ Contact and newsletter homepage sections are tracked under integrations so their
 | MOT-T02 | MOT-002/003 | Reusable reveal and stagger primitives | Bishowdip | `DONE` | MOT-T01 | `bishowdip` | SSR-safe visible content, fade/axis/scale variants, configurable threshold/once/delay, fallback, and reduced motion. |
 | MOT-T03 | MOT-002, HOME-006 | One-time animated counter primitive | Bishowdip | `DONE` | MOT-T01 | `bishowdip` | Viewport trigger, one-time requestAnimationFrame count, cubic easing, formatting, suffix/prefix, fallback, and cleanup. |
 | MOT-T04 | MOT-001, HOME-006 | Reusable accordion transition | Bishowdip | `DONE` | MOT-T01 | `bishowdip` | Single/multiple modes, stable IDs, ARIA expanded/controls/hidden state, animated height, and decorative icon handling. |
-| MOT-T05 | MOT-004 | Shared card/button hover motion | Bishowdip | `IN PROGRESS` | MOT-T01, FND-007 | `bishowdip` | Standardizing reusable pointer-capable card lift, media zoom, icon shift, and button icon motion. |
+| MOT-T05 | MOT-004 | Shared card/button hover motion | Bishowdip | `DONE` | MOT-T01, FND-007 | `bishowdip` | Reusable fine-pointer card lift/media zoom/icon shift and button end-icon motion; keyboard focus parity and reduced-motion override included. |
 | MOT-T06 | MOT-005 | Approved parallax/tilt behavior | `TBD` | `NOT STARTED` | DEC-003, MOT-T01 | — | Disable on touch/reduced motion. |
 | MOT-T07 | MOT-006 | Optional desktop custom cursor | `TBD` | `NOT STARTED` | MOT-T01 | — | May be deferred for usability/performance. |
 | RWD-T01 | §11 | Eliminate horizontal overflow at all required widths | `TBD` | `NOT STARTED` | Main layouts | — | Record automated measurement. |
@@ -338,6 +338,7 @@ Record decisions that affect multiple contributors. Never rely only on chat hist
 | 2026-09-05 | FND-011/012 | Vitest/jsdom | Button, accordion, motion fallback, header, and typed content invariants | Pass — 5 files, 13 tests | `npm test` | Bishowdip |
 | 2026-09-05 | HOME-T01/T02 | Local browser and Vitest/jsdom | Responsive hero structure, slide controls, autoplay pause, pagination, swipe, inactive state, typecheck, and build | Pass except approved photography pending | `src/components/home/Hero.tsx`, `npm test` | Bishowdip |
 | 2026-09-05 | SHELL-007 | Vitest/jsdom and production build | Visibility threshold, hidden tab state, activation, smooth-scroll behavior, typecheck, and build | Pass — 7 files, 19 tests | `src/components/layout/ScrollToTop.tsx`, `npm test` | Bishowdip |
+| 2026-09-05 | MOT-T05 | Local tests and production build | Pointer-capable card/media/icon motion, focus parity, button icon marker, touch-safe media query, and reduced-motion override | Pass — 7 files, 19 tests | `globals.css`, `src/components/ui/Button.tsx` | Bishowdip |
 
 ---
 
@@ -364,6 +365,7 @@ Move a task summary here only after its tracker row is `DONE`. Keep the original
 | 2026-09-05 | FND-012 | Bishowdip | Pending commit | Vitest and Testing Library foundation added with 13 passing tests. |
 | 2026-09-05 | HOME-T02 | Bishowdip | Pending commit | Accessible two-slide carousel completed with autoplay pause/reset, arrow and pagination controls, swipe, and fixed-height transitions. |
 | 2026-09-05 | SHELL-007 | Bishowdip | Pending commit | Global accessible scroll-to-top control completed with threshold visibility and reduced-motion-aware behavior. |
+| 2026-09-05 | MOT-T05 | Bishowdip | Pending commit | Shared hover/focus motion added to buttons, service cards, and blog cards with touch-safe capability queries. |
 
 ---
 

@@ -53,7 +53,7 @@ export default function BlogSection() {
           {POSTS.map((p, i) => (
             <article
               key={i}
-              className="group relative bg-white rounded-2xl overflow-hidden border border-gray-100 shadow-sm hover:shadow-2xl hover:shadow-primary-100 hover:-translate-y-1 transition-all duration-300"
+              className="motion-card group relative overflow-hidden rounded-2xl border border-gray-100 bg-white shadow-sm"
             >
               {/* Header colored bar */}
               <div className={`relative h-36 bg-gradient-to-br ${p.accent} overflow-hidden`}>

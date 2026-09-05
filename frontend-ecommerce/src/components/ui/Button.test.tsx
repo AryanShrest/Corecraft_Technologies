@@ -26,5 +26,6 @@ describe('Button', () => {
     )
 
     expect(screen.getByRole('link')).toHaveAccessibleName('Services')
+    expect(screen.getByText('decorative arrow').parentElement).toHaveClass('motion-button-icon')
   })
 })

@@ -154,6 +154,56 @@ select {
   background: rgb(255 255 255 / 14%);
 }
 
+.motion-card,
+.motion-card-media,
+.motion-card-icon,
+.motion-button-icon {
+  transition-duration: var(--motion-hover);
+  transition-timing-function: var(--ease-standard);
+}
+
+.motion-card {
+  transition-property: border-color, box-shadow, transform;
+}
+
+.motion-card-media,
+.motion-button-icon {
+  transition-property: transform;
+}
+
+.motion-card-icon {
+  transition-property: color, background-color, translate, rotate;
+}
+
+.motion-button-icon {
+  display: inline-flex;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .motion-card:hover,
+  .motion-card:focus-within {
+    border-color: rgb(61 114 252 / 28%);
+    box-shadow: 0 1.25rem 2.75rem rgb(30 64 175 / 12%);
+    transform: translateY(-0.375rem);
+  }
+
+  .motion-card:hover .motion-card-media,
+  .motion-card:focus-within .motion-card-media {
+    transform: scale(1.045);
+  }
+
+  .motion-card:hover .motion-card-icon,
+  .motion-card:focus-within .motion-card-icon {
+    translate: 0 -0.15rem;
+    rotate: -2deg;
+  }
+
+  .group\/button:hover .motion-button-icon,
+  .group\/button:focus-visible .motion-button-icon {
+    transform: translateX(0.2rem);
+  }
+}
+
 .motion-reveal,
 .motion-stagger > * {
   transition-duration: var(--motion-reveal);

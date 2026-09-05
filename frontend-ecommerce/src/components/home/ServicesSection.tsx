@@ -81,18 +81,18 @@ export default function ServicesSection() {
           {SERVICES.map((s) => (
             <article
               key={s.title}
-              className="group relative bg-white rounded-2xl overflow-hidden border border-gray-100 shadow-sm hover:shadow-2xl hover:shadow-primary-100 hover:-translate-y-1 transition-all duration-300"
+              className="motion-card group relative overflow-hidden rounded-2xl border border-gray-100 bg-white shadow-sm"
             >
               <div className="relative aspect-[16/10] overflow-hidden">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                   src={s.img}
                   alt={s.title}
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  className="motion-card-media h-full w-full object-cover"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent" />
                 {/* Floating icon */}
-                <div className="absolute left-1/2 bottom-0 -translate-x-1/2 translate-y-1/2 w-16 h-16 rounded-2xl bg-white shadow-xl shadow-black/10 flex items-center justify-center text-primary-700 border-4 border-white group-hover:bg-primary-600 group-hover:text-white transition-colors">
+                <div className="motion-card-icon absolute bottom-0 left-1/2 flex h-16 w-16 -translate-x-1/2 translate-y-1/2 items-center justify-center rounded-2xl border-4 border-white bg-white text-primary-700 shadow-xl shadow-black/10 group-hover:bg-primary-600 group-hover:text-white">
                   {s.icon}
                 </div>
                 <div className="absolute top-4 right-4 text-[11px] font-bold text-white/80 bg-white/10 backdrop-blur px-3 py-1 rounded-full border border-white/10">

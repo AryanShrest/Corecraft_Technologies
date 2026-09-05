@@ -50,7 +50,7 @@ function buttonClasses({
   variant = 'primary',
 }: Pick<SharedButtonProps, 'className' | 'fullWidth' | 'size' | 'variant'>) {
   return cn(
-    'inline-flex items-center justify-center gap-2 rounded-md font-semibold transition-[color,background-color,border-color,box-shadow,transform] duration-[var(--motion-hover)] ease-[var(--ease-standard)]',
+    'group/button inline-flex items-center justify-center gap-2 rounded-md font-semibold transition-[color,background-color,border-color,box-shadow,transform] duration-[var(--motion-hover)] ease-[var(--ease-standard)]',
     'focus-visible:outline focus-visible:outline-3 focus-visible:outline-offset-3 focus-visible:outline-[var(--color-focus)]',
     'disabled:pointer-events-none disabled:cursor-not-allowed',
     variantClasses[variant],
@@ -77,7 +77,11 @@ function ButtonContent({
         startIcon && <span aria-hidden="true">{startIcon}</span>
       )}
       <span>{children}</span>
-      {!loading && endIcon && <span aria-hidden="true">{endIcon}</span>}
+      {!loading && endIcon && (
+        <span aria-hidden="true" className="motion-button-icon">
+          {endIcon}
+        </span>
+      )}
     </>
   )
 }
