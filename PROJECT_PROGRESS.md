@@ -89,7 +89,7 @@ Replace placeholders before development begins.
 | Milestone | Status | Owner | Target | Completed | Evidence/notes |
 |---|---|---|---|---|---|
 | M0 — Decisions and asset clearance | `NOT STARTED` | `TBD` | `TBD` | — | — |
-| M1 — Foundation | `IN PROGRESS` | Bishowdip | `TBD` | — | FND-002–008 complete; typed content awaits client decisions. |
+| M1 — Foundation | `IN PROGRESS` | Bishowdip | `TBD` | — | FND-002–008 and FND-011–012 complete; typed content awaits client decisions. |
 | M2 — Shared shell | `IN PROGRESS` | Bishowdip | `TBD` | — | Header behavior complete; approved logo and remaining footer/search work pending. |
 | M3 — Homepage static fidelity | `NOT STARTED` | `TBD` | `TBD` | — | — |
 | M4 — Motion system | `IN PROGRESS` | Bishowdip | `TBD` | — | Core tokens, reveal/stagger, counter, and accordion primitives complete. |
@@ -105,14 +105,14 @@ Update these counts whenever a task moves to `DONE`.
 | Category | Done | Total | Progress |
 |---|---:|---:|---:|
 | Decisions/assets | 0 | 12 | 0% |
-| Foundation | 7 | 12 | 58% |
+| Foundation | 9 | 12 | 75% |
 | Shared shell | 2 | 8 | 25% |
 | Homepage | 0 | 12 | 0% |
 | Motion/responsive | 4 | 10 | 40% |
 | Internal pages | 0 | 8 | 0% |
 | Forms/integrations | 0 | 8 | 0% |
 | Quality/release | 0 | 14 | 0% |
-| **Overall** | **13** | **84** | **15%** |
+| **Overall** | **15** | **84** | **18%** |
 
 ---
 
@@ -151,8 +151,8 @@ These tasks block accurate implementation. Do not replace them with assumptions.
 | FND-008 | §6.5 | Build SectionHeading and media-frame primitives | Bishowdip | `DONE` | FND-004/005/006 | `bishowdip` | Accessible heading levels, alignment, description, aspect-ratio, and accent variants implemented. |
 | FND-009 | §13 | Create typed site settings and navigation data | Bishowdip | `BLOCKED` | DEC-005/009/012 | `bishowdip` | Schema and verified values added; opening hours and final legal details await decisions. |
 | FND-010 | §13 | Create typed hero, service, benefit, FAQ, and statistic data | Bishowdip | `BLOCKED` | DEC-004/006 | `bishowdip` | Typed data added; unknown statistics/FAQ answers/destinations are intentionally null. |
-| FND-011 | §5.2 | Review and approve required dependencies | `TBD` | `NOT STARTED` | FND-002 | — | One carousel and one icon strategy only. |
-| FND-012 | §18 | Configure component/E2E/accessibility/visual test foundation | `TBD` | `NOT STARTED` | FND-002 | — | Document new commands. |
+| FND-011 | §5.2 | Review and approve required dependencies | Bishowdip | `DONE` | FND-002 | `bishowdip` | See `DEPENDENCY_DECISIONS.md`; carousel/E2E/form dependencies remain deliberately deferred. |
+| FND-012 | §18 | Configure component/E2E/accessibility/visual test foundation | Bishowdip | `DONE` | FND-002 | `bishowdip` | Vitest/jsdom/Testing Library configured; 13 shared-component/content tests pass. E2E expansion remains QA-T09. |
 
 ---
 
@@ -314,6 +314,7 @@ Record decisions that affect multiple contributors. Never rely only on chat hist
 | 2026-09-05 | ADR-006 | Shared marketing UI must consume Container, Section, Button/IconButton, SectionHeading, and MediaFrame primitives instead of redefining equivalents. | Bishowdip | All SHELL, HOME, and PAGE tasks | `src/components/layout`, `src/components/ui` |
 | 2026-09-05 | ADR-007 | Use one sticky header whose desktop utility bar collapses after 32 px instead of cloning duplicate header DOM. | Bishowdip | SHELL-001–004 | `src/components/layout/SiteHeader.tsx` |
 | 2026-09-05 | ADR-008 | Use native CSS transitions plus IntersectionObserver with a visible-content fallback for shared reveal motion; do not add a motion dependency for these primitives. | Bishowdip | MOT-T01–T04 and section consumers | `src/components/motion`, `globals.css` |
+| 2026-09-05 | ADR-009 | Use Vitest 4.1.11 with Testing Library for component tests because its engine range supports the local Node 25 runtime; defer Playwright to E2E work. | Bishowdip | FND-011/012, QA-T08/009 | `DEPENDENCY_DECISIONS.md`, `vitest.config.mts` |
 
 ---
 
@@ -334,6 +335,7 @@ Record decisions that affect multiple contributors. Never rely only on chat hist
 | 2026-09-05 | FND-006–008 | Local baseline | Targeted Biome lint, TypeScript with incremental output disabled, production build | Pass | `src/components/layout`, `src/components/ui` | Bishowdip |
 | 2026-09-05 | SHELL-001–004 | Chromium local, 1440×900 and 390×844 | Active route, sticky collapse, menu transition, Escape, focus, body lock, closed tab exclusion, overflow | Pass except approved logo pending | `src/components/layout/SiteHeader.tsx` | Bishowdip |
 | 2026-09-05 | MOT-T01–T04 | Local hydrated browser test | Reveal fallback, stagger fallback, counter final value, accordion single-open state, ARIA expanded/hidden state | Pass | `src/components/motion`, `globals.css`; temporary test route removed | Bishowdip |
+| 2026-09-05 | FND-011/012 | Vitest/jsdom | Button, accordion, motion fallback, header, and typed content invariants | Pass — 5 files, 13 tests | `npm test` | Bishowdip |
 
 ---
 
@@ -356,6 +358,8 @@ Move a task summary here only after its tracker row is `DONE`. Keep the original
 | 2026-09-05 | MOT-T02 | Bishowdip | Pending commit | SSR-safe Reveal and StaggerGroup primitives completed with fallback behavior. |
 | 2026-09-05 | MOT-T03 | Bishowdip | Pending commit | One-time formatted AnimatedCounter completed. |
 | 2026-09-05 | MOT-T04 | Bishowdip | Pending commit | Accessible single/multiple Accordion primitive completed. |
+| 2026-09-05 | FND-011 | Bishowdip | Pending commit | Dependency choices, deferrals, compatibility, and security constraints documented. |
+| 2026-09-05 | FND-012 | Bishowdip | Pending commit | Vitest and Testing Library foundation added with 13 passing tests. |
 
 ---
 
