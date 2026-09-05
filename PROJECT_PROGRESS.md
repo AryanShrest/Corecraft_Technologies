@@ -66,7 +66,7 @@ Replace placeholders before development begins.
 
 | Team member | Primary area | Active branch | Current task | Availability |
 |---|---|---|---|---|
-| Bishowdip | Integration, foundation, final review | `bishowdip` | Documentation/setup | Active |
+| Bishowdip | Integration, foundation, final review | `bishowdip` | HOME-T01/T02 — homepage hero | Active |
 | Developer 2 — `TBD` | Homepage static sections | `TBD` | Unassigned | `TBD` |
 | Developer 3 — `TBD` | Motion and responsive QA | `TBD` | Unassigned | `TBD` |
 | Developer 4 — `TBD` | Internal pages and integrations | `TBD` | Unassigned | `TBD` |
@@ -175,8 +175,8 @@ These tasks block accurate implementation. Do not replace them with assumptions.
 
 | Task | Requirement | Deliverable | Owner | Status | Depends on | Branch/PR | Evidence/notes |
 |---|---|---|---|---|---|---|---|
-| HOME-T01 | HOME-001 | Static hero structure and responsive imagery | `TBD` | `NOT STARTED` | FND-006/007/010, DEC-003 | — | Motion handled separately. |
-| HOME-T02 | HOME-001 | Hero carousel, controls, autoplay, swipe, accessibility | `TBD` | `NOT STARTED` | HOME-T01, MOT-T01 | — | Pause on hover/focus. |
+| HOME-T01 | HOME-001 | Static hero structure and responsive imagery | Bishowdip | `IN PROGRESS` | FND-006/007/010, DEC-003 | `bishowdip` | Implementing approved copy and responsive structure; final photography remains blocked by DEC-003. |
+| HOME-T02 | HOME-001 | Hero carousel, controls, autoplay, swipe, accessibility | Bishowdip | `IN PROGRESS` | HOME-T01, MOT-T01 | `bishowdip` | Implementing controls, autoplay pause/reset, swipe, and accessible slide state. |
 | HOME-T03 | HOME-002 | How We Work section | `TBD` | `NOT STARTED` | FND-008, DEC-003 | — | `/services` CTA. |
 | HOME-T04 | HOME-003 | Innovation/process CTA section | `TBD` | `NOT STARTED` | Approved copy/assets | — | No invented steps. |
 | HOME-T05 | HOME-004 | Six-card service grid | `TBD` | `NOT STARTED` | FND-010, DEC-003/006 | — | Reused on Services page. |
