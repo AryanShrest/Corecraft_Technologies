@@ -66,7 +66,7 @@ Replace placeholders before development begins.
 
 | Team member | Primary area | Active branch | Current task | Availability |
 |---|---|---|---|---|
-| Bishowdip | Integration, foundation, final review | `bishowdip` | Shared shell and homepage | Active |
+| Bishowdip | Integration, foundation, final review | `bishowdip` | MOT-T05 — shared hover motion | Active |
 | Developer 2 — `TBD` | Homepage static sections | `TBD` | Unassigned | `TBD` |
 | Developer 3 — `TBD` | Motion and responsive QA | `TBD` | Unassigned | `TBD` |
 | Developer 4 — `TBD` | Internal pages and integrations | `TBD` | Unassigned | `TBD` |
@@ -200,7 +200,7 @@ Contact and newsletter homepage sections are tracked under integrations so their
 | MOT-T02 | MOT-002/003 | Reusable reveal and stagger primitives | Bishowdip | `DONE` | MOT-T01 | `bishowdip` | SSR-safe visible content, fade/axis/scale variants, configurable threshold/once/delay, fallback, and reduced motion. |
 | MOT-T03 | MOT-002, HOME-006 | One-time animated counter primitive | Bishowdip | `DONE` | MOT-T01 | `bishowdip` | Viewport trigger, one-time requestAnimationFrame count, cubic easing, formatting, suffix/prefix, fallback, and cleanup. |
 | MOT-T04 | MOT-001, HOME-006 | Reusable accordion transition | Bishowdip | `DONE` | MOT-T01 | `bishowdip` | Single/multiple modes, stable IDs, ARIA expanded/controls/hidden state, animated height, and decorative icon handling. |
-| MOT-T05 | MOT-004 | Shared card/button hover motion | `TBD` | `NOT STARTED` | MOT-T01, FND-007 | — | Touch-safe. |
+| MOT-T05 | MOT-004 | Shared card/button hover motion | Bishowdip | `IN PROGRESS` | MOT-T01, FND-007 | `bishowdip` | Standardizing reusable pointer-capable card lift, media zoom, icon shift, and button icon motion. |
 | MOT-T06 | MOT-005 | Approved parallax/tilt behavior | `TBD` | `NOT STARTED` | DEC-003, MOT-T01 | — | Disable on touch/reduced motion. |
 | MOT-T07 | MOT-006 | Optional desktop custom cursor | `TBD` | `NOT STARTED` | MOT-T01 | — | May be deferred for usability/performance. |
 | RWD-T01 | §11 | Eliminate horizontal overflow at all required widths | `TBD` | `NOT STARTED` | Main layouts | — | Record automated measurement. |
