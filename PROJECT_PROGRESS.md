@@ -2,7 +2,7 @@
 
 **Requirements:** [WEBSITE_CLONE_REQUIREMENTS.md](./WEBSITE_CLONE_REQUIREMENTS.md)  
 **Integration branch:** `bishowdip`  
-**Last updated:** 2026-09-05  
+**Last updated:** 2026-09-06  
 **Overall status:** In progress
 
 > This file is the canonical task tracker. Before starting work, claim the task here and pull the latest branch. Do not begin a task already marked `IN PROGRESS`, `IN REVIEW`, or `BLOCKED` without contacting its owner.
@@ -66,7 +66,7 @@ Replace placeholders before development begins.
 
 | Team member | Primary area | Active branch | Current task | Availability |
 |---|---|---|---|---|
-| Bishowdip | Integration, foundation, final review | `bishowdip` | Motion and homepage | Active |
+| Bishowdip | Integration, foundation, final review | `bishowdip` | SHELL-008 — internal-page banner | Active |
 | Developer 2 — `TBD` | Homepage static sections | `TBD` | Unassigned | `TBD` |
 | Developer 3 — `TBD` | Motion and responsive QA | `TBD` | Unassigned | `TBD` |
 | Developer 4 — `TBD` | Internal pages and integrations | `TBD` | Unassigned | `TBD` |
@@ -167,7 +167,7 @@ These tasks block accurate implementation. Do not replace them with assumptions.
 | SHELL-005 | GLO-005 | Functional search or approved removal | `TBD` | `NOT STARTED` | Search scope decision | — | Decorative search is forbidden. |
 | SHELL-006 | GLO-006 | Shared footer and copyright bar | `TBD` | `NOT STARTED` | FND-009, DEC-010/012 | — | No suspicious recent posts. |
 | SHELL-007 | GLO-007 | Accessible scroll-to-top control | Bishowdip | `DONE` | MOT-001 | `bishowdip` | Global 480 px threshold control with tab-order isolation, smooth scrolling, and reduced-motion fallback; component tests pass. |
-| SHELL-008 | PAGE-001 | Reusable internal-page header/banner/breadcrumb | `TBD` | `NOT STARTED` | SHELL-002, FND-008 | — | Exactly one page `h1`. |
+| SHELL-008 | PAGE-001 | Reusable internal-page header/banner/breadcrumb | Bishowdip | `IN PROGRESS` | SHELL-002, FND-008 | `bishowdip` | Building semantic breadcrumb, one-page-heading contract, responsive layout, and decorative treatment. |
 
 ---
 
