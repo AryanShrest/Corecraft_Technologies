@@ -43,6 +43,7 @@ export default function ContactSection() {
                   <span className="relative inline-block">
                     Great
                     <svg className="absolute -bottom-2 left-0 w-full" height="8" viewBox="0 0 160 8" preserveAspectRatio="none">
+                      <title>underline wave</title>
                       <path d="M2 6 Q 40 0 80 4 T 158 3" stroke="#60a5fa" strokeWidth="3" fill="none" strokeLinecap="round" />
                     </svg>
                   </span>{' '}
@@ -109,10 +110,11 @@ export default function ContactSection() {
               >
                 <div className="grid md:grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-xs font-semibold text-blue-100 mb-1.5 tracking-wide uppercase">
+                    <label htmlFor="contact-name" className="block text-xs font-semibold text-blue-100 mb-1.5 tracking-wide uppercase">
                       Your Name
                     </label>
                     <input
+                      id="contact-name"
                       type="text"
                       required
                       value={form.name}
@@ -122,10 +124,11 @@ export default function ContactSection() {
                     />
                   </div>
                   <div>
-                    <label className="block text-xs font-semibold text-blue-100 mb-1.5 tracking-wide uppercase">
+                    <label htmlFor="contact-email" className="block text-xs font-semibold text-blue-100 mb-1.5 tracking-wide uppercase">
                       Email address
                     </label>
                     <input
+                      id="contact-email"
                       type="email"
                       required
                       value={form.email}
@@ -136,10 +139,11 @@ export default function ContactSection() {
                   </div>
                 </div>
                 <div>
-                  <label className="block text-xs font-semibold text-blue-100 mb-1.5 tracking-wide uppercase">
+                  <label htmlFor="contact-message" className="block text-xs font-semibold text-blue-100 mb-1.5 tracking-wide uppercase">
                     Message
                   </label>
                   <textarea
+                    id="contact-message"
                     required
                     rows={5}
                     value={form.message}
@@ -154,11 +158,11 @@ export default function ContactSection() {
                     className="inline-flex items-center gap-2 bg-white text-primary-900 font-semibold px-7 py-3.5 rounded-md hover:bg-blue-50 shadow-xl shadow-black/20 transition-all"
                   >
                     Send Request
-                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" /></svg>
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><title>send</title><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" /></svg>
                   </button>
                   {sent && (
                     <span className="inline-flex items-center gap-2 text-sm text-green-300">
-                      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><title>success</title><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
                       Message sent!
                     </span>
                   )}

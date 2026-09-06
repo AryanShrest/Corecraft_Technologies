@@ -50,15 +50,16 @@ export default function BlogSection() {
         </div>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-7">
-          {POSTS.map((p, i) => (
+          {POSTS.map((p) => (
             <article
-              key={i}
+              key={p.title}
               className="group relative bg-white rounded-2xl overflow-hidden border border-gray-100 shadow-sm hover:shadow-2xl hover:shadow-primary-100 hover:-translate-y-1 transition-all duration-300"
             >
               {/* Header colored bar */}
               <div className={`relative h-36 bg-gradient-to-br ${p.accent} overflow-hidden`}>
                 <div className="absolute inset-0 opacity-30 mix-blend-overlay">
                   <svg className="w-full h-full" viewBox="0 0 400 200" fill="none">
+                    <title>decorative shapes</title>
                     <circle cx="340" cy="40" r="80" stroke="white" strokeWidth="1" opacity="0.3" />
                     <circle cx="80" cy="160" r="70" stroke="white" strokeWidth="1" opacity="0.3" />
                     <rect x="120" y="60" width="120" height="80" rx="12" stroke="white" strokeWidth="1" opacity="0.4" transform="rotate(-8 180 100)" />
@@ -79,7 +80,7 @@ export default function BlogSection() {
               <div className="p-5">
                 <ul className="space-y-1.5 mb-4 text-[11px] md:text-xs text-gray-500 leading-relaxed">
                   {p.meta.map((m, j) => (
-                    <li key={j} className="flex items-start gap-2">
+                    <li key={`${p.title}-${j}`} className="flex items-start gap-2">
                       <span className="mt-1 w-1.5 h-1.5 rounded-full bg-primary-400 flex-shrink-0" />
                       <span>{m}</span>
                     </li>
@@ -90,7 +91,7 @@ export default function BlogSection() {
                   className="inline-flex items-center gap-1.5 text-xs font-semibold text-primary-700 hover:text-primary-800 transition-colors"
                 >
                   Read More
-                  <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
+                  <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><title>arrow right</title><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
                 </Link>
               </div>
             </article>
@@ -103,7 +104,7 @@ export default function BlogSection() {
             className="inline-flex items-center gap-2 bg-slate-900 hover:bg-slate-800 text-white font-semibold px-6 py-3 rounded-md shadow-md transition-colors"
           >
             Read Here
-            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
+            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><title>arrow right</title><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
           </Link>
         </div>
       </div>

@@ -50,10 +50,10 @@ export default function InnovationSection() {
               <div className="absolute -bottom-6 -right-6 w-32 h-32 rounded-full border-4 border-white/10" />
 
               <div className="relative space-y-4">
-                {HIGHLIGHTS.map((h, i) => (
-                  <div key={i} className="flex items-start gap-3">
+                {HIGHLIGHTS.map((h, idx) => (
+                  <div key={h} className="flex items-start gap-3">
                     <div className="mt-0.5 flex-shrink-0 w-6 h-6 rounded-full bg-white/15 border border-white/30 flex items-center justify-center">
-                      <span className="text-xs font-bold">{String(i + 1).padStart(2, '0')}</span>
+                      <span className="text-xs font-bold">{String(idx + 1).padStart(2, '0')}</span>
                     </div>
                     <p className="text-sm md:text-base text-white/95 leading-relaxed">{h}</p>
                   </div>
@@ -63,17 +63,20 @@ export default function InnovationSection() {
               {/* Testimonial users */}
               <div className="relative mt-8 pt-6 border-t border-white/20 flex items-center justify-between">
                 <div className="flex items-center gap-3">
-                  <div className="flex -space-x-3">
-                    {[0, 1, 2].map((i) => (
-                      <div
-                        key={i}
-                        className="w-10 h-10 rounded-full border-2 border-primary-600"
-                        style={{
-                          background: `linear-gradient(135deg, hsl(${200 + i * 25}, 70%, 60%), hsl(${220 + i * 20}, 80%, 45%))`,
-                        }}
-                      />
-                    ))}
-                  </div>
+                    <div className="flex -space-x-3">
+                    {([0, 1, 2] as number[]).map((i) => {
+                      const bg = `linear-gradient(135deg, hsl(${200 + i * 25}, 70%, 60%), hsl(${220 + i * 20}, 80%, 45%))`
+                      return (
+                        <div
+                          key={bg}
+                          className="w-10 h-10 rounded-full border-2 border-primary-600"
+                          style={{
+                            background: bg,
+                          }}
+                        />
+                      )
+                    })}
+                    </div>
                   <div className="text-xs">
                     <div className="font-semibold">Trusted by 3,500+ entrepreneurs</div>
                     <div className="text-white/70">for reliable technology solutions</div>

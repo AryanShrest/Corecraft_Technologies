@@ -18,6 +18,7 @@ export default function WhyCoreCraft() {
       {/* Hexagon pattern background */}
       <div className="absolute inset-0 opacity-[0.05]">
         <svg className="w-full h-full" xmlns="http://www.w3.org/2000/svg">
+          <title>hexagon background</title>
           <defs>
             <pattern id="hexagons" width="50" height="43.4" patternUnits="userSpaceOnUse" patternTransform="scale(2)">
               <polygon
@@ -55,7 +56,7 @@ export default function WhyCoreCraft() {
               {FEATURES.map((f) => (
                 <div key={f} className="flex items-center gap-3 text-sm">
                   <span className="flex-shrink-0 w-5 h-5 rounded-full bg-green-400/20 border border-green-300/40 flex items-center justify-center">
-                    <svg className="w-3 h-3 text-green-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" /></svg>
+                    <svg className="w-3 h-3 text-green-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><title>check</title><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" /></svg>
                   </span>
                   <span className="text-blue-50">{f}</span>
                 </div>
@@ -67,7 +68,7 @@ export default function WhyCoreCraft() {
               className="inline-flex items-center gap-2 bg-white text-primary-900 font-semibold px-6 py-3.5 rounded-md hover:bg-blue-50 shadow-lg transition-all"
             >
               About Us
-              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><title>arrow right</title><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
             </Link>
           </div>
 
@@ -94,6 +95,7 @@ export default function WhyCoreCraft() {
                 </div>
                 <div className="mt-2 mx-auto w-2 h-2 rounded-full bg-white/60" />
                 <svg className="mx-auto mt-1 w-3 h-3 text-white/80" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <title>ribbon arrow</title>
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
                 </svg>
               </div>

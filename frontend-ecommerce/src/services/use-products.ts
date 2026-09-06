@@ -16,9 +16,9 @@ interface ListProductsParams {
 
 async function fetchProducts(params: ListProductsParams): Promise<PaginationResult<Product>> {
   const searchParams = new URLSearchParams()
-  Object.entries(params).forEach(([key, value]) => {
+  for (const [key, value] of Object.entries(params)) {
     if (value !== undefined) searchParams.append(key, String(value))
-  })
+  }
   const res = await fetch(`${ENDPOINTS.products.list}?${searchParams.toString()}`)
   if (!res.ok) throw new Error('Failed to fetch products')
   return res.json()
