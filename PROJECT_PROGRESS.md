@@ -66,7 +66,7 @@ Replace placeholders before development begins.
 
 | Team member | Primary area | Active branch | Current task | Availability |
 |---|---|---|---|---|
-| Bishowdip | Integration, foundation, final review | `bishowdip` | SHELL-008 — internal-page banner | Active |
+| Bishowdip | Integration, foundation, final review | `bishowdip` | Shared shell and internal pages | Active |
 | Developer 2 — `TBD` | Homepage static sections | `TBD` | Unassigned | `TBD` |
 | Developer 3 — `TBD` | Motion and responsive QA | `TBD` | Unassigned | `TBD` |
 | Developer 4 — `TBD` | Internal pages and integrations | `TBD` | Unassigned | `TBD` |
@@ -90,7 +90,7 @@ Replace placeholders before development begins.
 |---|---|---|---|---|---|
 | M0 — Decisions and asset clearance | `NOT STARTED` | `TBD` | `TBD` | — | — |
 | M1 — Foundation | `IN PROGRESS` | Bishowdip | `TBD` | — | FND-002–008 and FND-011–012 complete; typed content awaits client decisions. |
-| M2 — Shared shell | `IN PROGRESS` | Bishowdip | `TBD` | — | Header behavior complete; approved logo and remaining footer/search work pending. |
+| M2 — Shared shell | `IN PROGRESS` | Bishowdip | `TBD` | — | Header behavior, scroll-to-top, and internal-page banner complete; approved logo and footer/search decisions pending. |
 | M3 — Homepage static fidelity | `NOT STARTED` | `TBD` | `TBD` | — | — |
 | M4 — Motion system | `IN PROGRESS` | Bishowdip | `TBD` | — | Core tokens, reveal/stagger, counter, accordion, and shared hover behavior complete. |
 | M5 — Internal pages | `NOT STARTED` | `TBD` | `TBD` | — | — |
@@ -106,13 +106,13 @@ Update these counts whenever a task moves to `DONE`.
 |---|---:|---:|---:|
 | Decisions/assets | 0 | 12 | 0% |
 | Foundation | 9 | 12 | 75% |
-| Shared shell | 3 | 8 | 38% |
+| Shared shell | 4 | 8 | 50% |
 | Homepage | 1 | 12 | 8% |
 | Motion/responsive | 5 | 10 | 50% |
 | Internal pages | 0 | 8 | 0% |
 | Forms/integrations | 0 | 8 | 0% |
 | Quality/release | 0 | 14 | 0% |
-| **Overall** | **18** | **84** | **21%** |
+| **Overall** | **19** | **84** | **23%** |
 
 ---
 
@@ -167,7 +167,7 @@ These tasks block accurate implementation. Do not replace them with assumptions.
 | SHELL-005 | GLO-005 | Functional search or approved removal | `TBD` | `NOT STARTED` | Search scope decision | — | Decorative search is forbidden. |
 | SHELL-006 | GLO-006 | Shared footer and copyright bar | `TBD` | `NOT STARTED` | FND-009, DEC-010/012 | — | No suspicious recent posts. |
 | SHELL-007 | GLO-007 | Accessible scroll-to-top control | Bishowdip | `DONE` | MOT-001 | `bishowdip` | Global 480 px threshold control with tab-order isolation, smooth scrolling, and reduced-motion fallback; component tests pass. |
-| SHELL-008 | PAGE-001 | Reusable internal-page header/banner/breadcrumb | Bishowdip | `IN PROGRESS` | SHELL-002, FND-008 | `bishowdip` | Building semantic breadcrumb, one-page-heading contract, responsive layout, and decorative treatment. |
+| SHELL-008 | PAGE-001 | Reusable internal-page header/banner/breadcrumb | Bishowdip | `DONE` | SHELL-002, FND-008 | `bishowdip` | Responsive PageBanner provides exactly one h1, optional eyebrow/description, linked breadcrumb ancestors, and aria-current page state. |
 
 ---
 
@@ -339,6 +339,7 @@ Record decisions that affect multiple contributors. Never rely only on chat hist
 | 2026-09-05 | HOME-T01/T02 | Local browser and Vitest/jsdom | Responsive hero structure, slide controls, autoplay pause, pagination, swipe, inactive state, typecheck, and build | Pass except approved photography pending | `src/components/home/Hero.tsx`, `npm test` | Bishowdip |
 | 2026-09-05 | SHELL-007 | Vitest/jsdom and production build | Visibility threshold, hidden tab state, activation, smooth-scroll behavior, typecheck, and build | Pass — 7 files, 19 tests | `src/components/layout/ScrollToTop.tsx`, `npm test` | Bishowdip |
 | 2026-09-05 | MOT-T05 | Local tests and production build | Pointer-capable card/media/icon motion, focus parity, button icon marker, touch-safe media query, and reduced-motion override | Pass — 7 files, 19 tests | `globals.css`, `src/components/ui/Button.tsx` | Bishowdip |
+| 2026-09-06 | SHELL-008 | Vitest/jsdom and production build | One-h1 contract, Home/current/intermediate breadcrumb semantics, optional description, targeted Biome check, typecheck, and build | Pass — 8 files, 21 tests | `src/components/layout/PageBanner.tsx`, `npm test` | Bishowdip |
 
 ---
 
@@ -366,6 +367,7 @@ Move a task summary here only after its tracker row is `DONE`. Keep the original
 | 2026-09-05 | HOME-T02 | Bishowdip | Pending commit | Accessible two-slide carousel completed with autoplay pause/reset, arrow and pagination controls, swipe, and fixed-height transitions. |
 | 2026-09-05 | SHELL-007 | Bishowdip | Pending commit | Global accessible scroll-to-top control completed with threshold visibility and reduced-motion-aware behavior. |
 | 2026-09-05 | MOT-T05 | Bishowdip | Pending commit | Shared hover/focus motion added to buttons, service cards, and blog cards with touch-safe capability queries. |
+| 2026-09-06 | SHELL-008 | Bishowdip | Pending commit | Reusable responsive internal-page banner and semantic breadcrumb completed with component coverage. |
 
 ---
 
