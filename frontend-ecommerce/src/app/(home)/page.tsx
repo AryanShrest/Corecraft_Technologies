@@ -5,6 +5,7 @@ import Footer from '@/components/home/Footer'
 import Hero from '@/components/home/Hero'
 import HowWeWork from '@/components/home/HowWeWork'
 import InnovationSection from '@/components/home/InnovationSection'
+import PortfolioSection from '@/components/home/PortfolioSection'
 import ReadyCta from '@/components/home/ReadyCta'
 import ServicesSection from '@/components/home/ServicesSection'
 import StatsFaqSection from '@/components/home/StatsFaqSection'
@@ -20,6 +21,7 @@ export default function Home() {
         <HowWeWork />
         <InnovationSection />
         <ServicesSection />
+        <PortfolioSection />
         <WhyCoreCraft />
         <StatsFaqSection />
         <ReadyCta />

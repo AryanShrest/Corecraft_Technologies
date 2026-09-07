@@ -198,6 +198,14 @@ export function SiteHeader() {
                 /
               </li>
               <li>
+                <Link className="transition-colors hover:text-blue-200" href="/#portfolio">
+                  Portfolio
+                </Link>
+              </li>
+              <li aria-hidden="true" className="text-white/50">
+                /
+              </li>
+              <li>
                 <Link className="transition-colors hover:text-blue-200" href="/blog">
                   News
                 </Link>
