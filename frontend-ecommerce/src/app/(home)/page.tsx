@@ -9,6 +9,7 @@ import PortfolioSection from '@/components/home/PortfolioSection'
 import ReadyCta from '@/components/home/ReadyCta'
 import ServicesSection from '@/components/home/ServicesSection'
 import StatsFaqSection from '@/components/home/StatsFaqSection'
+import TeamSection from '@/components/home/TeamSection'
 import WhyCoreCraft from '@/components/home/WhyCoreCraft'
 import { SiteHeader } from '@/components/layout'
 
@@ -22,6 +23,7 @@ export default function Home() {
         <InnovationSection />
         <ServicesSection />
         <PortfolioSection />
+        <TeamSection />
         <WhyCoreCraft />
         <StatsFaqSection />
         <ReadyCta />

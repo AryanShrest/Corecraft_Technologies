@@ -1,5 +1,7 @@
 'use client'
 
+import { useEffect, useRef } from 'react'
+
 const PROJECTS = [
   {
     name: 'Zyra Cosmic',
@@ -52,8 +54,28 @@ const PROJECTS = [
 ]
 
 export default function PortfolioSection() {
+  const sectionRef = useRef<HTMLElement>(null)
+
+  useEffect(() => {
+    const cards = sectionRef.current?.querySelectorAll('.portfolio-card')
+    if (!cards) return
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('animate-in')
+            observer.unobserve(entry.target)
+          }
+        })
+      },
+      { threshold: 0.15 }
+    )
+    cards.forEach((card) => observer.observe(card))
+    return () => observer.disconnect()
+  }, [])
+
   return (
-    <section id="portfolio" className="py-20 lg:py-28 bg-white">
+    <section ref={sectionRef} id="portfolio" className="py-20 lg:py-28 bg-white">
       <div className="max-w-7xl mx-auto px-6">
         <div className="mb-14">
           <span className="inline-block bg-orange-500 text-white text-xs font-bold tracking-[0.2em] uppercase px-4 py-1.5 mb-5">
@@ -70,13 +92,14 @@ export default function PortfolioSection() {
         </div>
 
         <div className="grid md:grid-cols-2 gap-10 md:gap-12 lg:gap-x-16 lg:gap-y-14">
-          {PROJECTS.map((project) => (
+          {PROJECTS.map((project, i) => (
             <a
               key={project.url}
               href={project.url}
               target="_blank"
               rel="noopener noreferrer"
-              className="group block"
+              className="group block portfolio-card"
+              style={{ transitionDelay: `${(i % 2) * 150}ms` }}
             >
               <div className="relative overflow-hidden rounded-xl border border-gray-200 bg-white shadow-md motion-card">
                 <div className="relative w-full h-80 overflow-hidden">
