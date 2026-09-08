@@ -1,212 +1,231 @@
 'use client'
 
-import { useCallback, useEffect, useRef, useState } from 'react'
-
+import { useEffect, useState } from 'react'
 import { Container } from '@/components/layout'
+import { AnimatedCounter } from '@/components/motion'
 import { Button } from '@/components/ui'
-import { heroSlides } from '@/content/site'
-import { cn } from '@/utils/format'
 
-const AUTOPLAY_DELAY = 6000
-const SWIPE_THRESHOLD = 48
-
-function ArrowIcon({ direction = 'right' }: { direction?: 'left' | 'right' }) {
+function ArrowIcon() {
   return (
-    <svg
-      aria-hidden="true"
-      className={cn('size-4', direction === 'left' && 'rotate-180')}
-      fill="none"
-      viewBox="0 0 24 24"
-    >
-      <path
-        d="M5 12h14m-5-5 5 5-5 5"
-        stroke="currentColor"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        strokeWidth="2"
-      />
+    <svg aria-hidden="true" className="size-4" fill="none" viewBox="0 0 24 24">
+      <path d="M5 12h14m-5-5 5 5-5 5" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" />
     </svg>
   )
 }
 
-export default function Hero() {
-  const [activeIndex, setActiveIndex] = useState(0)
-  const [isPaused, setIsPaused] = useState(false)
-  const touchStartX = useRef<number | null>(null)
+function PlayIcon() {
+  return (
+    <svg aria-hidden="true" className="size-4" fill="currentColor" viewBox="0 0 24 24">
+      <path d="M8 5v14l11-7z" />
+    </svg>
+  )
+}
 
-  const selectSlide = useCallback((index: number) => {
-    setActiveIndex((index + heroSlides.length) % heroSlides.length)
+const SLIDES = [
+  {
+    img: '/images/images/financial-planing-meeting.webp',
+    label: 'Strategic Planning',
+    sub: 'Kathmandu, Nepal',
+  },
+  {
+    img: '/images/images/pexels-photo-6424588.avif',
+    label: 'Our Team at Work',
+    sub: 'CoreCraft HQ',
+  },
+  {
+    img: 'https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=800&q=80',
+    label: 'Collaborative Development',
+    sub: 'Building the future',
+  },
+  {
+    img: 'https://images.unsplash.com/photo-1531482615713-2afd69097998?w=800&q=80',
+    label: 'Creative Solutions',
+    sub: 'Design & Innovation',
+  },
+]
+
+export default function Hero() {
+  const [current, setCurrent] = useState(0)
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrent((c) => (c + 1) % SLIDES.length)
+    }, 10000)
+    return () => clearInterval(timer)
   }, [])
 
-  // biome-ignore lint/correctness/useExhaustiveDependencies: changing slides intentionally restarts autoplay
-  useEffect(() => {
-    if (isPaused || heroSlides.length < 2) return
-    const timer = window.setTimeout(() => {
-      setActiveIndex((current) => (current + 1) % heroSlides.length)
-    }, AUTOPLAY_DELAY)
-    return () => window.clearTimeout(timer)
-  }, [activeIndex, isPaused])
-
-  function finishSwipe(clientX: number) {
-    if (touchStartX.current === null) return
-    const distance = clientX - touchStartX.current
-    touchStartX.current = null
-    if (Math.abs(distance) < SWIPE_THRESHOLD) return
-    selectSlide(activeIndex + (distance < 0 ? 1 : -1))
+  function goTo(idx: number) {
+    if (idx === current) return
+    setCurrent(idx)
   }
+
+  const nextIdx = (current + 1) % SLIDES.length
 
   return (
     <section
       aria-label="CoreCraft introduction"
-      aria-roledescription="carousel"
-      className="relative isolate overflow-hidden bg-[#111f4d] text-white"
-      onBlur={(event) => {
-        if (!event.currentTarget.contains(event.relatedTarget)) setIsPaused(false)
-      }}
-      onFocus={() => setIsPaused(true)}
-      onMouseEnter={() => setIsPaused(true)}
-      onMouseLeave={() => setIsPaused(false)}
-      onTouchEnd={(event) => finishSwipe(event.changedTouches[0]?.clientX ?? 0)}
-      onTouchStart={(event) => {
-        touchStartX.current = event.touches[0]?.clientX ?? null
+      className="relative isolate overflow-hidden"
+      style={{
+        background: 'linear-gradient(135deg, #eef0ff 0%, #e8eaff 30%, #ede8ff 60%, #f0eeff 100%)',
       }}
     >
-      <div aria-hidden="true" className="absolute inset-0">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_78%_28%,rgba(61,114,252,0.35),transparent_31%),linear-gradient(112deg,#101d47_0%,#182d69_52%,#244caf_100%)]" />
-        <div className="hero-grid absolute inset-y-0 right-0 w-[58%] opacity-30" />
-        <div className="absolute -right-24 top-10 size-[30rem] rounded-full border border-white/10" />
-        <div className="absolute -right-2 top-32 size-72 rounded-full border border-white/10" />
-        <div className="absolute bottom-20 right-[14%] size-28 rotate-12 rounded-3xl border border-blue-300/20 bg-blue-300/5" />
-      </div>
-
-      <Container className="relative min-h-[39rem] py-16 sm:min-h-[42rem] sm:py-20 lg:min-h-[45rem] lg:py-24">
-        <div className="relative min-h-[29rem] sm:min-h-[31rem] lg:min-h-[34rem]">
-          {heroSlides.map((slide, index) => {
-            const isActive = index === activeIndex
-            const Heading = isActive ? 'h1' : 'div'
-            return (
-              <article
-                aria-hidden={!isActive}
-                aria-label={`${index + 1} of ${heroSlides.length}`}
-                aria-roledescription="slide"
-                className={cn(
-                  'absolute inset-0 grid items-center transition-[opacity,transform] duration-[var(--motion-reveal)] ease-[var(--ease-emphasis)] lg:grid-cols-[minmax(0,0.62fr)_minmax(20rem,0.38fr)] lg:gap-12',
-                  isActive
-                    ? 'z-10 translate-x-0 opacity-100'
-                    : 'pointer-events-none z-0 translate-x-8 opacity-0',
-                )}
-                key={slide.id}
-              >
-                <div className="max-w-3xl py-8">
-                  <p className="mb-6 flex items-center gap-3 text-xs font-semibold tracking-[0.22em] text-blue-200 sm:text-sm">
-                    <span aria-hidden="true" className="h-0.5 w-10 bg-brand" />
-                    {slide.eyebrow}
-                  </p>
-                  <Heading
-                    aria-label={slide.title}
-                    className="max-w-3xl text-[clamp(2.75rem,7vw,5.4rem)] font-extrabold leading-[0.98] tracking-[-0.045em] text-white"
-                  >
-                    {slide.title.split(' ').map((word, wordIndex) => {
-                      const highlighted = wordIndex === 1 || (index === 1 && wordIndex === 3)
-                      return (
-                        <span
-                          className={cn(highlighted && 'hero-highlight text-blue-300')}
-                          key={`${slide.id}-${word}`}
-                        >
-                          {word}{' '}
-                        </span>
-                      )
-                    })}
-                  </Heading>
-                  <p className="mt-7 max-w-2xl text-base leading-7 text-blue-50/85 sm:text-lg sm:leading-8">
-                    {slide.body}
-                  </p>
-                  <Button
-                    className="mt-9 shadow-xl shadow-black/20"
-                    endIcon={<ArrowIcon />}
-                    href="/contact"
-                    size="large"
-                  >
-                    Contact Now
-                  </Button>
-                </div>
-
-                <div aria-hidden="true" className="relative hidden min-h-[28rem] lg:block">
-                  <div className="absolute inset-8 rounded-[3rem] border border-white/15 bg-gradient-to-br from-white/15 to-white/[0.03] shadow-2xl shadow-black/25 backdrop-blur-sm" />
-                  <div className="absolute inset-x-20 bottom-20 top-24 rounded-[2rem] bg-gradient-to-br from-blue-300/25 to-brand/10 ring-1 ring-white/15" />
-                  <svg
-                    className="absolute inset-0 size-full text-blue-100/80"
-                    fill="none"
-                    viewBox="0 0 420 440"
-                  >
-                    <title>Decorative technology illustration</title>
-                    <path d="M110 295 210 120l100 175H110Z" stroke="currentColor" strokeWidth="2" />
-                    <circle
-                      cx="210"
-                      cy="218"
-                      r="68"
-                      stroke="currentColor"
-                      strokeDasharray="6 10"
-                      strokeWidth="2"
-                    />
-                    <path
-                      d="M173 219h74M210 182v74"
-                      stroke="currentColor"
-                      strokeLinecap="round"
-                      strokeWidth="8"
-                    />
-                  </svg>
-                  <div className="absolute right-2 top-16 rounded-2xl border border-white/20 bg-[#17242c]/90 px-5 py-4 shadow-xl backdrop-blur">
-                    <span className="block text-2xl font-bold text-white">Digital first</span>
-                    <span className="text-xs tracking-wide text-blue-200">BUILT TO SCALE</span>
-                  </div>
-                </div>
-              </article>
-            )
-          })}
-        </div>
-
-        <div className="relative z-20 flex items-center justify-between gap-6 border-t border-white/10 pt-5">
-          <fieldset className="flex gap-2 border-0 p-0" aria-label="Choose a slide">
-            {heroSlides.map((slide, index) => (
-              <button
-                aria-label={`Show slide ${index + 1}: ${slide.title}`}
-                aria-pressed={activeIndex === index}
-                className={cn(
-                  'h-3 rounded-full transition-[width,background-color] duration-[var(--motion-hover)]',
-                  activeIndex === index ? 'w-10 bg-brand' : 'w-3 bg-white/40 hover:bg-white/70',
-                )}
-                key={slide.id}
-                onClick={() => selectSlide(index)}
-                type="button"
-              />
-            ))}
-          </fieldset>
-          <div className="flex gap-2">
-            <button
-              aria-label="Previous slide"
-              className="hero-control"
-              onClick={() => selectSlide(activeIndex - 1)}
-              type="button"
-            >
-              <ArrowIcon direction="left" />
-            </button>
-            <button
-              aria-label="Next slide"
-              className="hero-control"
-              onClick={() => selectSlide(activeIndex + 1)}
-              type="button"
-            >
-              <ArrowIcon />
-            </button>
-          </div>
-        </div>
-      </Container>
-
+      {/* Dot grid */}
       <div
         aria-hidden="true"
-        className="absolute inset-x-0 bottom-0 h-10 bg-white [clip-path:polygon(0_74%,100%_0,100%_100%,0_100%)] sm:h-16"
+        className="absolute inset-0 opacity-30"
+        style={{
+          backgroundImage: 'radial-gradient(circle, #818cf8 1px, transparent 1px)',
+          backgroundSize: '32px 32px',
+        }}
       />
+      <div aria-hidden="true" className="pointer-events-none absolute -left-32 -top-32 size-[40rem] rounded-full bg-indigo-400/20 blur-3xl" />
+      <div aria-hidden="true" className="pointer-events-none absolute -bottom-20 -right-20 size-[30rem] rounded-full bg-indigo-300/15 blur-3xl" />
+
+      <Container className="relative py-10 sm:py-12 lg:py-14">
+        <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
+
+          {/* ── LEFT COLUMN ── */}
+          <div className="max-w-xl">
+            <span className="mb-6 inline-flex items-center gap-2 rounded-full border border-indigo-200 bg-white/70 px-4 py-2 text-sm font-medium text-indigo-700 shadow-sm backdrop-blur">
+              <span className="size-2 rounded-full bg-indigo-500 animate-pulse" />
+              Nepal&apos;s Digital Growth Partner
+            </span>
+
+            <h1 className="text-[clamp(2rem,4.5vw,3.4rem)] font-extrabold leading-[1.1] tracking-[-0.02em] text-slate-900">
+              We build software that{' '}
+              <span className="text-indigo-600">moves your business</span>{' '}
+              forward.
+            </h1>
+
+            <p className="mt-5 text-base leading-7 text-slate-600 sm:text-lg max-w-lg">
+              CoreCraft is a full-service digital agency in Kathmandu. We design and build
+              custom web apps, mobile apps, and e-commerce platforms that help businesses
+              in Nepal and beyond scale with confidence.
+            </p>
+
+            <div className="mt-8 flex flex-wrap items-center gap-4">
+              <Button
+                className="bg-indigo-600 text-white shadow-lg shadow-indigo-300/40 hover:bg-indigo-700"
+                endIcon={<ArrowIcon />}
+                href="/contact"
+                size="large"
+              >
+                Get a Free Consultation
+              </Button>
+              <Button
+                className="border border-slate-200 bg-white text-slate-800 shadow-sm hover:bg-slate-50 whitespace-nowrap"
+                href="/#portfolio"
+                size="large"
+                startIcon={<PlayIcon />}
+                variant="secondary"
+              >
+                View Our Work
+              </Button>
+            </div>
+          </div>
+
+          {/* ── RIGHT COLUMN — Dual Image Slideshow ── */}
+          <div className="relative mx-auto w-full max-w-[32rem] h-[400px] lg:h-[440px]">
+
+            {/* Card 1 — large, top-left */}
+            <div className="absolute left-0 top-0 w-[80%] h-[75%] rounded-2xl overflow-hidden shadow-2xl shadow-black/20 border-4 border-white">
+              {SLIDES.map((slide, i) => (
+                <div
+                  key={i}
+                  className="absolute inset-0"
+                  style={{
+                    opacity: i === current ? 1 : 0,
+                    transition: 'opacity 0.8s cubic-bezier(0.4,0,0.2,1)',
+                    zIndex: i === current ? 1 : 0,
+                  }}
+                >
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img src={slide.img} alt={slide.label} className="w-full h-full object-cover" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
+                </div>
+              ))}
+              <div className="absolute bottom-3 left-3 z-10 rounded-xl bg-white/90 backdrop-blur px-3 py-2 shadow">
+                <div className="text-xs font-bold text-slate-800" style={{ transition: 'opacity 0.4s' }}>{SLIDES[current].label}</div>
+                <div className="text-[10px] text-slate-500">{SLIDES[current].sub}</div>
+              </div>
+            </div>
+
+            {/* Card 2 — small, bottom-right, shows next slide */}
+            <div className="absolute bottom-0 right-0 w-[62%] h-[58%] rounded-2xl overflow-hidden shadow-2xl shadow-black/15 border-4 border-white">
+              {SLIDES.map((slide, i) => (
+                <div
+                  key={i}
+                  className="absolute inset-0"
+                  style={{
+                    opacity: i === nextIdx ? 1 : 0,
+                    transition: 'opacity 0.8s cubic-bezier(0.4,0,0.2,1)',
+                    zIndex: i === nextIdx ? 1 : 0,
+                  }}
+                >
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img src={slide.img} alt={slide.label} className="w-full h-full object-cover" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent" />
+                </div>
+              ))}
+              <div className="absolute bottom-3 left-3 z-10 rounded-xl bg-white/90 backdrop-blur px-3 py-2 shadow">
+                <div className="text-[10px] font-bold text-slate-800">{SLIDES[nextIdx].label}</div>
+                <div className="text-[9px] text-slate-500">{SLIDES[nextIdx].sub}</div>
+              </div>
+            </div>
+
+            {/* Stat badge — top right */}
+            <div className="absolute -right-4 top-4 z-20 rounded-2xl border border-indigo-100 bg-white px-4 py-3 shadow-xl">
+              <div className="text-[11px] text-slate-500 mb-0.5">Projects Done</div>
+              <div className="text-lg font-extrabold text-slate-900 leading-none">
+                <AnimatedCounter value={120} suffix="+" duration={1400} />
+              </div>
+              <div className="text-[10px] text-indigo-500 mt-0.5 font-medium">Delivered on time</div>
+            </div>
+
+            {/* Stat badge — bottom left */}
+            <div className="absolute -left-4 bottom-12 z-20 rounded-2xl border border-green-100 bg-white px-4 py-3 shadow-xl">
+              <div className="text-[11px] text-slate-500 mb-0.5">Client Retention</div>
+              <div className="text-lg font-extrabold text-slate-900 leading-none">
+                <AnimatedCounter value={98} suffix="%" duration={1400} />
+              </div>
+              <div className="text-[10px] text-green-500 mt-0.5 font-medium">Clients keep coming back</div>
+            </div>
+
+            {/* Dot indicators */}
+            <div className="absolute -bottom-6 left-1/2 -translate-x-1/2 flex gap-2 z-20">
+              {SLIDES.map((_, i) => (
+                <button
+                  key={i}
+                  onClick={() => goTo(i)}
+                  className={`rounded-full transition-all duration-300 ${
+                    i === current
+                      ? 'w-6 h-2 bg-indigo-600'
+                      : 'w-2 h-2 bg-indigo-200 hover:bg-indigo-400'
+                  }`}
+                  aria-label={`Go to slide ${i + 1}`}
+                />
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {/* ── STATS BAR ── */}
+        <div className="mt-14 grid grid-cols-2 gap-6 rounded-2xl border border-indigo-100 bg-white/60 px-8 py-8 shadow-sm backdrop-blur md:grid-cols-4">
+          {[
+            { value: 120, suffix: '+', label: 'Projects Delivered' },
+            { value: 45, suffix: '+', label: 'Happy Clients' },
+            { value: 6, suffix: '', label: 'Years in Business' },
+            { value: 15, suffix: '', label: 'Team Members' },
+          ].map((stat) => (
+            <div key={stat.label} className="text-center">
+              <div className="text-[clamp(1.8rem,4vw,2.6rem)] font-extrabold leading-none tracking-tight text-indigo-600">
+                <AnimatedCounter duration={1600} suffix={stat.suffix} value={stat.value} />
+              </div>
+              <div className="mt-2 text-sm font-medium text-slate-500">{stat.label}</div>
+            </div>
+          ))}
+        </div>
+      </Container>
     </section>
   )
 }

@@ -14,7 +14,7 @@ const FEATURES = [
 
 export default function WhyCoreCraft() {
   return (
-    <section className="relative overflow-hidden bg-gradient-to-br from-[#0a1940] via-[#112a66] to-[#1e3a8a] text-white py-24">
+    <section className="relative overflow-hidden bg-gradient-to-br from-[#0a1940] via-[#112a66] to-[#1e3a8a] text-white py-12">
       {/* Hexagon pattern background */}
       <div className="absolute inset-0 opacity-[0.05]">
         <svg className="w-full h-full" xmlns="http://www.w3.org/2000/svg">
