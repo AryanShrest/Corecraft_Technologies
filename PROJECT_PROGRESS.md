@@ -230,7 +230,7 @@ Contact and newsletter homepage sections are tracked under integrations so their
 | Task | Requirement | Deliverable | Owner | Status | Depends on | Branch/PR | Evidence/notes |
 |---|---|---|---|---|---|---|---|
 | INT-T01 | FORM-001/002 | Accessible contact-form UI and validation | Bishowdip | `DONE` | FND-007, DEC-009 | `bishowdip` | Labeled name/email/inquiry/budget/message fields, native validation, submitting, success, and recoverable error states. |
-| INT-T02 | FORM-003 | Secure server submission endpoint | Bishowdip | `DONE` | DEC-007, INT-T01 | `bishowdip` | Size cap, server allowlists, honeypot/timing checks, same-origin protection, hashed-IP rate limiting, escaped Resend delivery, timeouts, and provider-error handling implemented. Upstash is required for distributed production limiting. |
+| INT-T02 | FORM-003 | Secure server submission endpoint | Bishowdip | `DONE` | DEC-007, INT-T01 | `bishowdip` | Size cap, server allowlists, honeypot/timing checks, same-origin protection, atomic hashed-IP rate limiting, escaped Resend delivery, timeouts, and provider-error handling implemented. Upstash is required for distributed production limiting. |
 | INT-T03 | HOME-010 | Homepage contact section using shared form | `TBD` | `NOT STARTED` | INT-T01, DEC-003/009 | — | Do not duplicate form logic. |
 | INT-T04 | PAGE-004 | Contact-page integration using shared form | Bishowdip | `DONE` | PAGE-T03, INT-T01/002 | `bishowdip` | Contact brief posts JSON to `/api/contact`, prevents duplicate submits, and surfaces server outcomes without fake success. |
 | INT-T05 | FORM-004 | Newsletter UI and validation | `TBD` | `NOT STARTED` | DEC-008, SHELL-006 | — | Do not fake success. |

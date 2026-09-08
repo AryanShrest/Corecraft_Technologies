@@ -6,6 +6,8 @@ export const runtime = 'nodejs'
 const MAX_BODY_BYTES = 16_000
 const RATE_LIMIT = 5
 const RATE_WINDOW_SECONDS = 15 * 60
+const RATE_LIMIT_SCRIPT =
+  "local count = redis.call('INCR', KEYS[1]); if count == 1 then redis.call('EXPIRE', KEYS[1], ARGV[1]); end; return count"
 const ALLOWED_INQUIRIES = new Set([
   'New website or redesign',
   'Custom software',
@@ -85,18 +87,15 @@ async function checkRateLimit(key: string) {
   const redisToken = process.env.UPSTASH_REDIS_REST_TOKEN
 
   if (redisUrl && redisToken) {
-    const response = await fetch(`${redisUrl}/pipeline`, {
-      body: JSON.stringify([
-        ['INCR', key],
-        ['EXPIRE', key, RATE_WINDOW_SECONDS, 'NX'],
-      ]),
+    const response = await fetch(redisUrl, {
+      body: JSON.stringify(['EVAL', RATE_LIMIT_SCRIPT, '1', key, String(RATE_WINDOW_SECONDS)]),
       headers: { Authorization: `Bearer ${redisToken}`, 'Content-Type': 'application/json' },
       method: 'POST',
       signal: AbortSignal.timeout(4_000),
     })
     if (!response.ok) throw new Error('Rate-limit service unavailable')
-    const result = (await response.json()) as Array<{ result?: number }>
-    return (result[0]?.result ?? RATE_LIMIT + 1) <= RATE_LIMIT
+    const result = (await response.json()) as { result?: number }
+    return (result.result ?? RATE_LIMIT + 1) <= RATE_LIMIT
   }
 
   if (process.env.NODE_ENV === 'production') {
