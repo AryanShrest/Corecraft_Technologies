@@ -110,9 +110,9 @@ Update these counts whenever a task moves to `DONE`.
 | Homepage | 1 | 12 | 8% |
 | Motion/responsive | 5 | 10 | 50% |
 | Internal pages | 2 | 9 | 22% |
-| Forms/integrations | 3 | 8 | 38% |
+| Forms/integrations | 4 | 8 | 50% |
 | Quality/release | 0 | 14 | 0% |
-| **Overall** | **25** | **85** | **29%** |
+| **Overall** | **26** | **85** | **31%** |
 
 ---
 
@@ -236,7 +236,7 @@ Contact and newsletter homepage sections are tracked under integrations so their
 | INT-T05 | FORM-004 | Newsletter UI and validation | `TBD` | `NOT STARTED` | DEC-008, SHELL-006 | — | Do not fake success. |
 | INT-T06 | FORM-004 | Newsletter provider/backend integration | `TBD` | `NOT STARTED` | INT-T05, DEC-008 | — | Consent and provider errors. |
 | INT-T07 | FORM-005 | Privacy notice and retention/consent behavior | `TBD` | `NOT STARTED` | DEC-007/008 | — | Required before production collection. |
-| INT-T08 | §5.3, §13 | Final CMS or typed-content integration | `TBD` | `NOT STARTED` | DEC-010, FND-010 | — | Sanitize any CMS HTML. |
+| INT-T08 | §5.3, §13 | Final CMS or typed-content integration | Bishowdip | `DONE` | Supabase production configuration | `bishowdip` | Next.js `/admin` manages four active hero slides and an expandable partner directory using authenticated server APIs, Postgres records, Storage uploads, cache invalidation, and static public fallbacks. No CMS HTML is accepted. |
 
 ---
 
@@ -344,6 +344,7 @@ Record decisions that affect multiple contributors. Never rely only on chat hist
 | 2026-09-06 | SHELL-008 | Vitest/jsdom and production build | One-h1 contract, Home/current/intermediate breadcrumb semantics, optional description, targeted Biome check, typecheck, and build | Pass — 8 files, 21 tests | `src/components/layout/PageBanner.tsx`, `npm test` | Bishowdip |
 | 2026-09-08 | PAGE-T09/INT-T01/PAGE-T03 | Local browser desktop/mobile, Vitest, and production build | Goal recommendation, comparison disclosure semantics, pricing-to-contact preselection, direct contact links, prepared email handoff, responsive navigation/layout | Pass except DEC-009 contact-detail approval | `/pricing`, `/contact`; 10 files, 27 tests | Bishowdip |
 | 2026-09-08 | PAGE-T03/INT-T01/INT-T02/INT-T04 | Local browser, Vitest, TypeScript, production build | Confirmed location/hours, optional budget UX, server validation, cross-site/honeypot/timing defenses, rate limiting, escaped delivery, delivery failures, accessible UI states | Pass — production credentials still required | `/contact`, `/api/contact`; 11 files, 32 tests | Bishowdip |
+| 2026-09-08 | INT-T08/security foundation | Local TypeScript, Vitest, npm audit, Next.js production build | Admin auth boundary, CMS routes, upload validation, four-slide constraint, unlimited partner source, fallback content, patched runtime dependencies | Pass — zero known production dependency vulnerabilities; Supabase setup still required | `/admin`, `/api/admin/content`, `/`; 11 test files, 32 tests | Bishowdip |
 | 2026-09-08 | PAGE-T03/INT-T01/INT-T02/INT-T04 | Vitest, TypeScript, production build | Approved location/hours, optional budget, server validation, bot/origin checks, provider delivery and failure behavior | Pass — production secrets and verified sending domain remain deployment configuration | `/api/contact`, `/contact`; 11 files, 31 tests | Bishowdip |
 
 ---
@@ -378,6 +379,7 @@ Move a task summary here only after its tracker row is `DONE`. Keep the original
 | 2026-09-08 | PAGE-T03 | Bishowdip | Pending commit | Contact page completed with approved Kapan, Nepal location and 10:00 AM–6:00 PM hours. |
 | 2026-09-08 | INT-T02 | Bishowdip | Pending commit | Secure contact endpoint completed with validation, anti-spam checks, distributed rate-limit adapter, escaped Resend delivery, and recoverable errors. |
 | 2026-09-08 | INT-T04 | Bishowdip | Pending commit | Contact UI integrated with the server endpoint and honest sending/success/error states. |
+| 2026-09-08 | INT-T08 | Bishowdip | Pending commit | Single-deployment Supabase CMS foundation added for homepage hero and partner management with secure uploads and static fallbacks. |
 
 ---
 

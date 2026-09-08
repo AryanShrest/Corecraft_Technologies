@@ -1,14 +1,22 @@
 'use client'
 
-import { useEffect, useState } from 'react'
 import { Container } from '@/components/layout'
 import { AnimatedCounter } from '@/components/motion'
 import { Button } from '@/components/ui'
+import { fallbackHomeContent } from '@/content/home-content'
+import type { HeroMedia } from '@/types/home-content'
+import { useEffect, useState } from 'react'
 
 function ArrowIcon() {
   return (
     <svg aria-hidden="true" className="size-4" fill="none" viewBox="0 0 24 24">
-      <path d="M5 12h14m-5-5 5 5-5 5" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" />
+      <path
+        d="M5 12h14m-5-5 5 5-5 5"
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth="2"
+      />
     </svg>
   )
 }
@@ -21,45 +29,24 @@ function PlayIcon() {
   )
 }
 
-const SLIDES = [
-  {
-    img: '/images/images/financial-planing-meeting.webp',
-    label: 'Strategic Planning',
-    sub: 'Kathmandu, Nepal',
-  },
-  {
-    img: '/images/images/pexels-photo-6424588.avif',
-    label: 'Our Team at Work',
-    sub: 'CoreCraft HQ',
-  },
-  {
-    img: 'https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=800&q=80',
-    label: 'Collaborative Development',
-    sub: 'Building the future',
-  },
-  {
-    img: 'https://images.unsplash.com/photo-1531482615713-2afd69097998?w=800&q=80',
-    label: 'Creative Solutions',
-    sub: 'Design & Innovation',
-  },
-]
-
-export default function Hero() {
+export default function Hero({
+  slides = fallbackHomeContent.heroSlides,
+}: { slides?: HeroMedia[] }) {
   const [current, setCurrent] = useState(0)
 
   useEffect(() => {
     const timer = setInterval(() => {
-      setCurrent((c) => (c + 1) % SLIDES.length)
+      setCurrent((c) => (c + 1) % slides.length)
     }, 10000)
     return () => clearInterval(timer)
-  }, [])
+  }, [slides.length])
 
   function goTo(idx: number) {
     if (idx === current) return
     setCurrent(idx)
   }
 
-  const nextIdx = (current + 1) % SLIDES.length
+  const nextIdx = (current + 1) % slides.length
 
   return (
     <section
@@ -78,12 +65,17 @@ export default function Hero() {
           backgroundSize: '32px 32px',
         }}
       />
-      <div aria-hidden="true" className="pointer-events-none absolute -left-32 -top-32 size-[40rem] rounded-full bg-indigo-400/20 blur-3xl" />
-      <div aria-hidden="true" className="pointer-events-none absolute -bottom-20 -right-20 size-[30rem] rounded-full bg-indigo-300/15 blur-3xl" />
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute -left-32 -top-32 size-[40rem] rounded-full bg-indigo-400/20 blur-3xl"
+      />
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute -bottom-20 -right-20 size-[30rem] rounded-full bg-indigo-300/15 blur-3xl"
+      />
 
       <Container className="relative py-10 sm:py-12 lg:py-14">
         <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
-
           {/* ── LEFT COLUMN ── */}
           <div className="max-w-xl">
             <span className="mb-6 inline-flex items-center gap-2 rounded-full border border-indigo-200 bg-white/70 px-4 py-2 text-sm font-medium text-indigo-700 shadow-sm backdrop-blur">
@@ -92,15 +84,14 @@ export default function Hero() {
             </span>
 
             <h1 className="text-[clamp(2rem,4.5vw,3.4rem)] font-extrabold leading-[1.1] tracking-[-0.02em] text-slate-900">
-              We build software that{' '}
-              <span className="text-indigo-600">moves your business</span>{' '}
+              We build software that <span className="text-indigo-600">moves your business</span>{' '}
               forward.
             </h1>
 
             <p className="mt-5 text-base leading-7 text-slate-600 sm:text-lg max-w-lg">
-              CoreCraft is a full-service digital agency in Kathmandu. We design and build
-              custom web apps, mobile apps, and e-commerce platforms that help businesses
-              in Nepal and beyond scale with confidence.
+              CoreCraft is a full-service digital agency in Kathmandu. We design and build custom
+              web apps, mobile apps, and e-commerce platforms that help businesses in Nepal and
+              beyond scale with confidence.
             </p>
 
             <div className="mt-8 flex flex-wrap items-center gap-4">
@@ -126,12 +117,11 @@ export default function Hero() {
 
           {/* ── RIGHT COLUMN — Dual Image Slideshow ── */}
           <div className="relative mx-auto w-full max-w-[32rem] h-[400px] lg:h-[440px]">
-
             {/* Card 1 — large, top-left */}
             <div className="absolute left-0 top-0 w-[80%] h-[75%] rounded-2xl overflow-hidden shadow-2xl shadow-black/20 border-4 border-white">
-              {SLIDES.map((slide, i) => (
+              {slides.map((slide, i) => (
                 <div
-                  key={i}
+                  key={slide.id}
                   className="absolute inset-0"
                   style={{
                     opacity: i === current ? 1 : 0,
@@ -140,21 +130,30 @@ export default function Hero() {
                   }}
                 >
                   {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src={slide.img} alt={slide.label} className="w-full h-full object-cover" />
+                  <img
+                    src={slide.imageUrl}
+                    alt={slide.altText}
+                    className="w-full h-full object-cover"
+                  />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
                 </div>
               ))}
               <div className="absolute bottom-3 left-3 z-10 rounded-xl bg-white/90 backdrop-blur px-3 py-2 shadow">
-                <div className="text-xs font-bold text-slate-800" style={{ transition: 'opacity 0.4s' }}>{SLIDES[current].label}</div>
-                <div className="text-[10px] text-slate-500">{SLIDES[current].sub}</div>
+                <div
+                  className="text-xs font-bold text-slate-800"
+                  style={{ transition: 'opacity 0.4s' }}
+                >
+                  {slides[current].title}
+                </div>
+                <div className="text-[10px] text-slate-500">{slides[current].subtitle}</div>
               </div>
             </div>
 
             {/* Card 2 — small, bottom-right, shows next slide */}
             <div className="absolute bottom-0 right-0 w-[62%] h-[58%] rounded-2xl overflow-hidden shadow-2xl shadow-black/15 border-4 border-white">
-              {SLIDES.map((slide, i) => (
+              {slides.map((slide, i) => (
                 <div
-                  key={i}
+                  key={slide.id}
                   className="absolute inset-0"
                   style={{
                     opacity: i === nextIdx ? 1 : 0,
@@ -163,13 +162,17 @@ export default function Hero() {
                   }}
                 >
                   {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src={slide.img} alt={slide.label} className="w-full h-full object-cover" />
+                  <img
+                    src={slide.imageUrl}
+                    alt={slide.altText}
+                    className="w-full h-full object-cover"
+                  />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent" />
                 </div>
               ))}
               <div className="absolute bottom-3 left-3 z-10 rounded-xl bg-white/90 backdrop-blur px-3 py-2 shadow">
-                <div className="text-[10px] font-bold text-slate-800">{SLIDES[nextIdx].label}</div>
-                <div className="text-[9px] text-slate-500">{SLIDES[nextIdx].sub}</div>
+                <div className="text-[10px] font-bold text-slate-800">{slides[nextIdx].title}</div>
+                <div className="text-[9px] text-slate-500">{slides[nextIdx].subtitle}</div>
               </div>
             </div>
 
@@ -179,7 +182,9 @@ export default function Hero() {
               <div className="text-lg font-extrabold text-slate-900 leading-none">
                 <AnimatedCounter value={120} suffix="+" duration={1400} />
               </div>
-              <div className="text-[10px] text-indigo-500 mt-0.5 font-medium">Delivered on time</div>
+              <div className="text-[10px] text-indigo-500 mt-0.5 font-medium">
+                Delivered on time
+              </div>
             </div>
 
             {/* Stat badge — bottom left */}
@@ -188,15 +193,18 @@ export default function Hero() {
               <div className="text-lg font-extrabold text-slate-900 leading-none">
                 <AnimatedCounter value={98} suffix="%" duration={1400} />
               </div>
-              <div className="text-[10px] text-green-500 mt-0.5 font-medium">Clients keep coming back</div>
+              <div className="text-[10px] text-green-500 mt-0.5 font-medium">
+                Clients keep coming back
+              </div>
             </div>
 
             {/* Dot indicators */}
             <div className="absolute -bottom-6 left-1/2 -translate-x-1/2 flex gap-2 z-20">
-              {SLIDES.map((_, i) => (
+              {slides.map((slide, i) => (
                 <button
-                  key={i}
+                  key={slide.id}
                   onClick={() => goTo(i)}
+                  type="button"
                   className={`rounded-full transition-all duration-300 ${
                     i === current
                       ? 'w-6 h-2 bg-indigo-600'

@@ -15,8 +15,13 @@ const pathInquiry: Record<string, string> = {
   'launch-sprint': 'New website or redesign',
 }
 
-export default function ContactPage({ searchParams }: { searchParams?: { path?: string } }) {
-  const initialInquiry = searchParams?.path ? pathInquiry[searchParams.path] : undefined
+export default async function ContactPage({
+  searchParams,
+}: {
+  searchParams?: Promise<{ path?: string }>
+}) {
+  const params = await searchParams
+  const initialInquiry = params?.path ? pathInquiry[params.path] : undefined
 
   return (
     <div className="bg-white">

@@ -22,7 +22,7 @@ export function AnimatedCounter({
   ...props
 }: AnimatedCounterProps) {
   const elementRef = useRef<HTMLSpanElement>(null)
-  const frameRef = useRef<number>()
+  const frameRef = useRef<number | undefined>(undefined)
   const startedRef = useRef(false)
   const reducedMotion = useReducedMotion()
   const [displayValue, setDisplayValue] = useState(0)

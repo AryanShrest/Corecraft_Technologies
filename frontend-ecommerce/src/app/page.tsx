@@ -12,14 +12,16 @@ import StatsFaqSection from '@/components/home/StatsFaqSection'
 import TeamSection from '@/components/home/TeamSection'
 import WhyCoreCraft from '@/components/home/WhyCoreCraft'
 import { SiteHeader } from '@/components/layout'
+import { getHomeContent } from '@/lib/home-content'
 
-export default function Home() {
+export default async function Home() {
+  const content = await getHomeContent()
   return (
     <div className="bg-white">
       <SiteHeader />
       <main id="primary">
-        <Hero />
-        <ClientsSection />
+        <Hero slides={content.heroSlides} />
+        <ClientsSection partners={content.partners} />
         <HowWeWork />
         <ServicesSection />
         <PortfolioSection />
