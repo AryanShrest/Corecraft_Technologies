@@ -1,5 +1,5 @@
 {
-  "buildCommand": "npm run build",
-  "outputDirectory": ".next",
-  "installCommand": "npm install"
+  "buildCommand": "cd frontend-ecommerce && npm install && npm run build",
+  "outputDirectory": "frontend-ecommerce/.next",
+  "installCommand": "cd frontend-ecommerce && npm install"
 }
