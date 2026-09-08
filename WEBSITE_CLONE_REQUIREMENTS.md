@@ -41,7 +41,7 @@ This document is the canonical requirements specification. Contributors must not
 2. Store approved assets locally or in the team's approved media service. Do not depend on WordPress theme-demo URLs.
 3. Do not migrate the suspicious software/crack/torrent articles currently visible on the reference website.
 4. Do not invent statistics. Values such as client satisfaction, completed projects, and customers supported require written confirmation.
-5. Do not invent service prices. The reference Pricing item currently points to `#`; it is not a defined page.
+5. Do not invent service prices. On 2026-09-08, the owner approved a real Pricing page using transparent custom-proposal engagement paths until monetary rates are supplied.
 6. Do not submit forms to the old production WordPress installation.
 7. The public website scope is separate from the repository's ecommerce backend. No ecommerce API is required for this project unless separately approved.
 8. Every feature must work with keyboard input, touch, and `prefers-reduced-motion`.
@@ -843,7 +843,7 @@ Rules:
 The following are unresolved and must have issues:
 
 - Exact validated statistic numbers.
-- Pricing navigation behavior and whether a Pricing page exists.
+- Monetary package rates remain pending; the Pricing page itself and custom-proposal model are approved.
 - Service-detail destinations.
 - Newsletter provider and consent copy.
 - Contact form recipient.

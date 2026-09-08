@@ -2,7 +2,7 @@
 
 **Requirements:** [WEBSITE_CLONE_REQUIREMENTS.md](./WEBSITE_CLONE_REQUIREMENTS.md)  
 **Integration branch:** `bishowdip`  
-**Last updated:** 2026-09-05  
+**Last updated:** 2026-09-08  
 **Overall status:** In progress
 
 > This file is the canonical task tracker. Before starting work, claim the task here and pull the latest branch. Do not begin a task already marked `IN PROGRESS`, `IN REVIEW`, or `BLOCKED` without contacting its owner.
@@ -66,7 +66,7 @@ Replace placeholders before development begins.
 
 | Team member | Primary area | Active branch | Current task | Availability |
 |---|---|---|---|---|
-| Bishowdip | Integration, foundation, final review | `bishowdip` | Motion and homepage | Active |
+| Bishowdip | Integration, foundation, final review | `bishowdip` | Contact/Pricing review and integration | Active |
 | Developer 2 — `TBD` | Homepage static sections | `TBD` | Unassigned | `TBD` |
 | Developer 3 — `TBD` | Motion and responsive QA | `TBD` | Unassigned | `TBD` |
 | Developer 4 — `TBD` | Internal pages and integrations | `TBD` | Unassigned | `TBD` |
@@ -90,11 +90,11 @@ Replace placeholders before development begins.
 |---|---|---|---|---|---|
 | M0 — Decisions and asset clearance | `NOT STARTED` | `TBD` | `TBD` | — | — |
 | M1 — Foundation | `IN PROGRESS` | Bishowdip | `TBD` | — | FND-002–008 and FND-011–012 complete; typed content awaits client decisions. |
-| M2 — Shared shell | `IN PROGRESS` | Bishowdip | `TBD` | — | Header behavior complete; approved logo and remaining footer/search work pending. |
+| M2 — Shared shell | `IN PROGRESS` | Bishowdip | `TBD` | — | Header behavior, scroll-to-top, and internal-page banner complete; approved logo and footer/search decisions pending. |
 | M3 — Homepage static fidelity | `NOT STARTED` | `TBD` | `TBD` | — | — |
 | M4 — Motion system | `IN PROGRESS` | Bishowdip | `TBD` | — | Core tokens, reveal/stagger, counter, accordion, and shared hover behavior complete. |
-| M5 — Internal pages | `NOT STARTED` | `TBD` | `TBD` | — | — |
-| M6 — Forms and integrations | `NOT STARTED` | `TBD` | `TBD` | — | — |
+| M5 — Internal pages | `IN PROGRESS` | Bishowdip | `TBD` | — | Interactive Pricing page complete; Contact structure awaits final office details. |
+| M6 — Forms and integrations | `IN PROGRESS` | Bishowdip | `TBD` | — | Contact brief UI and honest email handoff complete; server delivery remains pending. |
 | M7 — Accessibility, SEO, performance | `NOT STARTED` | `TBD` | `TBD` | — | — |
 | M8 — Release QA and launch | `NOT STARTED` | `TBD` | `TBD` | — | — |
 
@@ -104,15 +104,15 @@ Update these counts whenever a task moves to `DONE`.
 
 | Category | Done | Total | Progress |
 |---|---:|---:|---:|
-| Decisions/assets | 0 | 12 | 0% |
+| Decisions/assets | 1 | 12 | 8% |
 | Foundation | 9 | 12 | 75% |
-| Shared shell | 3 | 8 | 38% |
+| Shared shell | 4 | 8 | 50% |
 | Homepage | 1 | 12 | 8% |
 | Motion/responsive | 5 | 10 | 50% |
-| Internal pages | 0 | 8 | 0% |
-| Forms/integrations | 0 | 8 | 0% |
+| Internal pages | 1 | 9 | 11% |
+| Forms/integrations | 1 | 8 | 13% |
 | Quality/release | 0 | 14 | 0% |
-| **Overall** | **18** | **84** | **21%** |
+| **Overall** | **22** | **85** | **26%** |
 
 ---
 
@@ -126,7 +126,7 @@ These tasks block accurate implementation. Do not replace them with assumptions.
 | DEC-002 | §2, §13 | Approve logo files and usage | `TBD` | `NOT STARTED` | DEC-001 | — | — |
 | DEC-003 | §2, §13 | Approve all website photos/illustrations and record sources | `TBD` | `NOT STARTED` | DEC-001 | — | — |
 | DEC-004 | HOME-006 | Confirm all statistic numbers and suffixes | `TBD` | `NOT STARTED` | Client/owner | — | Never invent values. |
-| DEC-005 | GLO-002 | Decide Pricing link/page behavior | `TBD` | `NOT STARTED` | Client/owner | — | Hide until approved rather than linking to `#`. |
+| DEC-005 | GLO-002 | Decide Pricing link/page behavior | Bishowdip | `DONE` | Client/owner | `bishowdip` | User approved a dedicated interactive Pricing page on 2026-09-08; monetary rates remain unapproved, so plans use honest custom proposals. |
 | DEC-006 | HOME-004, PAGE-003 | Confirm service-detail destinations | `TBD` | `NOT STARTED` | Content owner | — | — |
 | DEC-007 | FORM-003 | Confirm contact-form recipient and mail provider | `TBD` | `NOT STARTED` | Client/owner | — | Keep credentials out of Git. |
 | DEC-008 | FORM-004 | Confirm newsletter provider, audience, and consent copy | `TBD` | `NOT STARTED` | Client/owner | — | — |
@@ -167,7 +167,7 @@ These tasks block accurate implementation. Do not replace them with assumptions.
 | SHELL-005 | GLO-005 | Functional search or approved removal | `TBD` | `NOT STARTED` | Search scope decision | — | Decorative search is forbidden. |
 | SHELL-006 | GLO-006 | Shared footer and copyright bar | `TBD` | `NOT STARTED` | FND-009, DEC-010/012 | — | No suspicious recent posts. |
 | SHELL-007 | GLO-007 | Accessible scroll-to-top control | Bishowdip | `DONE` | MOT-001 | `bishowdip` | Global 480 px threshold control with tab-order isolation, smooth scrolling, and reduced-motion fallback; component tests pass. |
-| SHELL-008 | PAGE-001 | Reusable internal-page header/banner/breadcrumb | `TBD` | `NOT STARTED` | SHELL-002, FND-008 | — | Exactly one page `h1`. |
+| SHELL-008 | PAGE-001 | Reusable internal-page header/banner/breadcrumb | Bishowdip | `DONE` | SHELL-002, FND-008 | `bishowdip` | Responsive PageBanner provides exactly one h1, optional eyebrow/description, linked breadcrumb ancestors, and aria-current page state. |
 
 ---
 
@@ -215,12 +215,13 @@ Contact and newsletter homepage sections are tracked under integrations so their
 |---|---|---|---|---|---|---|---|
 | PAGE-T01 | PAGE-002 | About page in specified section order | `TBD` | `NOT STARTED` | SHELL-008, approved About copy | — | No invented company claims. |
 | PAGE-T02 | PAGE-003 | Services page using shared service data/components | `TBD` | `NOT STARTED` | SHELL-008, HOME-T05 | — | No duplicate service source. |
-| PAGE-T03 | PAGE-004 | Contact page structure and approved contact details | `TBD` | `NOT STARTED` | SHELL-008, DEC-009 | — | Map only if exact location approved. |
+| PAGE-T03 | PAGE-004 | Contact page structure and approved contact details | Bishowdip | `BLOCKED` | SHELL-008, DEC-009 | `bishowdip` | Page structure, direct channels, responsive layout, and form are complete; exact office destination/hours remain omitted pending DEC-009. |
 | PAGE-T04 | PAGE-005 | Blog listing and responsive sidebar | `TBD` | `NOT STARTED` | SHELL-008, DEC-010 | — | Canonical `/blog`. |
 | PAGE-T05 | PAGE-006 | Individual blog article template | `TBD` | `NOT STARTED` | PAGE-T04 | — | Structured article semantics. |
 | PAGE-T06 | PAGE-007 | Search results and category/archive pages | `TBD` | `NOT STARTED` | PAGE-T04, SHELL-005 | — | Query/pagination reflected in URL. |
 | PAGE-T07 | PAGE-008 | Branded real 404 page | `TBD` | `NOT STARTED` | FND-007, SHELL-006 | — | Must return 404. |
 | PAGE-T08 | §15 | Legacy redirect map, sitemap, and robots routes | `TBD` | `NOT STARTED` | Final route list | — | Include legacy blog route decision. |
+| PAGE-T09 | Pricing approval | Interactive custom-proposal Pricing page | Bishowdip | `DONE` | DEC-005, SHELL-008 | `bishowdip` | Three custom-proposal paths, goal-based recommendation, accessible expandable comparison, responsive motion, and personalized contact links; no invented rates. |
 
 ---
 
@@ -228,7 +229,7 @@ Contact and newsletter homepage sections are tracked under integrations so their
 
 | Task | Requirement | Deliverable | Owner | Status | Depends on | Branch/PR | Evidence/notes |
 |---|---|---|---|---|---|---|---|
-| INT-T01 | FORM-001/002 | Accessible contact-form UI and validation | `TBD` | `NOT STARTED` | FND-007, DEC-009 | — | Idle/error/loading/success states. |
+| INT-T01 | FORM-001/002 | Accessible contact-form UI and validation | Bishowdip | `DONE` | FND-007, DEC-009 | `bishowdip` | Labeled name/email/inquiry/message fields, native validation, prepared state, and transparent mailto handoff; no fake submission success or client-side storage. |
 | INT-T02 | FORM-003 | Secure server submission endpoint | `TBD` | `NOT STARTED` | DEC-007, INT-T01 | — | Server validation and rate limit. |
 | INT-T03 | HOME-010 | Homepage contact section using shared form | `TBD` | `NOT STARTED` | INT-T01, DEC-003/009 | — | Do not duplicate form logic. |
 | INT-T04 | PAGE-004 | Contact-page integration using shared form | `TBD` | `NOT STARTED` | PAGE-T03, INT-T01/002 | — | — |
@@ -315,6 +316,7 @@ Record decisions that affect multiple contributors. Never rely only on chat hist
 | 2026-09-05 | ADR-007 | Use one sticky header whose desktop utility bar collapses after 32 px instead of cloning duplicate header DOM. | Bishowdip | SHELL-001–004 | `src/components/layout/SiteHeader.tsx` |
 | 2026-09-05 | ADR-008 | Use native CSS transitions plus IntersectionObserver with a visible-content fallback for shared reveal motion; do not add a motion dependency for these primitives. | Bishowdip | MOT-T01–T04 and section consumers | `src/components/motion`, `globals.css` |
 | 2026-09-05 | ADR-009 | Use Vitest 4.1.11 with Testing Library for component tests because its engine range supports the local Node 25 runtime; defer Playwright to E2E work. | Bishowdip | FND-011/012, QA-T08/009 | `DEPENDENCY_DECISIONS.md`, `vitest.config.mts` |
+| 2026-09-08 | ADR-010 | Add a dedicated Pricing page using custom-proposal engagement paths; do not publish monetary rates until supplied and approved. | User/Bishowdip | DEC-005, PAGE-T09, navigation | User request in current task |
 
 ---
 
@@ -339,6 +341,8 @@ Record decisions that affect multiple contributors. Never rely only on chat hist
 | 2026-09-05 | HOME-T01/T02 | Local browser and Vitest/jsdom | Responsive hero structure, slide controls, autoplay pause, pagination, swipe, inactive state, typecheck, and build | Pass except approved photography pending | `src/components/home/Hero.tsx`, `npm test` | Bishowdip |
 | 2026-09-05 | SHELL-007 | Vitest/jsdom and production build | Visibility threshold, hidden tab state, activation, smooth-scroll behavior, typecheck, and build | Pass — 7 files, 19 tests | `src/components/layout/ScrollToTop.tsx`, `npm test` | Bishowdip |
 | 2026-09-05 | MOT-T05 | Local tests and production build | Pointer-capable card/media/icon motion, focus parity, button icon marker, touch-safe media query, and reduced-motion override | Pass — 7 files, 19 tests | `globals.css`, `src/components/ui/Button.tsx` | Bishowdip |
+| 2026-09-06 | SHELL-008 | Vitest/jsdom and production build | One-h1 contract, Home/current/intermediate breadcrumb semantics, optional description, targeted Biome check, typecheck, and build | Pass — 8 files, 21 tests | `src/components/layout/PageBanner.tsx`, `npm test` | Bishowdip |
+| 2026-09-08 | PAGE-T09/INT-T01/PAGE-T03 | Local browser desktop/mobile, Vitest, and production build | Goal recommendation, comparison disclosure semantics, pricing-to-contact preselection, direct contact links, prepared email handoff, responsive navigation/layout | Pass except DEC-009 contact-detail approval | `/pricing`, `/contact`; 10 files, 27 tests | Bishowdip |
 
 ---
 
@@ -366,6 +370,9 @@ Move a task summary here only after its tracker row is `DONE`. Keep the original
 | 2026-09-05 | HOME-T02 | Bishowdip | Pending commit | Accessible two-slide carousel completed with autoplay pause/reset, arrow and pagination controls, swipe, and fixed-height transitions. |
 | 2026-09-05 | SHELL-007 | Bishowdip | Pending commit | Global accessible scroll-to-top control completed with threshold visibility and reduced-motion-aware behavior. |
 | 2026-09-05 | MOT-T05 | Bishowdip | Pending commit | Shared hover/focus motion added to buttons, service cards, and blog cards with touch-safe capability queries. |
+| 2026-09-06 | SHELL-008 | Bishowdip | Pending commit | Reusable responsive internal-page banner and semantic breadcrumb completed with component coverage. |
+| 2026-09-08 | PAGE-T09 | Bishowdip | Pending commit | Interactive custom-proposal Pricing page completed without fabricated monetary prices. |
+| 2026-09-08 | INT-T01 | Bishowdip | Pending commit | Accessible contact brief UI completed with a transparent user-controlled email handoff. |
 
 ---
 

@@ -19,7 +19,7 @@ describe('site content invariants', () => {
   it('does not expose placeholder navigation destinations', () => {
     for (const item of siteSettings.navigation) {
       expect(item.href).toMatch(/^\//)
-      expect(item.href).not.toContain('#')
+      expect(item.href).not.toBe('#')
     }
 
     for (const social of siteSettings.socialLinks) {

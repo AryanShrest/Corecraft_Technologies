@@ -15,6 +15,7 @@ Keep the existing homepage route operational while shared foundations are introd
 | `/` | Homepage | HOME-T01–T12 | Existing canonical route |
 | `/about` | About | PAGE-T01 | Redirect `/about/` naturally through Next.js policy if needed |
 | `/services` | Services | PAGE-T02 | Redirect `/services/` if needed |
+| `/pricing` | Interactive custom-proposal engagement paths | PAGE-T09 | Approved by DEC-005; monetary rates remain unpublished until approved |
 | `/contact` | Contact | PAGE-T03/INT-T04 | Redirect `/contact/` if needed |
 | `/blog` | Blog listing | PAGE-T04 | Permanent redirect from `/blog-grid-right/` after launch approval |
 | `/blog/[slug]` | Article | PAGE-T05 | Per-post legacy redirects require an approved migration list |
@@ -24,7 +25,7 @@ Keep the existing homepage route operational while shared foundations are introd
 | `/terms` | Terms | DEC-012/PAGE work | Content requires approval |
 | `/_not-found` | Framework 404 | PAGE-T07 | Replace with branded `not-found.tsx` |
 
-Pricing is not a canonical route until DEC-005 is resolved.
+Pricing became a canonical route when DEC-005 was resolved on 2026-09-08.
 
 ## Incremental folder direction
 
@@ -44,6 +45,7 @@ src/
 │   ├── (marketing)/
 │   │   ├── about/page.tsx
 │   │   ├── services/page.tsx
+│   │   ├── pricing/page.tsx
 │   │   ├── contact/page.tsx
 │   │   ├── blog/page.tsx
 │   │   ├── blog/[slug]/page.tsx

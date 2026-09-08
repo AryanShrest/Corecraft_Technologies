@@ -1,4 +1,4 @@
-import { act, fireEvent, render, screen } from '@testing-library/react'
+import { act, render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { afterEach, describe, expect, it, vi } from 'vitest'
 
@@ -7,43 +7,37 @@ import Hero from './Hero'
 describe('Hero', () => {
   afterEach(() => vi.useRealTimers())
 
-  it('renders verified content and keeps inactive slides inaccessible', () => {
+  it('renders the current headline and primary calls to action', () => {
     render(<Hero />)
     expect(
-      screen.getByRole('heading', { level: 1, name: 'Your Digital Growth Partner' }),
+      screen.getByRole('heading', {
+        level: 1,
+        name: 'We build software that moves your business forward.',
+      }),
     ).toBeVisible()
-    expect(document.querySelector('[aria-label="2 of 2"]')).toHaveAttribute('aria-hidden', 'true')
-    expect(screen.getByRole('link', { name: 'Contact Now' })).toHaveAttribute('href', '/contact')
+    expect(screen.getByRole('link', { name: 'Get a Free Consultation' })).toHaveAttribute(
+      'href',
+      '/contact',
+    )
+    expect(screen.getByRole('link', { name: 'View Our Work' })).toHaveAttribute(
+      'href',
+      '/#portfolio',
+    )
   })
 
-  it('supports arrow and pagination navigation', async () => {
+  it('supports direct pagination across all four slides', async () => {
     const user = userEvent.setup()
     render(<Hero />)
-    await user.click(screen.getByRole('button', { name: 'Next slide' }))
-    expect(document.querySelector('[aria-label="2 of 2"]')).toHaveAttribute('aria-hidden', 'false')
-    await user.click(screen.getByRole('button', { name: /Show slide 1:/ }))
-    expect(document.querySelector('[aria-label="1 of 2"]')).toHaveAttribute('aria-hidden', 'false')
+    await user.click(screen.getByRole('button', { name: 'Go to slide 4' }))
+    expect(screen.getByText('Creative Solutions')).toBeVisible()
+    await user.click(screen.getByRole('button', { name: 'Go to slide 1' }))
+    expect(screen.getByText('Strategic Planning')).toBeVisible()
   })
 
-  it('supports horizontal swipe gestures', () => {
-    render(<Hero />)
-    const carousel = screen.getByRole('region', { name: 'CoreCraft introduction' })
-    fireEvent.touchStart(carousel, { touches: [{ clientX: 180 }] })
-    fireEvent.touchEnd(carousel, { changedTouches: [{ clientX: 80 }] })
-    expect(document.querySelector('[aria-label="2 of 2"]')).toHaveAttribute('aria-hidden', 'false')
-  })
-
-  it('autoplays after six seconds and pauses while hovered', () => {
+  it('autoplays after ten seconds', () => {
     vi.useFakeTimers()
     render(<Hero />)
-    const carousel = screen.getByRole('region', { name: 'CoreCraft introduction' })
-
-    fireEvent.mouseEnter(carousel)
-    act(() => vi.advanceTimersByTime(6000))
-    expect(document.querySelector('[aria-label="1 of 2"]')).toHaveAttribute('aria-hidden', 'false')
-
-    fireEvent.mouseLeave(carousel)
-    act(() => vi.advanceTimersByTime(6000))
-    expect(document.querySelector('[aria-label="2 of 2"]')).toHaveAttribute('aria-hidden', 'false')
+    act(() => vi.advanceTimersByTime(10000))
+    expect(screen.getByText('Our Team at Work')).toBeVisible()
   })
 })
