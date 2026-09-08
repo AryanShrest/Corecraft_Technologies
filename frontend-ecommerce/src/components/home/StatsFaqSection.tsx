@@ -54,7 +54,7 @@ export default function StatsFaqSection() {
   const [openIdx, setOpenIdx] = useState<number | null>(1)
 
   return (
-    <section className="py-20 lg:py-28 bg-gradient-to-b from-white via-blue-50/40 to-white relative overflow-hidden">
+    <section className="py-10 lg:py-14 bg-gradient-to-b from-white via-blue-50/40 to-white relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-6">
         <div className="grid lg:grid-cols-2 gap-16 items-start">
           {/* Left: Stats + Team */}

@@ -31,20 +31,12 @@ function Brand({
       onClick={onNavigate}
       tabIndex={tabIndex}
     >
-      <span
-        aria-hidden="true"
-        className="grid size-11 place-items-center rounded-lg bg-gradient-to-br from-brand to-brand-secondary font-heading text-sm font-extrabold text-white shadow-sm"
-      >
-        CC
-      </span>
-      <span>
-        <span className="block font-heading text-xl font-extrabold leading-none text-ink-heading">
-          CoreCraft
-        </span>
-        <span className="mt-1 block text-[0.6rem] font-semibold uppercase leading-none tracking-[0.24em] text-brand">
-          Technologies
-        </span>
-      </span>
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
+        src="/images/corecraft logo/Screenshot 2026-09-08 141243.png"
+        alt="CoreCraft Technologies logo"
+        className="h-10 w-auto object-contain"
+      />
     </Link>
   )
 }
@@ -106,13 +98,33 @@ export function SiteHeader() {
   const [scrolled, setScrolled] = useState(false)
   const menuButtonRef = useRef<HTMLButtonElement>(null)
   const mobilePanelRef = useRef<HTMLDivElement>(null)
+  const rafRef = useRef<number | null>(null)
 
   useEffect(() => {
-    const updateScrolledState = () => setScrolled(window.scrollY > 32)
-    updateScrolledState()
-    window.addEventListener('scroll', updateScrolledState, { passive: true })
+    const ENTER_THRESHOLD = 64
+    const EXIT_THRESHOLD = 16
 
-    return () => window.removeEventListener('scroll', updateScrolledState)
+    setScrolled(window.scrollY > ENTER_THRESHOLD)
+
+    const onScroll = () => {
+      if (rafRef.current !== null) return
+      rafRef.current = window.requestAnimationFrame(() => {
+        rafRef.current = null
+        const y = window.scrollY
+        setScrolled((current) => {
+          if (current) return y > EXIT_THRESHOLD
+          return y > ENTER_THRESHOLD
+        })
+      })
+    }
+
+    window.addEventListener('scroll', onScroll, { passive: true })
+    onScroll()
+
+    return () => {
+      window.removeEventListener('scroll', onScroll)
+      if (rafRef.current !== null) window.cancelAnimationFrame(rafRef.current)
+    }
   }, [])
 
   useEffect(() => {
@@ -158,60 +170,62 @@ export function SiteHeader() {
 
   return (
     <header className="sticky top-0 z-50">
-      <div
-        className={cn(
-          'hidden overflow-hidden bg-[var(--color-navy)] text-white transition-[max-height,opacity] duration-[var(--motion-hover)] lg:block',
-          scrolled ? 'max-h-0 opacity-0' : 'max-h-12 opacity-100',
-        )}
-      >
-        <div className="site-container flex min-h-12 items-center justify-between gap-8 text-sm">
-          <div className="flex items-center gap-7">
-            <a
-              className="inline-flex items-center gap-2 text-white/90 transition-colors hover:text-white"
-              href={`mailto:${siteSettings.contact.email}`}
-            >
-              <MailIcon />
-              {siteSettings.contact.email}
-            </a>
-            <span className="inline-flex items-center gap-2 text-white/90">
-              <LocationIcon />
-              {siteSettings.contact.address}
-            </span>
-          </div>
+      <div className="hidden h-12 overflow-hidden bg-[var(--color-navy)] lg:block">
+        <div
+          className={cn(
+            'flex h-full items-center justify-between gap-8 text-sm text-white transition-[transform,opacity] duration-[var(--motion-hover)] ease-[var(--ease-standard)] will-change-transform',
+            scrolled ? '-translate-y-full opacity-0' : 'translate-y-0 opacity-100',
+          )}
+        >
+          <div className="site-container flex h-full min-h-12 w-full items-center justify-between gap-8">
+            <div className="flex items-center gap-7">
+              <a
+                className="inline-flex items-center gap-2 text-white/90 transition-colors hover:text-white"
+                href={`mailto:${siteSettings.contact.email}`}
+              >
+                <MailIcon />
+                {siteSettings.contact.email}
+              </a>
+              <span className="inline-flex items-center gap-2 text-white/90">
+                <LocationIcon />
+                {siteSettings.contact.address}
+              </span>
+            </div>
 
-          <nav aria-label="Utility navigation">
-            <ul className="flex items-center gap-2">
-              <li>
-                <Link className="transition-colors hover:text-blue-200" href="/about">
-                  About Us
-                </Link>
-              </li>
-              <li aria-hidden="true" className="text-white/50">
-                /
-              </li>
-              <li>
-                <Link className="transition-colors hover:text-blue-200" href="/services">
-                  Service
-                </Link>
-              </li>
-              <li aria-hidden="true" className="text-white/50">
-                /
-              </li>
-              <li>
-                <Link className="transition-colors hover:text-blue-200" href="/#portfolio">
-                  Portfolio
-                </Link>
-              </li>
-              <li aria-hidden="true" className="text-white/50">
-                /
-              </li>
-              <li>
-                <Link className="transition-colors hover:text-blue-200" href="/blog">
-                  News
-                </Link>
-              </li>
-            </ul>
-          </nav>
+            <nav aria-label="Utility navigation">
+              <ul className="flex items-center gap-2">
+                <li>
+                  <Link className="transition-colors hover:text-blue-200" href="/about">
+                    About Us
+                  </Link>
+                </li>
+                <li aria-hidden="true" className="text-white/50">
+                  /
+                </li>
+                <li>
+                  <Link className="transition-colors hover:text-blue-200" href="/services">
+                    Service
+                  </Link>
+                </li>
+                <li aria-hidden="true" className="text-white/50">
+                  /
+                </li>
+                <li>
+                  <Link className="transition-colors hover:text-blue-200" href="/#portfolio">
+                    Portfolio
+                  </Link>
+                </li>
+                <li aria-hidden="true" className="text-white/50">
+                  /
+                </li>
+                <li>
+                  <Link className="transition-colors hover:text-blue-200" href="/blog">
+                    News
+                  </Link>
+                </li>
+              </ul>
+            </nav>
+          </div>
         </div>
       </div>
 
@@ -221,12 +235,7 @@ export function SiteHeader() {
           scrolled && 'border-[var(--color-border)] shadow-lg shadow-slate-950/5',
         )}
       >
-        <div
-          className={cn(
-            'site-container flex items-center justify-between gap-8 py-4 transition-[padding] duration-[var(--motion-hover)]',
-            scrolled && 'lg:py-3',
-          )}
-        >
+        <div className="site-container flex items-center justify-between gap-8 py-3 lg:py-4">
           <Brand />
 
           <nav aria-label="Primary navigation" className="hidden lg:block">

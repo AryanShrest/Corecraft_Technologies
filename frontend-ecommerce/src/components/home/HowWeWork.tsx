@@ -2,78 +2,124 @@ const STEPS = [
   {
     num: '01',
     title: 'Discover',
-    desc: 'Understanding your business needs and project goals.',
+    time: 'Week 1–2',
+    desc: 'Deep dive into your business, user needs, and project goals to understand the problem before writing a single line of code.',
     icon: (
-      <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.8} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg>
+      <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" />
+      </svg>
     ),
   },
   {
     num: '02',
     title: 'Plan',
-    desc: 'Crafting the perfect strategy and technical roadmap.',
+    time: 'Week 2–3',
+    desc: 'Mapping out system architecture, design systems, and timelines with clear milestones so everyone stays aligned.',
     icon: (
-      <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.8} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" /></svg>
+      <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" />
+      </svg>
     ),
   },
   {
     num: '03',
     title: 'Develop',
-    desc: 'Building your solution with modern applications.',
+    time: 'Week 3–12',
+    desc: 'Built in two-week sprints with weekly demos so you can see progress and course-correct early if needed.',
     icon: (
-      <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.8} d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" /></svg>
+      <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 9l3 3-3 3m5 0h3" />
+      </svg>
     ),
   },
   {
     num: '04',
-    title: 'Deliver & Support',
-    desc: 'Launching your product with continuous support and maintenance.',
+    title: 'Deliver',
+    time: 'Launch & beyond',
+    desc: 'We launch, monitor, and optimise — then stay on for ongoing support, iterations, and new feature rollouts.',
     icon: (
-      <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.8} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" /></svg>
+      <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+      </svg>
     ),
   },
 ]
 
+function ArrowRight() {
+  return (
+    <div className="hidden lg:flex items-center justify-center flex-shrink-0 -mx-2 z-10">
+      <div className="flex items-center justify-center size-8 rounded-full bg-indigo-100 border border-indigo-200">
+        <svg className="size-4 text-indigo-600" fill="none" viewBox="0 0 24 24">
+          <path d="M5 12h14m-5-5 5 5-5 5" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" />
+        </svg>
+      </div>
+    </div>
+  )
+}
+
 export default function HowWeWork() {
   return (
-    <section className="py-20 lg:py-28 bg-white relative">
+    <section className="py-10 lg:py-14 bg-white">
       <div className="max-w-7xl mx-auto px-6">
-        <div className="text-center mb-16">
-          <div className="inline-flex items-center gap-3 text-xs font-semibold text-primary-600 tracking-[0.25em] uppercase mb-4">
-            <span className="w-10 h-px bg-primary-400" />
+
+        {/* Header */}
+        <div className="text-center mb-14">
+          <span className="inline-block bg-indigo-600 text-white text-xs font-bold tracking-[0.2em] uppercase px-4 py-1.5 rounded mb-5">
             HOW WE WORK
-            <span className="w-10 h-px bg-primary-400" />
-          </div>
-          <h2 className="text-3xl md:text-4xl font-extrabold text-slate-900 tracking-tight">
-            From Idea To The Execution
+          </span>
+          <h2 className="text-3xl md:text-4xl font-extrabold text-slate-900 tracking-tight mb-4">
+            A proven process, built for results
           </h2>
+          <p className="text-base text-slate-500 max-w-xl mx-auto leading-relaxed">
+            No surprises, no guesswork. Our four-step approach keeps you informed and involved from day one.
+          </p>
         </div>
 
-        <div className="relative">
-          {/* Line connector (desktop) */}
-          <div className="hidden lg:block absolute top-24 left-[12%] right-[12%] h-0.5 bg-gradient-to-r from-primary-200 via-primary-400 to-primary-200 z-0" />
+        {/* Cards row */}
+        <div className="flex flex-col lg:flex-row items-stretch gap-4 lg:gap-0">
+          {STEPS.map((step, i) => (
+            <>
+              <div
+                key={step.num}
+                className="flex-1 bg-white rounded-2xl border border-slate-200 shadow-sm p-9 flex flex-col gap-5 hover:shadow-md hover:border-indigo-200 transition-all duration-300"
+              >
+                {/* Icon */}
+                <div className="flex items-center justify-between">
+                  <div className="flex size-12 items-center justify-center rounded-xl bg-indigo-50 text-indigo-600 border border-indigo-100">
+                    {step.icon}
+                  </div>
+                  <span className="text-3xl font-black text-slate-100 select-none">{step.num}</span>
+                </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-10 relative z-10">
-            {STEPS.map((s, i) => (
-              <div key={s.num} className="relative text-center group">
-                {/* Step num badge */}
-                <div className="text-[88px] font-black text-primary-50/80 absolute -top-10 left-1/2 -translate-x-1/2 select-none pointer-events-none leading-none">
-                  {s.num}
+                {/* Title + time */}
+                <div>
+                  <h3 className="text-lg font-bold text-slate-900">{step.title}</h3>
+                  <span className="inline-block mt-1 text-xs font-medium text-indigo-600 bg-indigo-50 px-2.5 py-0.5 rounded-full border border-indigo-100">
+                    {step.time}
+                  </span>
                 </div>
-                {/* Icon circle */}
-                <div className="relative mx-auto w-20 h-20 rounded-2xl bg-gradient-to-br from-primary-50 to-blue-50 border-2 border-primary-100 text-primary-700 flex items-center justify-center group-hover:from-primary-600 group-hover:to-primary-700 group-hover:text-white group-hover:border-primary-700 group-hover:shadow-xl group-hover:shadow-primary-200 transition-all duration-300">
-                  {s.icon}
-                </div>
-                {/* Connector dot on line */}
-                <div className="hidden lg:block absolute top-[108px] left-1/2 -translate-x-1/2 w-5 h-5 rounded-full bg-white border-4 border-primary-500 shadow-md z-20" />
 
-                <div className="mt-8 space-y-2">
-                  <h3 className="text-lg font-bold text-slate-900">{s.title}</h3>
-                  <p className="text-sm text-gray-500 leading-relaxed">{s.desc}</p>
-                </div>
+                <p className="text-sm text-slate-500 leading-relaxed">{step.desc}</p>
               </div>
-            ))}
-          </div>
+
+              {i < STEPS.length - 1 && <ArrowRight key={`arrow-${i}`} />}
+            </>
+          ))}
         </div>
+
+        {/* CTA */}
+        <div className="mt-12 text-center">
+          <a
+            href="/contact"
+            className="inline-flex items-center gap-2 rounded-xl bg-indigo-600 px-7 py-3.5 text-sm font-semibold text-white shadow-lg shadow-indigo-200 hover:bg-indigo-700 transition-colors"
+          >
+            Start your project today
+            <svg className="size-4" fill="none" viewBox="0 0 24 24">
+              <path d="M5 12h14m-5-5 5 5-5 5" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" />
+            </svg>
+          </a>
+        </div>
+
       </div>
     </section>
   )

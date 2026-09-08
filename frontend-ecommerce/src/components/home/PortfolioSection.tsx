@@ -75,7 +75,7 @@ export default function PortfolioSection() {
   }, [])
 
   return (
-    <section ref={sectionRef} id="portfolio" className="py-20 lg:py-28 bg-white">
+    <section ref={sectionRef} id="portfolio" className="py-10 lg:py-14 bg-white">
       <div className="max-w-7xl mx-auto px-6">
         <div className="mb-14">
           <span className="inline-block bg-orange-500 text-white text-xs font-bold tracking-[0.2em] uppercase px-4 py-1.5 mb-5">

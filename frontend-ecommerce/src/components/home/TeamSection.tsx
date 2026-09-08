@@ -4,6 +4,12 @@ import { useEffect, useRef } from 'react'
 
 const TEAM = [
   {
+    name: 'Aagosh Upreti',
+    title: 'Founder & Director',
+    bio: "CEO and Director leading CoreCraft's strategic direction, driving business growth, fostering innovation, and building a strong foundation for long-term success.",
+    img: '/images/team/Aagosh Upreti .jpeg',
+  },
+  {
     name: 'Ro Heet',
     title: 'Co-Founder & CEO',
     bio: "Visionary leader driving CoreCraft's mission to deliver world-class digital solutions with a passion for innovation.",
@@ -20,12 +26,6 @@ const TEAM = [
     title: 'AI Engineer',
     bio: 'Designing intelligent systems with machine learning, LLMs, and AI-driven automation.',
     img: '/images/team/Aaryan.jpg',
-  },
-  {
-    name: 'Hero Kaji',
-    title: 'UI/UX Designer',
-    bio: 'Creative designer who transforms ideas into intuitive, visually stunning designs that engage and inspire.',
-    img: 'https://ui-avatars.com/api/?name=Hero+Kaji&size=200&background=3d72fc&color=fff&bold=true',
   },
 ]
 
@@ -51,7 +51,7 @@ export default function TeamSection() {
   }, [])
 
   return (
-    <section ref={sectionRef} id="team" className="py-20 lg:py-28" style={{ background: 'var(--color-surface-light)' }}>
+    <section ref={sectionRef} id="team" className="py-10 lg:py-14" style={{ background: 'var(--color-surface-light)' }}>
       <div className="max-w-7xl mx-auto px-6">
         <div className="text-center mb-14">
           <span className="inline-block bg-orange-500 text-white text-xs font-bold tracking-[0.2em] uppercase px-4 py-1.5 mb-5">

@@ -1,10 +1,10 @@
+import ClientsSection from '@/components/home/ClientsSection'
 import BlogSection from '@/components/home/BlogSection'
 import CommitmentSection from '@/components/home/CommitmentSection'
 import ContactSection from '@/components/home/ContactSection'
 import Footer from '@/components/home/Footer'
 import Hero from '@/components/home/Hero'
 import HowWeWork from '@/components/home/HowWeWork'
-import InnovationSection from '@/components/home/InnovationSection'
 import PortfolioSection from '@/components/home/PortfolioSection'
 import ReadyCta from '@/components/home/ReadyCta'
 import ServicesSection from '@/components/home/ServicesSection'
@@ -19,8 +19,8 @@ export default function Home() {
       <SiteHeader />
       <main id="primary">
         <Hero />
+        <ClientsSection />
         <HowWeWork />
-        <InnovationSection />
         <ServicesSection />
         <PortfolioSection />
         <TeamSection />

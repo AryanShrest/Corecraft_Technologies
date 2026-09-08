@@ -21,7 +21,7 @@ export default function ContactSection() {
   }
 
   return (
-    <section className="py-20 lg:py-28 bg-white relative overflow-hidden">
+    <section className="py-10 lg:py-14 bg-white relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-6">
         <div className="relative bg-gradient-to-br from-[#13275f] via-[#1e3a8a] to-[#172554] rounded-3xl overflow-hidden shadow-2xl shadow-blue-900/30 text-white">
           {/* Decorative shapes */}

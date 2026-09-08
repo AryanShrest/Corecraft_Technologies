@@ -43,7 +43,7 @@ const OFFERINGS = [
 
 export default function CommitmentSection() {
   return (
-    <section className="relative overflow-hidden bg-slate-950 text-white py-24">
+    <section className="relative overflow-hidden bg-slate-950 text-white py-12">
       {/* Background image overlay */}
       <div
         className="absolute inset-0 bg-cover bg-center opacity-20"

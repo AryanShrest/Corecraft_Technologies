@@ -5,7 +5,7 @@ const CTA_IMG =
 
 export default function ReadyCta() {
   return (
-    <section className="bg-white py-16">
+    <section className="bg-white py-8">
       <div className="max-w-7xl mx-auto px-6">
         <div className="relative overflow-hidden bg-gradient-to-r from-[#0a1940] via-[#13275f] to-[#0a1940] rounded-3xl shadow-2xl shadow-blue-900/20 text-white">
           {/* Background hexagons + blobs */}

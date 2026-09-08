@@ -36,7 +36,7 @@ const POSTS = [
 
 export default function BlogSection() {
   return (
-    <section className="py-20 lg:py-28 bg-gradient-to-b from-white via-blue-50/40 to-white">
+    <section className="py-10 lg:py-14 bg-gradient-to-b from-white via-blue-50/40 to-white">
       <div className="max-w-7xl mx-auto px-6">
         <div className="text-center mb-14">
           <div className="inline-flex items-center gap-3 text-xs font-semibold text-primary-600 tracking-[0.25em] uppercase mb-4">
