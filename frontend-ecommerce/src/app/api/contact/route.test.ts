@@ -2,6 +2,24 @@ import { afterEach, describe, expect, it, vi } from 'vitest'
 
 import { POST } from './route'
 
+const { fromMock } = vi.hoisted(() => ({
+  fromMock: vi.fn(() => ({
+    insert: vi.fn(() => ({
+      select: vi.fn(() => ({
+        single: vi.fn(async () => ({
+          data: { id: '12345678-0000-0000-0000-000000000000' },
+          error: null,
+        })),
+      })),
+    })),
+    update: vi.fn(() => ({ eq: vi.fn(async () => ({ error: null })) })),
+  })),
+}))
+
+vi.mock('@/lib/supabase/server', () => ({
+  createServiceSupabaseClient: () => ({ from: fromMock }),
+}))
+
 const validPayload = {
   budget: 'NPR 300,000–750,000',
   email: 'mina@example.com',
@@ -68,16 +86,17 @@ describe('POST /api/contact', () => {
     )
   })
 
-  it('returns a recoverable error when delivery fails', async () => {
+  it('keeps the saved inquiry successful when email notification fails', async () => {
     vi.stubEnv('RESEND_API_KEY', 'test-key')
     vi.stubEnv('CONTACT_FROM_EMAIL', 'Website <website@corecraftnepal.com>')
     vi.stubEnv('CONTACT_TO_EMAIL', 'info@corecraftnepal.com')
     vi.stubGlobal('fetch', vi.fn().mockResolvedValue(new Response('{}', { status: 500 })))
 
     const response = await POST(request(validPayload, { 'x-forwarded-for': '203.0.113.19' }))
-    expect(response.status).toBe(503)
+    expect(response.status).toBe(200)
     expect(await response.json()).toMatchObject({
-      message: expect.stringMatching(/email or call/i),
+      ok: true,
+      reference: '12345678',
     })
   })
 

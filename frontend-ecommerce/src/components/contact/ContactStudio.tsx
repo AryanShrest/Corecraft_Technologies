@@ -132,11 +132,16 @@ export function ContactStudio({ initialInquiry }: { initialInquiry?: string }) {
         headers: { 'Content-Type': 'application/json' },
         method: 'POST',
       })
-      const result = (await response.json().catch(() => null)) as { message?: string } | null
+      const result = (await response.json().catch(() => null)) as {
+        message?: string
+        reference?: string
+      } | null
       if (!response.ok) throw new Error(result?.message || 'Your message could not be delivered.')
 
       setSubmission('success')
-      setFeedback('Thanks—your project brief has been delivered. We’ll be in touch.')
+      setFeedback(
+        `Thanks—your project brief is safely recorded${result?.reference ? ` as #${result.reference}` : ''}. We’ll be in touch.`,
+      )
       setBrief(emptyBrief)
       startedAt.current = Date.now()
       form.reset()

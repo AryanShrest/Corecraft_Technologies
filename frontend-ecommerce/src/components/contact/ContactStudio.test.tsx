@@ -56,7 +56,7 @@ describe('ContactStudio', () => {
     await user.click(screen.getByRole('button', { name: 'Send project brief' }))
 
     expect(await screen.findByRole('status')).toHaveTextContent(
-      'your project brief has been delivered',
+      'your project brief is safely recorded',
     )
     expect(fetchMock).toHaveBeenCalledWith(
       '/api/contact',

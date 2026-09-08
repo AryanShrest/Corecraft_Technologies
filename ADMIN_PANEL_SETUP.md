@@ -18,6 +18,8 @@ The public homepage keeps its checked-in images as a fallback until Supabase is 
 1. Create one Supabase project.
 2. Open SQL Editor and run:
    `frontend-ecommerce/supabase/migrations/202609080001_home_content.sql`
+   Then run:
+   `frontend-ecommerce/supabase/migrations/202609080002_contact_inquiries.sql`
 3. In Authentication, create the first administrator manually with email and password.
    Do not enable public sign-up for this CMS.
 4. Copy that user's UUID and grant access in SQL Editor:
@@ -41,6 +43,15 @@ SUPABASE_SERVICE_ROLE_KEY=SERVER_ONLY_SERVICE_ROLE_KEY
 8. Open `/admin/login` and sign in with the manually created administrator.
 
 ## Content rules
+
+### Project inquiries
+
+- Every accepted contact form is saved to Supabase before email notification is attempted.
+- `/admin/inquiries` is the durable team inbox and source of truth.
+- Leads move through `new`, `contacted`, `qualified`, `won`, and `closed` stages.
+- Administrators can search submissions, reply by email, and store private follow-up notes.
+- A failed or unconfigured email notification does not discard the saved inquiry.
+- The public browser has no direct read or write access to inquiry records.
 
 ### Hero slides
 
@@ -72,6 +83,7 @@ SUPABASE_SERVICE_ROLE_KEY=SERVER_ONLY_SERVICE_ROLE_KEY
 ## Deployment checklist
 
 - [ ] Migration applied successfully.
+- [ ] Contact inquiry migration applied successfully.
 - [ ] `site-media` bucket exists and is public.
 - [ ] First Auth user created manually.
 - [ ] User UUID inserted into `admin_profiles`.
@@ -80,4 +92,6 @@ SUPABASE_SERVICE_ROLE_KEY=SERVER_ONLY_SERVICE_ROLE_KEY
 - [ ] `/admin/login` accepts the administrator account.
 - [ ] A test logo can be uploaded, hidden, shown, and removed.
 - [ ] The homepage updates after an admin mutation.
+- [ ] A contact form submission appears in `/admin/inquiries`.
+- [ ] Inquiry status and private notes can be updated.
 - [ ] Service-role key is absent from browser bundles and logs.

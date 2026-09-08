@@ -1,5 +1,6 @@
 'use client'
 
+import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import type { FormEvent } from 'react'
 import { useCallback, useEffect, useState } from 'react'
@@ -161,9 +162,17 @@ export function AdminDashboard({ email }: { email: string }) {
             <h1 className="mt-2 text-3xl font-extrabold">Homepage content</h1>
             <p className="mt-2 text-sm text-slate-300">Signed in as {email}</p>
           </div>
-          <Button onClick={logout} variant="secondary">
-            Sign out
-          </Button>
+          <div className="flex flex-wrap gap-3">
+            <Link
+              className="rounded-xl bg-blue-600 px-4 py-3 text-sm font-semibold text-white"
+              href="/admin/inquiries"
+            >
+              View inquiries
+            </Link>
+            <Button onClick={logout} variant="secondary">
+              Sign out
+            </Button>
+          </div>
         </header>
 
         {error && (

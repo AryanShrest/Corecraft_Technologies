@@ -1,6 +1,8 @@
 import { createHash } from 'node:crypto'
 import { NextResponse } from 'next/server'
 
+import { createServiceSupabaseClient } from '@/lib/supabase/server'
+
 export const runtime = 'nodejs'
 
 const MAX_BODY_BYTES = 16_000
@@ -151,6 +153,29 @@ async function deliver(payload: ContactPayload) {
   if (!response.ok) throw new Error(`Contact delivery failed with status ${response.status}`)
 }
 
+async function saveInquiry(payload: ContactPayload, request: Request) {
+  const service = createServiceSupabaseClient()
+  const fingerprint = createHash('sha256')
+    .update(
+      `${clientAddress(request)}:${process.env.CONTACT_FINGERPRINT_SALT || 'corecraft-contact'}`,
+    )
+    .digest('hex')
+  const result = await service
+    .from('contact_inquiries')
+    .insert({
+      budget: payload.budget || null,
+      client_fingerprint: fingerprint,
+      email: payload.email,
+      inquiry_type: payload.inquiry,
+      message: payload.message,
+      name: payload.name,
+    })
+    .select('id')
+    .single()
+  if (result.error || !result.data) throw new Error('Inquiry could not be stored')
+  return { id: result.data.id as string, service }
+}
+
 export async function POST(request: Request) {
   if (isCrossSite(request)) {
     return NextResponse.json({ message: 'Request origin was rejected.' }, { status: 403 })
@@ -192,15 +217,44 @@ export async function POST(request: Request) {
         { headers: { 'Retry-After': String(RATE_WINDOW_SECONDS) }, status: 429 },
       )
     }
-    await deliver(payload)
-    return NextResponse.json({ ok: true })
+    const { id, service } = await saveInquiry(payload, request)
+    try {
+      await deliver(payload)
+      await service
+        .from('contact_inquiries')
+        .update({
+          delivery_error: null,
+          delivery_status: 'sent',
+          updated_at: new Date().toISOString(),
+        })
+        .eq('id', id)
+    } catch (deliveryError) {
+      const notConfigured =
+        deliveryError instanceof Error && deliveryError.message.includes('not configured')
+      await service
+        .from('contact_inquiries')
+        .update({
+          delivery_error:
+            deliveryError instanceof Error
+              ? deliveryError.message.slice(0, 500)
+              : 'Unknown delivery error',
+          delivery_status: notConfigured ? 'not_configured' : 'failed',
+          updated_at: new Date().toISOString(),
+        })
+        .eq('id', id)
+      console.error(
+        'Contact notification failed; inquiry was saved',
+        deliveryError instanceof Error ? deliveryError.message : 'Unknown error',
+      )
+    }
+    return NextResponse.json({ ok: true, reference: id.slice(0, 8) })
   } catch (error) {
     console.error(
       'Contact submission failed',
       error instanceof Error ? error.message : 'Unknown error',
     )
     return NextResponse.json(
-      { message: 'We could not deliver your message. Please email or call us directly.' },
+      { message: 'We could not securely save your message. Please email or call us directly.' },
       { status: 503 },
     )
   }
