@@ -1,10 +1,12 @@
 import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
-import { describe, expect, it } from 'vitest'
+import { afterEach, describe, expect, it, vi } from 'vitest'
 
 import { ContactStudio } from './ContactStudio'
 
 describe('ContactStudio', () => {
+  afterEach(() => vi.unstubAllGlobals())
+
   it('provides direct email and telephone channels', () => {
     render(<ContactStudio />)
 
@@ -26,7 +28,14 @@ describe('ContactStudio', () => {
     )
   })
 
-  it('prepares a transparent mailto handoff instead of claiming a submission', async () => {
+  it('offers an optional budget range and submits the brief to the server', async () => {
+    const fetchMock = vi.fn().mockResolvedValue(
+      new Response(JSON.stringify({ ok: true }), {
+        headers: { 'Content-Type': 'application/json' },
+        status: 200,
+      }),
+    )
+    vi.stubGlobal('fetch', fetchMock)
     const user = userEvent.setup()
     render(<ContactStudio />)
 
@@ -36,18 +45,22 @@ describe('ContactStudio', () => {
       screen.getByRole('combobox', { name: 'What can we help with?' }),
       'Custom software',
     )
+    await user.selectOptions(
+      screen.getByRole('combobox', { name: /Approximate budget/ }),
+      'NPR 300,000–750,000',
+    )
     await user.type(
       screen.getByRole('textbox', { name: 'Tell us about the outcome you need' }),
       'We need to replace a manual order workflow with a reliable digital system.',
     )
-    await user.click(screen.getByRole('button', { name: 'Prepare my email' }))
+    await user.click(screen.getByRole('button', { name: 'Send project brief' }))
 
-    const handoff = screen.getByRole('link', { name: 'Open email app' })
-    expect(handoff).toHaveAttribute(
-      'href',
-      expect.stringContaining('mailto:info@corecraftnepal.com'),
+    expect(await screen.findByRole('status')).toHaveTextContent(
+      'your project brief has been delivered',
     )
-    expect(handoff).toHaveAttribute('href', expect.stringContaining('Custom%20software'))
-    expect(screen.queryByText(/message sent/i)).not.toBeInTheDocument()
+    expect(fetchMock).toHaveBeenCalledWith(
+      '/api/contact',
+      expect.objectContaining({ method: 'POST' }),
+    )
   })
 })

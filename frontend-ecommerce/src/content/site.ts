@@ -4,13 +4,12 @@ export const siteSettings: SiteSettings = {
   name: 'CoreCraft Technologies',
   shortName: 'CoreCraft',
   contact: {
-    address: 'Kapan, Kathmandu',
+    address: 'Kapan, Nepal',
     email: 'info@corecraftnepal.com',
     phoneDisplay: '+977 9861941981',
     phoneHref: 'tel:+9779861941981',
   },
-  // Opening hours differ across the current site and prototype. Keep this empty until DEC-009.
-  openingHours: null,
+  openingHours: '10:00 AM–6:00 PM',
   navigation: [
     { label: 'Home', href: '/' },
     { label: 'About', href: '/about' },

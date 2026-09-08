@@ -29,8 +29,8 @@ describe('site content invariants', () => {
     }
   })
 
-  it('keeps unapproved statistics and opening hours unresolved', () => {
-    expect(siteSettings.openingHours).toBeNull()
+  it('keeps unapproved statistics unresolved and stores approved opening hours', () => {
+    expect(siteSettings.openingHours).toBe('10:00 AM–6:00 PM')
     expect(statistics.every((statistic) => statistic.value === null)).toBe(true)
   })
 

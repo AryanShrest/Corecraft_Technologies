@@ -1,7 +1,7 @@
 'use client'
 
 import type { FormEvent } from 'react'
-import { useMemo, useState } from 'react'
+import { useRef, useState } from 'react'
 
 import { Reveal, StaggerGroup } from '@/components/motion'
 import { Button, SectionHeading } from '@/components/ui'
@@ -17,13 +17,31 @@ const inquiryTypes = [
 ] as const
 
 type Brief = {
+  budget: string
   email: string
   inquiry: string
   message: string
   name: string
 }
 
-const emptyBrief: Brief = { email: '', inquiry: inquiryTypes[0], message: '', name: '' }
+const budgetRanges = [
+  'Not sure yet',
+  'Let’s discuss',
+  'Under NPR 100,000',
+  'NPR 100,000–300,000',
+  'NPR 300,000–750,000',
+  'NPR 750,000+',
+] as const
+
+const emptyBrief: Brief = {
+  budget: '',
+  email: '',
+  inquiry: inquiryTypes[0],
+  message: '',
+  name: '',
+}
+
+type SubmissionState = 'error' | 'idle' | 'sending' | 'success'
 
 function MailIcon() {
   return (
@@ -87,22 +105,49 @@ export function ContactStudio({ initialInquiry }: { initialInquiry?: string }) {
       ? (initialInquiry as (typeof inquiryTypes)[number])
       : emptyBrief.inquiry,
   })
-  const [prepared, setPrepared] = useState(false)
-
-  const mailtoHref = useMemo(() => {
-    const subject = `Project inquiry: ${brief.inquiry}`
-    const body = `Name: ${brief.name}\nEmail: ${brief.email}\nInquiry: ${brief.inquiry}\n\nProject brief:\n${brief.message}`
-    return `mailto:${siteSettings.contact.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`
-  }, [brief])
+  const [submission, setSubmission] = useState<SubmissionState>('idle')
+  const [feedback, setFeedback] = useState('')
+  const startedAt = useRef(Date.now())
 
   function updateBrief(field: keyof Brief, value: string) {
-    setPrepared(false)
+    setSubmission('idle')
+    setFeedback('')
     setBrief((current) => ({ ...current, [field]: value }))
   }
 
-  function prepareEmail(event: FormEvent<HTMLFormElement>) {
+  async function submitBrief(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
-    setPrepared(true)
+    const form = event.currentTarget
+    const data = new FormData(form)
+    setSubmission('sending')
+    setFeedback('')
+
+    try {
+      const response = await fetch('/api/contact', {
+        body: JSON.stringify({
+          ...brief,
+          startedAt: startedAt.current,
+          website: data.get('website'),
+        }),
+        headers: { 'Content-Type': 'application/json' },
+        method: 'POST',
+      })
+      const result = (await response.json().catch(() => null)) as { message?: string } | null
+      if (!response.ok) throw new Error(result?.message || 'Your message could not be delivered.')
+
+      setSubmission('success')
+      setFeedback('Thanks—your project brief has been delivered. We’ll be in touch.')
+      setBrief(emptyBrief)
+      startedAt.current = Date.now()
+      form.reset()
+    } catch (error) {
+      setSubmission('error')
+      setFeedback(
+        error instanceof Error
+          ? error.message
+          : 'Your message could not be delivered. Please email or call us directly.',
+      )
+    }
   }
 
   return (
@@ -114,7 +159,7 @@ export function ContactStudio({ initialInquiry }: { initialInquiry?: string }) {
       <div className="site-container relative">
         <Reveal>
           <SectionHeading
-            description="Choose the quickest channel or shape your idea into a clear project brief. Nothing is submitted silently—the final step opens your own email app so you stay in control."
+            description="Choose the quickest channel or shape your idea into a clear project brief. Your message is securely delivered to the CoreCraft team."
             eyebrow="Talk to the people who build"
             title="A good project starts with a useful conversation"
           />
@@ -153,10 +198,10 @@ export function ContactStudio({ initialInquiry }: { initialInquiry?: string }) {
                 <span className="grid size-12 place-items-center rounded-2xl bg-blue-50 text-brand">
                   <PinIcon />
                 </span>
-                <h2 className="mt-5 text-lg font-bold text-ink-heading">Based in Kathmandu</h2>
+                <h2 className="mt-5 text-lg font-bold text-ink-heading">Visit or call us</h2>
                 <p className="mt-1 text-sm text-ink-body">{siteSettings.contact.address}</p>
-                <p className="mt-4 text-xs leading-5 text-slate-500">
-                  A map is intentionally withheld until the exact office destination is confirmed.
+                <p className="mt-4 text-xs font-semibold uppercase tracking-[0.12em] text-slate-500">
+                  {siteSettings.openingHours}
                 </p>
               </div>
             </StaggerGroup>
@@ -172,7 +217,7 @@ export function ContactStudio({ initialInquiry }: { initialInquiry?: string }) {
               aria-hidden="true"
               className="absolute -right-20 -top-20 size-64 rounded-full bg-blue-400/20 blur-3xl"
             />
-            <form className="relative" onSubmit={prepareEmail}>
+            <form className="relative" onSubmit={submitBrief}>
               <div className="flex flex-col justify-between gap-3 sm:flex-row sm:items-start">
                 <div>
                   <p className="text-xs font-semibold uppercase tracking-[0.2em] text-blue-300">
@@ -224,6 +269,22 @@ export function ContactStudio({ initialInquiry }: { initialInquiry?: string }) {
                   </select>
                 </label>
                 <label className="contact-field sm:col-span-2">
+                  <span>
+                    Approximate budget{' '}
+                    <span className="font-normal text-blue-100/60">(optional)</span>
+                  </span>
+                  <select
+                    name="budget"
+                    onChange={(event) => updateBrief('budget', event.target.value)}
+                    value={brief.budget}
+                  >
+                    <option value="">Select a range</option>
+                    {budgetRanges.map((budget) => (
+                      <option key={budget}>{budget}</option>
+                    ))}
+                  </select>
+                </label>
+                <label className="contact-field sm:col-span-2">
                   <span>Tell us about the outcome you need</span>
                   <textarea
                     minLength={20}
@@ -237,28 +298,36 @@ export function ContactStudio({ initialInquiry }: { initialInquiry?: string }) {
                 </label>
               </div>
 
+              <label className="sr-only" aria-hidden="true">
+                Website
+                <input autoComplete="off" name="website" tabIndex={-1} type="text" />
+              </label>
+
               <div className="mt-6 flex flex-col gap-4 sm:flex-row sm:items-center">
-                <Button endIcon={<ArrowIcon />} size="large" type="submit">
-                  Prepare my email
+                <Button
+                  endIcon={<ArrowIcon />}
+                  loading={submission === 'sending'}
+                  size="large"
+                  type="submit"
+                >
+                  {submission === 'sending' ? 'Sending…' : 'Send project brief'}
                 </Button>
                 <p className="text-xs leading-5 text-blue-100/70">
-                  This form does not store or send your data.
+                  Your details are used only to respond to this inquiry.
                 </p>
               </div>
 
-              <div aria-live="polite" className={prepared ? 'mt-6' : 'sr-only'}>
-                {prepared && (
-                  <div className="rounded-2xl border border-blue-300/30 bg-blue-400/10 p-5">
-                    <p className="font-semibold text-white">Your project brief is ready.</p>
-                    <p className="mt-1 text-sm text-blue-100/80">
-                      Review it in your email app before sending.
-                    </p>
-                    <a
-                      className="mt-4 inline-flex min-h-11 items-center gap-2 rounded-lg bg-white px-5 py-2 text-sm font-bold text-[#111f4d] transition-transform hover:-translate-y-0.5"
-                      href={mailtoHref}
-                    >
-                      Open email app <ArrowIcon />
-                    </a>
+              <div aria-live="polite" className={feedback ? 'mt-6' : 'sr-only'}>
+                {feedback && (
+                  <div
+                    className={`rounded-2xl border p-5 text-sm ${
+                      submission === 'success'
+                        ? 'border-emerald-300/40 bg-emerald-400/10 text-emerald-50'
+                        : 'border-red-300/40 bg-red-400/10 text-red-50'
+                    }`}
+                    role={submission === 'error' ? 'alert' : 'status'}
+                  >
+                    {feedback}
                   </div>
                 )}
               </div>

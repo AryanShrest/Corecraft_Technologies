@@ -293,7 +293,7 @@ Implement and test at minimum:
 ### GLO-001 — Top information bar
 
 - Desktop only unless approved otherwise.
-- Left group: email and Kapan, Kathmandu.
+- Left group: email and the approved location text “Kapan, Nepal.”
 - Right group: About Us, Service, and News links separated visually by slashes.
 - Email uses a valid `mailto:` URL.
 - Location must use an approved map destination or render as non-interactive text; never link to `#`.
@@ -770,7 +770,9 @@ The audited reference measured a 390 px viewport while document content reported
 
 - Name: required, trimmed, 2–100 characters.
 - Email: required, normalized, valid email, maximum 254 characters.
-- Message: required, trimmed, 10–5,000 characters.
+- Project type: required and restricted to the approved list.
+- Approximate budget: optional range selector with “Not sure yet” and “Let’s discuss” choices; never require an exact figure.
+- Message: required, trimmed, 20–4,000 characters.
 - Honeypot field or equivalent passive spam check.
 - Optional Turnstile only after privacy and deployment setup.
 
@@ -785,7 +787,9 @@ The audited reference measured a 390 px viewport while document content reported
 
 ### FORM-003 — Submission backend
 
-- Recipient email is `TBD` and cannot be inferred from visible page copy.
+- Recipient comes only from the server-side `CONTACT_TO_EMAIL` environment variable.
+- Resend is the delivery adapter; the verified sender comes from `CONTACT_FROM_EMAIL`.
+- Upstash Redis provides distributed production rate limiting; local memory is development fallback only.
 - Validate again on the server.
 - Sanitize/escape content in generated email templates.
 - Apply rate limiting.

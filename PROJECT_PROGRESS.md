@@ -109,10 +109,10 @@ Update these counts whenever a task moves to `DONE`.
 | Shared shell | 4 | 8 | 50% |
 | Homepage | 1 | 12 | 8% |
 | Motion/responsive | 5 | 10 | 50% |
-| Internal pages | 1 | 9 | 11% |
-| Forms/integrations | 1 | 8 | 13% |
+| Internal pages | 2 | 9 | 22% |
+| Forms/integrations | 3 | 8 | 38% |
 | Quality/release | 0 | 14 | 0% |
-| **Overall** | **22** | **85** | **26%** |
+| **Overall** | **25** | **85** | **29%** |
 
 ---
 
@@ -128,9 +128,9 @@ These tasks block accurate implementation. Do not replace them with assumptions.
 | DEC-004 | HOME-006 | Confirm all statistic numbers and suffixes | `TBD` | `NOT STARTED` | Client/owner | — | Never invent values. |
 | DEC-005 | GLO-002 | Decide Pricing link/page behavior | Bishowdip | `DONE` | Client/owner | `bishowdip` | User approved a dedicated interactive Pricing page on 2026-09-08; monetary rates remain unapproved, so plans use honest custom proposals. |
 | DEC-006 | HOME-004, PAGE-003 | Confirm service-detail destinations | `TBD` | `NOT STARTED` | Content owner | — | — |
-| DEC-007 | FORM-003 | Confirm contact-form recipient and mail provider | `TBD` | `NOT STARTED` | Client/owner | — | Keep credentials out of Git. |
+| DEC-007 | FORM-003 | Confirm contact-form recipient and mail provider | Bishowdip | `BLOCKED` | Production credentials/domain verification | `bishowdip` | Resend adapter targets `CONTACT_TO_EMAIL`; owner must configure the production environment and verify the sending domain. |
 | DEC-008 | FORM-004 | Confirm newsletter provider, audience, and consent copy | `TBD` | `NOT STARTED` | Client/owner | — | — |
-| DEC-009 | PAGE-004 | Confirm address, map coordinates, phone, email, and opening hours | `TBD` | `NOT STARTED` | Client/owner | — | Normalize in one settings object. |
+| DEC-009 | PAGE-004 | Confirm address, map coordinates, phone, email, and opening hours | Bishowdip | `BLOCKED` | Exact map coordinates | `bishowdip` | User confirmed Kapan, Nepal and 10:00 AM–6:00 PM on 2026-09-08. Map remains omitted until an exact destination is supplied. |
 | DEC-010 | PAGE-005/006 | Approve legitimate blog posts and reject suspicious legacy posts | `TBD` | `NOT STARTED` | Security/content review | — | Do not import old database blindly. |
 | DEC-011 | HOME-009 | Approve feature-strip labels/icons or remove the section | `TBD` | `NOT STARTED` | Content/design | — | — |
 | DEC-012 | §13 | Approve final site copy, social URLs, and legal entity name | `TBD` | `NOT STARTED` | Client/owner | — | — |
@@ -149,7 +149,7 @@ These tasks block accurate implementation. Do not replace them with assumptions.
 | FND-006 | §6.3/6.4 | Implement containers, grids, spacing, and breakpoints | Bishowdip | `DONE` | FND-004 | `bishowdip` | Fluid site container, section spacing, minimum width, and overflow foundation implemented. |
 | FND-007 | §6.5 | Build shared Button and icon-button primitives | Bishowdip | `DONE` | FND-004/005 | `bishowdip` | Link/button modes plus primary/secondary/text, size, loading, disabled, icon, and full-width states. |
 | FND-008 | §6.5 | Build SectionHeading and media-frame primitives | Bishowdip | `DONE` | FND-004/005/006 | `bishowdip` | Accessible heading levels, alignment, description, aspect-ratio, and accent variants implemented. |
-| FND-009 | §13 | Create typed site settings and navigation data | Bishowdip | `BLOCKED` | DEC-005/009/012 | `bishowdip` | Schema and verified values added; opening hours and final legal details await decisions. |
+| FND-009 | §13 | Create typed site settings and navigation data | Bishowdip | `BLOCKED` | DEC-009/012 | `bishowdip` | Schema, navigation, Kapan address, and 10:00 AM–6:00 PM hours added; exact map destination and final legal details await decisions. |
 | FND-010 | §13 | Create typed hero, service, benefit, FAQ, and statistic data | Bishowdip | `BLOCKED` | DEC-004/006 | `bishowdip` | Typed data added; unknown statistics/FAQ answers/destinations are intentionally null. |
 | FND-011 | §5.2 | Review and approve required dependencies | Bishowdip | `DONE` | FND-002 | `bishowdip` | See `DEPENDENCY_DECISIONS.md`; carousel/E2E/form dependencies remain deliberately deferred. |
 | FND-012 | §18 | Configure component/E2E/accessibility/visual test foundation | Bishowdip | `DONE` | FND-002 | `bishowdip` | Vitest/jsdom/Testing Library configured; 13 shared-component/content tests pass. E2E expansion remains QA-T09. |
@@ -215,7 +215,7 @@ Contact and newsletter homepage sections are tracked under integrations so their
 |---|---|---|---|---|---|---|---|
 | PAGE-T01 | PAGE-002 | About page in specified section order | `TBD` | `NOT STARTED` | SHELL-008, approved About copy | — | No invented company claims. |
 | PAGE-T02 | PAGE-003 | Services page using shared service data/components | `TBD` | `NOT STARTED` | SHELL-008, HOME-T05 | — | No duplicate service source. |
-| PAGE-T03 | PAGE-004 | Contact page structure and approved contact details | Bishowdip | `BLOCKED` | SHELL-008, DEC-009 | `bishowdip` | Page structure, direct channels, responsive layout, and form are complete; exact office destination/hours remain omitted pending DEC-009. |
+| PAGE-T03 | PAGE-004 | Contact page structure and approved contact details | Bishowdip | `DONE` | SHELL-008, DEC-009 | `bishowdip` | Responsive contact experience displays confirmed Kapan, Nepal address and 10:00 AM–6:00 PM hours; no approximate map link is published. |
 | PAGE-T04 | PAGE-005 | Blog listing and responsive sidebar | `TBD` | `NOT STARTED` | SHELL-008, DEC-010 | — | Canonical `/blog`. |
 | PAGE-T05 | PAGE-006 | Individual blog article template | `TBD` | `NOT STARTED` | PAGE-T04 | — | Structured article semantics. |
 | PAGE-T06 | PAGE-007 | Search results and category/archive pages | `TBD` | `NOT STARTED` | PAGE-T04, SHELL-005 | — | Query/pagination reflected in URL. |
@@ -229,10 +229,10 @@ Contact and newsletter homepage sections are tracked under integrations so their
 
 | Task | Requirement | Deliverable | Owner | Status | Depends on | Branch/PR | Evidence/notes |
 |---|---|---|---|---|---|---|---|
-| INT-T01 | FORM-001/002 | Accessible contact-form UI and validation | Bishowdip | `DONE` | FND-007, DEC-009 | `bishowdip` | Labeled name/email/inquiry/message fields, native validation, prepared state, and transparent mailto handoff; no fake submission success or client-side storage. |
-| INT-T02 | FORM-003 | Secure server submission endpoint | `TBD` | `NOT STARTED` | DEC-007, INT-T01 | — | Server validation and rate limit. |
+| INT-T01 | FORM-001/002 | Accessible contact-form UI and validation | Bishowdip | `DONE` | FND-007, DEC-009 | `bishowdip` | Labeled name/email/inquiry/budget/message fields, native validation, submitting, success, and recoverable error states. |
+| INT-T02 | FORM-003 | Secure server submission endpoint | Bishowdip | `DONE` | DEC-007, INT-T01 | `bishowdip` | Size cap, server allowlists, honeypot/timing checks, same-origin protection, hashed-IP rate limiting, escaped Resend delivery, timeouts, and provider-error handling implemented. Upstash is required for distributed production limiting. |
 | INT-T03 | HOME-010 | Homepage contact section using shared form | `TBD` | `NOT STARTED` | INT-T01, DEC-003/009 | — | Do not duplicate form logic. |
-| INT-T04 | PAGE-004 | Contact-page integration using shared form | `TBD` | `NOT STARTED` | PAGE-T03, INT-T01/002 | — | — |
+| INT-T04 | PAGE-004 | Contact-page integration using shared form | Bishowdip | `DONE` | PAGE-T03, INT-T01/002 | `bishowdip` | Contact brief posts JSON to `/api/contact`, prevents duplicate submits, and surfaces server outcomes without fake success. |
 | INT-T05 | FORM-004 | Newsletter UI and validation | `TBD` | `NOT STARTED` | DEC-008, SHELL-006 | — | Do not fake success. |
 | INT-T06 | FORM-004 | Newsletter provider/backend integration | `TBD` | `NOT STARTED` | INT-T05, DEC-008 | — | Consent and provider errors. |
 | INT-T07 | FORM-005 | Privacy notice and retention/consent behavior | `TBD` | `NOT STARTED` | DEC-007/008 | — | Required before production collection. |
@@ -343,6 +343,8 @@ Record decisions that affect multiple contributors. Never rely only on chat hist
 | 2026-09-05 | MOT-T05 | Local tests and production build | Pointer-capable card/media/icon motion, focus parity, button icon marker, touch-safe media query, and reduced-motion override | Pass — 7 files, 19 tests | `globals.css`, `src/components/ui/Button.tsx` | Bishowdip |
 | 2026-09-06 | SHELL-008 | Vitest/jsdom and production build | One-h1 contract, Home/current/intermediate breadcrumb semantics, optional description, targeted Biome check, typecheck, and build | Pass — 8 files, 21 tests | `src/components/layout/PageBanner.tsx`, `npm test` | Bishowdip |
 | 2026-09-08 | PAGE-T09/INT-T01/PAGE-T03 | Local browser desktop/mobile, Vitest, and production build | Goal recommendation, comparison disclosure semantics, pricing-to-contact preselection, direct contact links, prepared email handoff, responsive navigation/layout | Pass except DEC-009 contact-detail approval | `/pricing`, `/contact`; 10 files, 27 tests | Bishowdip |
+| 2026-09-08 | PAGE-T03/INT-T01/INT-T02/INT-T04 | Local browser, Vitest, TypeScript, production build | Confirmed location/hours, optional budget UX, server validation, cross-site/honeypot/timing defenses, rate limiting, escaped delivery, delivery failures, accessible UI states | Pass — production credentials still required | `/contact`, `/api/contact`; 11 files, 32 tests | Bishowdip |
+| 2026-09-08 | PAGE-T03/INT-T01/INT-T02/INT-T04 | Vitest, TypeScript, production build | Approved location/hours, optional budget, server validation, bot/origin checks, provider delivery and failure behavior | Pass — production secrets and verified sending domain remain deployment configuration | `/api/contact`, `/contact`; 11 files, 31 tests | Bishowdip |
 
 ---
 
@@ -373,6 +375,9 @@ Move a task summary here only after its tracker row is `DONE`. Keep the original
 | 2026-09-06 | SHELL-008 | Bishowdip | Pending commit | Reusable responsive internal-page banner and semantic breadcrumb completed with component coverage. |
 | 2026-09-08 | PAGE-T09 | Bishowdip | Pending commit | Interactive custom-proposal Pricing page completed without fabricated monetary prices. |
 | 2026-09-08 | INT-T01 | Bishowdip | Pending commit | Accessible contact brief UI completed with a transparent user-controlled email handoff. |
+| 2026-09-08 | PAGE-T03 | Bishowdip | Pending commit | Contact page completed with approved Kapan, Nepal location and 10:00 AM–6:00 PM hours. |
+| 2026-09-08 | INT-T02 | Bishowdip | Pending commit | Secure contact endpoint completed with validation, anti-spam checks, distributed rate-limit adapter, escaped Resend delivery, and recoverable errors. |
+| 2026-09-08 | INT-T04 | Bishowdip | Pending commit | Contact UI integrated with the server endpoint and honest sending/success/error states. |
 
 ---
 
