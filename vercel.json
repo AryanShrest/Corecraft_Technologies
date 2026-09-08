@@ -1,8 +1,5 @@
 {
-  "$schema": "https://openapi.vercel.sh/vercel.json",
-  "framework": "nextjs",
   "buildCommand": "cd frontend-ecommerce && npm install && npm run build",
-  "installCommand": "npm --prefix frontend-ecommerce install",
   "outputDirectory": "frontend-ecommerce/.next",
-  "rootDirectory": "frontend-ecommerce"
+  "installCommand": "npm --prefix frontend-ecommerce install"
 }
