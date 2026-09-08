@@ -10,7 +10,9 @@ const LOGOS_ROW2 = [
   { name: 'Zymo Wine',       src: '/images/clients/Zymo wine .png' },
 ]
 
-function MarqueeRow({ logos, direction }: { logos: typeof LOGOS; direction: 'left' | 'right' }) {
+type LogoItem = { name: string; src: string }
+
+function MarqueeRow({ logos, direction }: { logos: readonly LogoItem[]; direction: 'left' | 'right' }) {
   // Duplicate for seamless loop
   const items = [...logos, ...logos, ...logos]
   return (

@@ -1,5 +1,5 @@
-import ClientsSection from '@/components/home/ClientsSection'
 import BlogSection from '@/components/home/BlogSection'
+import ClientsSection from '@/components/home/ClientsSection'
 import CommitmentSection from '@/components/home/CommitmentSection'
 import ContactSection from '@/components/home/ContactSection'
 import Footer from '@/components/home/Footer'
