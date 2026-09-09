@@ -164,7 +164,7 @@ export async function POST(request: Request) {
       await admin.service.storage.from('site-media').remove([storagePath])
       throw result.error
     }
-    revalidateTag('home-content', 'max')
+    revalidateTag('home-content')
     return NextResponse.json({ item: result.data }, { status: 201 })
   } catch (error) {
     console.error('Admin upload failed', error instanceof Error ? error.message : 'Unknown error')
@@ -211,7 +211,7 @@ export async function PATCH(request: Request) {
     .single()
   if (result.error)
     return NextResponse.json({ message: 'Content could not be updated.' }, { status: 500 })
-  revalidateTag('home-content', 'max')
+  revalidateTag('home-content')
   return NextResponse.json({ item: result.data })
 }
 
@@ -234,6 +234,6 @@ export async function DELETE(request: Request) {
   if (existing.data.storage_path) {
     await admin.service.storage.from('site-media').remove([existing.data.storage_path])
   }
-  revalidateTag('home-content', 'max')
+  revalidateTag('home-content')
   return NextResponse.json({ ok: true })
 }
