@@ -3,7 +3,7 @@
 ## Architecture
 
 The website and backend are one deployable Next.js application in `frontend-ecommerce`.
-The former `new-backend-ecommerce` Express shop is not used by the admin panel.
+Next.js Route Handlers provide the backend, so no separate application server is required.
 
 Supabase provides three managed capabilities without a second application server:
 
